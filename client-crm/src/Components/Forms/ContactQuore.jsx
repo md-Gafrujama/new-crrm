@@ -2,16 +2,21 @@ import React, { useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { API_BASE_URL } from '../../config/api'; 
+import { Header } from '../common/Header';
+import { Sidebar } from '../common/sidebar';
+
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
-import { API_BASE_URL } from '../config/api'; 
 
-
-const RealtimeTracking = () => {
+const ContactQuore = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
+    message: '',
   });
 
   const handleChange = React.useCallback((e) => {
@@ -32,22 +37,25 @@ const RealtimeTracking = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const token = localStorage.getItem('token');
-      if (!token) throw new Error('No authentication token found');
-
+      
       const body = {
+        customerFirstName: formData.firstName,
+        customerLastName: formData.lastName,
+        emailAddress: formData.email,
         phoneNumber: formData.phone,
+        message: formData.message,
       };
 
-      const response = await axios.post(`${API_BASE_URL}/api/realtimetracking`, {
-        body,
+      const res = await axios.post(`${API_BASE_URL}/api/contactquore`,
+      body,
+      {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
-      });
+      }
+    );
 
-      toast.success("Realtime Tracking done Successfully!", {
+      toast.success("Lead Created Successfully!", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -65,12 +73,12 @@ const RealtimeTracking = () => {
     setTimeout(() => navigate("/dashboard"), 2000);
   }     
     } catch (e) {
-      console.error("Reailtime Tracking Failed - Full Error:", e);
+      console.error("Lead Creation Failed - Full Error:", e);
       console.error("Error details:", {
         message: e.message,
         stack: e.stack,
       });
-      toast.error(e.message || "Reailtime Tracking  Failed. Please try again.");
+      toast.error(e.message || "Lead Creation Failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -92,7 +100,7 @@ const RealtimeTracking = () => {
           className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100 transition-all hover:shadow-2xl"
         >
           <div className="absolute top-4 right-4">
-    {localStorage.getItem('userType') === 'admin' && (
+           {localStorage.getItem('userType') === 'admin' && (
   <button
     type="button"
     onClick={handlegobacktodashboard}
@@ -111,10 +119,60 @@ const RealtimeTracking = () => {
 )}
           </div>
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">Realtime Tracking</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-2">Contact Quore b2b</h2>
           </div>
 
-            <div className='mb-10'>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                First Name
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                placeholder="John"
+                autoComplete="given-name"
+              />
+            </div>
+            <div>
+              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                placeholder="Doe"
+                autoComplete="family-name"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                placeholder="your@email.com"
+                autoComplete="email"
+              />
+            </div>
+            <div>
               <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
               <input
                 type="tel"
@@ -127,7 +185,27 @@ const RealtimeTracking = () => {
                 autoComplete="tel"
               />
             </div>
+          </div>
 
+
+
+
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Message
+            </label>
+            <input
+              type="text"
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+              placeholder='Type your Message..'
+              autoComplete="message"
+            />
+          </div>
 
 
 
@@ -137,7 +215,7 @@ const RealtimeTracking = () => {
             className={`w-full cursor-pointer bg-gradient-to-r from-[#ff8633] to-[#ff9a52] text-white py-3 rounded-lg font-medium hover:from-[#e6732b] hover:to-[#e6732b] transition-all shadow-md hover:shadow-lg active:scale-95 transform ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
               }`}
           >
-            {isSubmitting ? 'Reailtime Tracking ...' : 'Track'}
+            {isSubmitting ? 'Sending Message...' : 'Send Message'}
           </button>
         </form>
       </Suspense>
@@ -146,4 +224,4 @@ const RealtimeTracking = () => {
   );
 };
 
-export default React.memo(RealtimeTracking);
+export default React.memo(ContactQuore);

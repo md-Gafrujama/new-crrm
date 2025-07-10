@@ -2,7 +2,10 @@ import React, { useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { API_BASE_URL } from '../config/api'; 
+import { API_BASE_URL } from '../../config/api'; 
+import { Header } from '../common/Header';
+import { Sidebar } from '../common/sidebar';
+
 
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
 
@@ -103,8 +106,11 @@ const AlertsandReminder = () => {
 
   return (
     <>
-
+ 
 {localStorage.getItem('userType') === 'admin' && (
+  <>
+  <Header/>
+  <Sidebar/>
   <button
     type="button"
     onClick={handlegobacktodashboard}
@@ -120,6 +126,7 @@ const AlertsandReminder = () => {
     </svg>
     <span>Back to Dashboard</span>
   </button>
+  </>
 )}
 
    <div className="flex items-center justify-center  p-0">

@@ -6,8 +6,9 @@ const Eye = lazy(() => import('lucide-react').then(module => ({ default: module.
 const EyeOff = lazy(() => import('lucide-react').then(module => ({ default: module.EyeOff })));
 const Loader2 = lazy(() => import('lucide-react').then(module => ({ default: module.Loader2 })));
 const Lock = lazy(() => import('lucide-react').then(module => ({ default: module.Lock })));
-import { API_BASE_URL } from '../config/api';
-
+import { API_BASE_URL } from '../../config/api';
+import { Header } from '../common/Header';
+import { Sidebar } from '../common/sidebar';
 
 const UpdatePassword = () => {
   const navigate = useNavigate();

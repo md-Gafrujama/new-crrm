@@ -2,19 +2,19 @@ import React, { useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { API_BASE_URL } from '../config/api'; 
+import { API_BASE_URL } from '../../config/api'; 
+import { Header } from '../common/Header';
+import { Sidebar } from '../common/sidebar';
 
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
 
-const ContactQuore = () => {
+const Comparebazar = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: '',
-    phone: '',
-    message: '',
+    comment: '',
   });
 
   const handleChange = React.useCallback((e) => {
@@ -35,16 +35,16 @@ const ContactQuore = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      
       const body = {
-        customerFirstName: formData.firstName,
-        customerLastName: formData.lastName,
-        emailAddress: formData.email,
-        phoneNumber: formData.phone,
-        message: formData.message,
+        userFirstName: formData.firstName,
+        userLastName: formData.lastName,
+        comment: formData.comment, 
       };
 
-      const res = await axios.post(`${API_BASE_URL}/api/contactquore`,
+      console.log(body)
+
+    const res = await axios.post(
+      `${API_BASE_URL}/api/external/compBazar`,
       body,
       {
         headers: {
@@ -53,7 +53,7 @@ const ContactQuore = () => {
       }
     );
 
-      toast.success("Lead Created Successfully!", {
+      toast.success("Comment added Successfully!", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -71,12 +71,13 @@ const ContactQuore = () => {
     setTimeout(() => navigate("/dashboard"), 2000);
   }     
     } catch (e) {
-      console.error("Lead Creation Failed - Full Error:", e);
+      console.error("Comment Failed - Full Error:", e);
       console.error("Error details:", {
         message: e.message,
         stack: e.stack,
+        response: e.response?.data
       });
-      toast.error(e.message || "Lead Creation Failed. Please try again.");
+      toast.error(e.message || "Comment  Failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -117,8 +118,10 @@ const ContactQuore = () => {
 )}
           </div>
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">Contact Quore b2b</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-2">Compare Bazar Comments</h2>
           </div>
+
+
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
@@ -155,53 +158,21 @@ const ContactQuore = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
-                placeholder="your@email.com"
-                autoComplete="email"
-              />
-            </div>
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg text-center border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
-                placeholder="+1 (123) 456-7890"
-                autoComplete="tel"
-              />
-            </div>
-          </div>
 
-
-
-
-          <div className="mb-4">
+         <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Message
+              Comment
             </label>
             <input
-              type="text"
-              id="message"
-              name="message"
-              value={formData.message}
+              type="comment"
+              id="comment"
+              name="comment"
+              value={formData.comment}
               onChange={handleChange}
               required
               className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
-              placeholder='Type your Message..'
-              autoComplete="message"
+              placeholder='Type your comment...'
+              autoComplete="comment"
             />
           </div>
 
@@ -213,7 +184,7 @@ const ContactQuore = () => {
             className={`w-full cursor-pointer bg-gradient-to-r from-[#ff8633] to-[#ff9a52] text-white py-3 rounded-lg font-medium hover:from-[#e6732b] hover:to-[#e6732b] transition-all shadow-md hover:shadow-lg active:scale-95 transform ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
               }`}
           >
-            {isSubmitting ? 'Sending Message...' : 'Send Message'}
+            {isSubmitting ? 'Adding Comment...' : 'Comment'}
           </button>
         </form>
       </Suspense>
@@ -222,4 +193,4 @@ const ContactQuore = () => {
   );
 };
 
-export default React.memo(ContactQuore);
+export default React.memo(Comparebazar);

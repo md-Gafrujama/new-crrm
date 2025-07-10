@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Pages/login.jsx';
-import Sign from './Pages/sign.jsx';
+import Sign from './Components/Forms/sign.jsx';
 import Dashboard from './Pages/dashboard.jsx';
 import UserProfile from './Pages/userProfile.jsx';
-import Register from './Pages/register.jsx';
+import Register from './Components/Forms/register.jsx';
 import './App.css';
 import ProtectedRoute from './Pages/protectedRoute.js';
-import ForgetPassword from './Pages/forgetPassword.jsx';
+import ForgetPassword from './Components/Forms/forgetPassword.jsx';
 import OTPPage from './Pages/Otp.jsx';
-import  UpdatePassword from "./Pages/UpdatePassword.jsx"
+import  UpdatePassword from "./Components/Forms/UpdatePassword.jsx"
 import AllUsers from './Pages/AllUsers.jsx';
-import EditUser from './Pages/EditUser.jsx';
+import EditUser from './Components/Forms/EditUser.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AddLeadsForm from './Components/AddLeadsForm.jsx';
-import LeadsActivity from './Pages/LeadsActivity.jsx';
-import AlertsandReminderForm from './Components/AlertsandReminderForm.jsx';
-import Quoreb2b from './Pages/Quoreb2b.jsx';
-import Comparebazar from './Pages/Comparebazar.jsx';
-import ContactQuore from './Pages/ContactQuore.jsx';
+import AddLeadsForm from './Components/Leads/AddLeadsForm.jsx';
+import LeadsActivity from './Components/Leads/LeadsActivity.jsx';
+import AlertsandReminderForm from './Components/Forms/AlertsandReminderForm.jsx';
+import Quoreb2b from './Components/Forms/Quoreb2b.jsx';
+import Comparebazar from './Components/Forms/Comparebazar.jsx';
+import ContactQuore from './Components/Forms/ContactQuore.jsx';
 import QuoreandCompareComments from './Pages/QuoreandCompareComments.jsx';
-import QuoreLeads from './Pages/QuoreLeads.jsx';
+import QuoreLeads from './Components/Forms/QuoreLeads.jsx';
+import { ThemeProvider } from './contexts/theme-context.jsx';
 
 function App() {
   
@@ -51,6 +52,7 @@ function App() {
   };
 
   return (
+    <ThemeProvider storageKey="theme">
     <Router>
         <ToastContainer
         position="top-center"
@@ -109,6 +111,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
+    </ThemeProvider>
   );
 }
 

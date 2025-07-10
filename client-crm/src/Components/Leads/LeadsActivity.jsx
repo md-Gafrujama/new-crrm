@@ -3,8 +3,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { API_BASE_URL } from '../config/api'; 
-
+import { API_BASE_URL } from '../../config/api'; 
+import { Header } from '../common/Header';
+import { Sidebar } from '../common/sidebar';
+import { cn } from "../../utils/cn";
 
 const download = async () => {
   try {
@@ -38,7 +40,7 @@ const download = async () => {
 };
 
 
-const LeadsActivity = () => {
+const LeadsActivity = ({collapsed}) => {
   const navigate = useNavigate();
   const [leadsData, setLeadsData] = useState([]);
   const [viewPopupOpen, setViewPopupOpen] = useState(false);
@@ -264,7 +266,14 @@ const LeadsActivity = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <>
+    <Header/>
+    <Sidebar/>
+        <div className={cn(
+    "transition-[margin] duration-300 ease-in-out",
+    collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
+  )}>
+    <div className="min-h-screen bg-gray-50 p-20">
       <header className="mb-8">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 relative w-full">
   {/* For small screens: Column layout */}
@@ -279,8 +288,6 @@ const LeadsActivity = () => {
         </svg>
       </button>
     </div>
-    <BackButton onClick={handlegobacktodashboard} />
-    
   </div>
 
   {/* For medium+ screens: Original row layout */}
@@ -296,7 +303,6 @@ const LeadsActivity = () => {
         </svg>
       </button>
     </div>
-    <BackButton onClick={handlegobacktodashboard} />
     <div className="w-10"></div> {/* Spacer to balance the flex layout */}
   </div>
 </div>
@@ -354,6 +360,8 @@ const LeadsActivity = () => {
         />
       )}
     </div>
+    </div>
+   </>
   );
 };
 
@@ -377,23 +385,6 @@ const ErrorDisplay = ({ error }) => (
   </div>
 );
 
-const BackButton = ({ onClick }) => (
-  <button
-    type="button"
-    onClick={onClick}
-    className="cursor-pointer flex items-center gap-2 m-3 px-4 py-2 bg-[#ff8633] text-white rounded-lg transition-colors hover:bg-[#e57328] ml-auto"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-5 w-5 group-hover:transform group-hover:-translate-x-1 transition-transform"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-    </svg>
-    <span >Back to Dashboard</span>
-  </button>
-);
 
 const StatCard = React.memo(({ title, value, icon }) => (
   <div className="bg-white p-4 rounded-lg shadow flex-1 min-w-[200px]">

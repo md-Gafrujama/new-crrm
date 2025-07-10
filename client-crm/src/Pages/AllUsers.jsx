@@ -1,9 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import EditUser from './EditUser';
+import EditUser from '../Components/Forms/EditUser';
 import axios from 'axios';
 import { API_BASE_URL } from '../config/api'; 
-const AllUsers = () => {
+import { Header } from '../Components/common/Header';
+import { Sidebar } from '../Components/common/sidebar';
+import { cn } from "../utils/cn";
+
+const AllUsers = ({collapsed}) => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,9 +51,7 @@ const AllUsers = () => {
     navigate('/sign');
   };
 
-  const handlegobacktodashboard = ()=> {
-    navigate('/dashboard');
-  };
+
 
   const handleEditUser = (userId) => {
     setSelectedUserId(userId);
@@ -97,7 +99,14 @@ const AllUsers = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <>
+    <Header/>
+    <Sidebar/>
+      <div className={cn(
+    "transition-[margin] duration-300 ease-in-out",
+    collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
+  )}>
+    <div className="container mx-auto px-4 py-20">
       <div className="flex justify-between items-center mb-8 max-w-6xl mx-auto">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800">User Management</h1>
         <div className='flex flex-col lg:flex-row md:flex-row gap-2'>
@@ -110,16 +119,6 @@ const AllUsers = () => {
             <path d="M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
           Add New User
-        </button>
-
-        <button
-          onClick={handlegobacktodashboard}
-          className="cursor-pointer flex items-center gap-2  px-4 py-2 bg-[#ff8633] text-white rounded-lg transition-colors hover:bg-[#e57328]"
-        >
-       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
-</svg>
-         Go Back to Dashboard
         </button>
         </div>
       </div>
@@ -211,6 +210,8 @@ const AllUsers = () => {
         </div>
       )}
     </div>
+    </div>
+    </>
   );
 };
 

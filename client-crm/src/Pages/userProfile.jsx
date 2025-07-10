@@ -1771,9 +1771,9 @@ import React, { useState, lazy, Suspense, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import AddLeadsForm from '../Components/AddLeadsForm';
-import AlertsandReminderForm from '../Components/AlertsandReminderForm';
-import RealtimeTracking from '../Components/RealtimeTracking';
+import AddLeadsForm from '../Components/Leads/AddLeadsForm';
+import AlertsandReminderForm from '../Components/Forms/AlertsandReminderForm';
+import RealtimeTracking from '../Components/Forms/RealtimeTracking';
 import axios from 'axios';
 import { API_BASE_URL } from '../config/api';
 

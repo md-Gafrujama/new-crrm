@@ -2,17 +2,17 @@ import React, { useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { API_BASE_URL } from '../config/api'; 
-
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
+import { API_BASE_URL } from '../../config/api'; 
+import { Header } from '../common/Header';
+import { Sidebar } from '../common/sidebar';
 
-const Comparebazar = () => {
+const RealtimeTracking = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    comment: '',
+    email: '',
+    phone: '',
   });
 
   const handleChange = React.useCallback((e) => {
@@ -33,25 +33,22 @@ const Comparebazar = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('No authentication token found');
+
       const body = {
-        userFirstName: formData.firstName,
-        userLastName: formData.lastName,
-        comment: formData.comment, 
+        phoneNumber: formData.phone,
       };
 
-      console.log(body)
-
-    const res = await axios.post(
-      `${API_BASE_URL}/api/external/compBazar`,
-      body,
-      {
+      const response = await axios.post(`${API_BASE_URL}/api/realtimetracking`, {
+        body,
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         }
-      }
-    );
+      });
 
-      toast.success("Comment added Successfully!", {
+      toast.success("Realtime Tracking done Successfully!", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -69,13 +66,12 @@ const Comparebazar = () => {
     setTimeout(() => navigate("/dashboard"), 2000);
   }     
     } catch (e) {
-      console.error("Comment Failed - Full Error:", e);
+      console.error("Reailtime Tracking Failed - Full Error:", e);
       console.error("Error details:", {
         message: e.message,
         stack: e.stack,
-        response: e.response?.data
       });
-      toast.error(e.message || "Comment  Failed. Please try again.");
+      toast.error(e.message || "Reailtime Tracking  Failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -97,7 +93,10 @@ const Comparebazar = () => {
           className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100 transition-all hover:shadow-2xl"
         >
           <div className="absolute top-4 right-4">
-           {localStorage.getItem('userType') === 'admin' && (
+    {localStorage.getItem('userType') === 'admin' && (
+      <>
+      <Header/>
+      <Sidebar/>
   <button
     type="button"
     onClick={handlegobacktodashboard}
@@ -113,66 +112,27 @@ const Comparebazar = () => {
     </svg>
     <span>Back to Dashboard</span>
   </button>
+  </>
 )}
           </div>
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">Compare Bazar Comments</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-2">Realtime Tracking</h2>
           </div>
 
-
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                First Name
-              </label>
+            <div className='mb-10'>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
               <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
                 onChange={handleChange}
-                required
-                className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
-                placeholder="John"
-                autoComplete="given-name"
+                className="w-full px-4 py-3 rounded-lg text-center border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                placeholder="+1 (123) 456-7890"
+                autoComplete="tel"
               />
             </div>
-            <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-                Last Name
-              </label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
-                placeholder="Doe"
-                autoComplete="family-name"
-              />
-            </div>
-          </div>
 
-
-         <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Comment
-            </label>
-            <input
-              type="comment"
-              id="comment"
-              name="comment"
-              value={formData.comment}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
-              placeholder='Type your comment...'
-              autoComplete="comment"
-            />
-          </div>
 
 
 
@@ -182,7 +142,7 @@ const Comparebazar = () => {
             className={`w-full cursor-pointer bg-gradient-to-r from-[#ff8633] to-[#ff9a52] text-white py-3 rounded-lg font-medium hover:from-[#e6732b] hover:to-[#e6732b] transition-all shadow-md hover:shadow-lg active:scale-95 transform ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
               }`}
           >
-            {isSubmitting ? 'Adding Comment...' : 'Comment'}
+            {isSubmitting ? 'Reailtime Tracking ...' : 'Track'}
           </button>
         </form>
       </Suspense>
@@ -191,4 +151,4 @@ const Comparebazar = () => {
   );
 };
 
-export default React.memo(Comparebazar);
+export default React.memo(RealtimeTracking);
