@@ -97,10 +97,11 @@ model OTP {
   expiresAt    DateTime                      
 }
 
-model QB2b{
+model Qb2b{
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  firstName String
-  lastName String
+  customerName String
+  customerEmail String
+  customerNumber String
   comment String
 }
 

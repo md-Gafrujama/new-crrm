@@ -30,7 +30,7 @@ const OTPPage = () => {
             console.log("Entered OTP:", enteredOtp);
 
             if (enteredOtp.length === 6) {
-                const response = await axios.post(`${API_BASE_URL}/api/checkingOTP`, 
+                const response = await axios.post(`${API_BASE_URL}/api/forgetPass1/verify`, 
                   { otp: enteredOtp },
                   {
                     headers: {
