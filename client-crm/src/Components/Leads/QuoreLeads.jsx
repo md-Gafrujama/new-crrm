@@ -5,7 +5,7 @@ import axios from 'axios';
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
 import { API_BASE_URL } from '../../config/api'; 
 import { Header } from '../common/Header';
-import { Sidebar } from '../common/sidebar';
+import { Sidebar,useSidebar } from '../common/sidebar';
 
 const QuoreLeads = () => {
   const navigate = useNavigate();

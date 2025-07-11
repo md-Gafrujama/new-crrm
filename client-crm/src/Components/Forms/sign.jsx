@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { API_BASE_URL } from '../../config/api'; 
 import { Header } from '../common/Header';
-import { Sidebar } from '../common/sidebar';
+import { Sidebar,useSidebar } from '../common/sidebar';
 
 // Lazy load components and icons
 const Eye = lazy(() => import('lucide-react').then(module => ({ default: module.Eye })));
@@ -15,6 +15,7 @@ const Sign = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -123,8 +124,13 @@ const handleSubmit = async (e) => {
 
   return (
     <>
-    <Header/>
-    <Sidebar/>
+   <Header 
+             onToggleSidebar={toggleSidebar} 
+         />
+          <Sidebar 
+                   isOpen={isSidebarOpen} 
+                   onClose={closeSidebar}
+           >
     <div className="flex items-center justify-center min-h-screen p-20">
       <Suspense fallback={
         <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100">
@@ -343,6 +349,7 @@ const handleSubmit = async (e) => {
         </form>
       </Suspense>
     </div>
+    </Sidebar>
     </>
   );
 };

@@ -8,7 +8,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import axios from "axios";
 import { API_BASE_URL } from '../../config/api'; 
 import { Header } from '../common/Header';
-import { Sidebar } from '../common/sidebar';
+import { Sidebar,useSidebar } from '../common/sidebar';
 
 // Lazy loaded components
 const PhoneInput = lazy(() => import('react-phone-input-2'));

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { API_BASE_URL } from '../../config/api'; 
 import { Header } from '../common/Header';
-import { Sidebar } from '../common/sidebar';
+import { Sidebar,useSidebar } from '../common/sidebar';
 
 
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
@@ -31,7 +31,7 @@ const AlertsandReminder = () => {
   const handlegobacktodashboard = () => {
     navigate('/dashboard');
   };
-
+const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
  const handleSubmitAlert = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -109,8 +109,13 @@ const AlertsandReminder = () => {
  
 {localStorage.getItem('userType') === 'admin' && (
   <>
-  <Header/>
-  <Sidebar/>
+  <Header 
+            onToggleSidebar={toggleSidebar} 
+        />
+         <Sidebar 
+                  isOpen={isSidebarOpen} 
+                  onClose={closeSidebar}
+          >
   <button
     type="button"
     onClick={handlegobacktodashboard}
@@ -126,6 +131,7 @@ const AlertsandReminder = () => {
     </svg>
     <span>Back to Dashboard</span>
   </button>
+  </Sidebar>
   </>
 )}
 

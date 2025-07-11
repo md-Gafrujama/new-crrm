@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { Users, ShoppingCart, DollarSign, TrendingUp, Activity, AlertCircle } from 'lucide-react';
 import { Header } from '../Components/common/Header';
-import { Sidebar } from '../Components/common/sidebar';
+import { Sidebar,useSidebar } from '../Components/common/sidebar';
 import { cn } from "../utils/cn";
 import { Bell, ChevronsLeft, Moon, Search, Sun } from "lucide-react";
 import { useTheme } from "../hooks/use-theme";  
@@ -11,6 +11,7 @@ import { useTheme } from "../hooks/use-theme";
 const Dashboard = ({collapsed, onLogout }) => {
 
   const { theme, setTheme } = useTheme();
+  const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
   const stats = [
     { title: 'Total Users', value: '2,453', change: '+12%', trend: 'up' },
     { title: 'Revenue', value: '$9,876', change: '+8.2%', trend: 'up' },
@@ -47,8 +48,13 @@ const Dashboard = ({collapsed, onLogout }) => {
 
   return (
     <>
-     <Header/>
-      <Sidebar/>
+     <Header 
+          onToggleSidebar={toggleSidebar} 
+      />
+       <Sidebar 
+                isOpen={isSidebarOpen} 
+                onClose={closeSidebar}
+        >
        <div className={cn(
     "transition-[margin] duration-300 ease-in-out",
     collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
@@ -172,6 +178,7 @@ const Dashboard = ({collapsed, onLogout }) => {
       </main>
     </div>
     </div>
+    </Sidebar>
     </>
   );
 };

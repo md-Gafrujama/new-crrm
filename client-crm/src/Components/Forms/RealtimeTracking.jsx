@@ -5,7 +5,7 @@ import axios from 'axios';
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
 import { API_BASE_URL } from '../../config/api'; 
 import { Header } from '../common/Header';
-import { Sidebar } from '../common/sidebar';
+import { Sidebar,useSidebar } from '../common/sidebar';
 
 const RealtimeTracking = () => {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const RealtimeTracking = () => {
   const handlegobacktodashboard = () => {
     navigate('/dashboard');
   };
-
+const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -95,8 +95,13 @@ const RealtimeTracking = () => {
           <div className="absolute top-4 right-4">
     {localStorage.getItem('userType') === 'admin' && (
       <>
-      <Header/>
-      <Sidebar/>
+      <Header 
+                onToggleSidebar={toggleSidebar} 
+            />
+             <Sidebar 
+                      isOpen={isSidebarOpen} 
+                      onClose={closeSidebar}
+              >
   <button
     type="button"
     onClick={handlegobacktodashboard}
@@ -112,6 +117,7 @@ const RealtimeTracking = () => {
     </svg>
     <span>Back to Dashboard</span>
   </button>
+  </Sidebar>
   </>
 )}
           </div>

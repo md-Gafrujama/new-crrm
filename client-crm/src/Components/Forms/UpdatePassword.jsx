@@ -8,7 +8,7 @@ const Loader2 = lazy(() => import('lucide-react').then(module => ({ default: mod
 const Lock = lazy(() => import('lucide-react').then(module => ({ default: module.Lock })));
 import { API_BASE_URL } from '../../config/api';
 import { Header } from '../common/Header';
-import { Sidebar } from '../common/sidebar';
+import { Sidebar,useSidebar } from '../common/sidebar';
 
 const UpdatePassword = () => {
   const navigate = useNavigate();
