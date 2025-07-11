@@ -43,6 +43,21 @@ export const navbarLinks = [
         ],
     },
     {
+        title: "External Data",
+        links: [
+            {
+                label: "Quoreb2b",
+                icon: Package,
+                path: "/quore-comments",
+            },
+            {
+                label: "CompareBazar",
+                icon: PackagePlus,
+                path: "/compare-comments",
+            }
+        ],
+    },
+    {
         title: "Products",
         links: [
             {
@@ -69,11 +84,6 @@ export const navbarLinks = [
                 label: "Settings",
                 icon: Settings,
                 path: "/settings",
-            },
-            {
-                label: "External",
-                icon: Settings,
-                path: "/quore-compare-comments",
             }
         ],
     },

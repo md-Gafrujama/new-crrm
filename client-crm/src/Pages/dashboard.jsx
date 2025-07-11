@@ -6,26 +6,16 @@ import { Header } from '../Components/common/Header';
 import { Sidebar } from '../Components/common/sidebar';
 import { cn } from "../utils/cn";
 import { Bell, ChevronsLeft, Moon, Search, Sun } from "lucide-react";
+import { useTheme } from "../hooks/use-theme";  
 
 const Dashboard = ({collapsed, onLogout }) => {
 
-  const navigate = useNavigate();
-
+  const { theme, setTheme } = useTheme();
   const stats = [
     { title: 'Total Users', value: '2,453', change: '+12%', trend: 'up' },
     { title: 'Revenue', value: '$9,876', change: '+8.2%', trend: 'up' },
     { title: 'Tasks Completed', value: '156', change: '-3.1%', trend: 'down' },
     { title: 'Pending Requests', value: '23', change: '+4%', trend: 'up' },
-  ];
-
-
-
-
-    const statsCards = [
-    { title: 'Total Users', value: '12,847', change: '+12%', icon: Users, color: 'bg-blue-500' },
-    { title: 'Revenue', value: '$284,920', change: '+8.2%', icon: DollarSign, color: 'bg-green-500' },
-    { title: 'Orders', value: '3,247', change: '+23%', icon: ShoppingCart, color: 'bg-purple-500' },
-    { title: 'Growth Rate', value: '15.3%', change: '+2.1%', icon: TrendingUp, color: 'bg-orange-500' }
   ];
 
   const userDistributionData = [
@@ -53,25 +43,11 @@ const Dashboard = ({collapsed, onLogout }) => {
     { day: 'Sun', revenue: 16300 }
   ];
 
-  const recentActivities = [
-    { id: 1, user: 'John Doe', action: 'Created new product listing', time: '2 min ago', status: 'success' },
-    { id: 2, user: 'Sarah Wilson', action: 'Updated user permissions', time: '5 min ago', status: 'info' },
-    { id: 3, user: 'Mike Johnson', action: 'Processed bulk order #1247', time: '12 min ago', status: 'success' },
-    { id: 4, user: 'Emily Davis', action: 'System backup completed', time: '1 hour ago', status: 'success' },
-    { id: 5, user: 'Alex Brown', action: 'Failed login attempt detected', time: '2 hours ago', status: 'warning' }
-  ];
-
-  const alerts = [
-    { id: 1, message: 'Server CPU usage at 85%', type: 'warning', time: '10 min ago' },
-    { id: 2, message: 'Daily backup completed successfully', type: 'success', time: '1 hour ago' },
-    { id: 3, message: 'New security update available', type: 'info', time: '3 hours ago' }
-  ];
-
 
 
   return (
     <>
-     {/* <Header/> */}
+     <Header/>
       <Sidebar/>
        <div className={cn(
     "transition-[margin] duration-300 ease-in-out",
@@ -79,58 +55,6 @@ const Dashboard = ({collapsed, onLogout }) => {
   )}>
     <div className="min-h-screen py-20">
       {/* Header */}
-     
-    <header className="fixed top-0 left-0 right-0 z-50 flex h-[60px] items-center justify-between bg-white px-4 shadow-md transition-colors">
-
-    <div className="flex-1">
-       
-    </div>
-    
-    {/* Right side container */}
-    <div className="flex flex-1 items-center justify-end gap-4">
-        {/* Search input */}
-        <div className="hidden md:flex items-center w-full max-w-[300px]">
-            <div className="input flex items-center w-full border border-gray-300 rounded-lg p-2 ">
-                <Search
-                    size={20}
-                    className="text-slate-300"
-                />
-                <input
-                    type="text"
-                    name="search"
-                    id="search"
-                    placeholder="Search..."
-                    className="w-full bg-transparent text-slate-900 outline-0 placeholder:text-slate-300 dark:text-slate-50 px-2"
-                />
-            </div>
-        </div>
-        
-        {/* Theme toggle and logout buttons */}
-        <div className="flex items-center gap-x-3">
-            <button
-                className="btn-ghost size-10"
-                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            >
-                <Sun
-                    size={20}
-                    className="dark:hidden"
-                />
-                <Moon
-                    size={20}
-                    className="hidden dark:block"
-                />
-            </button>
-            
-            <button
-                onClick={onLogout}
-                className="cursor-pointer px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
-            >
-                Logout
-            </button>
-        </div>
-    </div>
-</header>
-
       <main className="mx-auto px-4 py-6 sm:px-0 lg:px-0">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
