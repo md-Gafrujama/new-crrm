@@ -41,7 +41,7 @@ const UpdatePassword = () => {
       setIsSubmitting(true);
       setErrorMessage('');
       try {
-        const response = await axios.put(`${API_BASE_URL}/api/updatePassword`, 
+        const response = await axios.put(`${API_BASE_URL}/api/forgetPass2`, 
           {
             email,
             newPassword: newPassword,

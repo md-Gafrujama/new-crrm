@@ -35,7 +35,7 @@ const ForgetPassword = () => {
     }, 10000); // 10s timeout
 
     const response = await axios.post(
-      `${API_BASE_URL}/api/checkingOTP/send`,
+      `${API_BASE_URL}/api/forgetPass1/send`,
       { email },
       {
         headers: { "Content-Type": "application/json" },
