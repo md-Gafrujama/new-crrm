@@ -129,10 +129,10 @@ const AlertsandReminder = () => {
   </>
 )}
 
-   <div className="flex items-center justify-center  p-0">
+   <div className="flex items-center justify-center  p-0 bg-gray-100 mt-5">
      
                   <Suspense fallback={
-                    <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100">
+                    <div className=" p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100">
                       <div className="animate-pulse">
                         <div className="h-8 bg-gray-200 rounded w-3/4 mb-6 mx-auto"></div>
                         <div className="h-4 bg-gray-200 rounded w-1/2 mb-8 mx-auto"></div>

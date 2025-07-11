@@ -115,7 +115,7 @@ const AddLeadsForm = () => {
        <button
          type="button"
          onClick={handlegobacktodashboard}
-         className="cursor-pointer flex items-center gap-2 m-3 px-2 p-2 bg-[#ff8633] text-white rounded-lg transition-colors hover:bg-[#e57328] ml-auto"
+         className="cursor-pointer flex items-center gap-2 m-3 px-2 p-2 bg-[#ff8633] text-white rounded-lg transition-colors hover:bg-[#e57328] ml-auto bg-gray-100"
        >
          <svg
            xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +130,7 @@ const AddLeadsForm = () => {
        </>
      )}
      
-    <div className="flex items-center justify-center min-h-screen p-4">
+    <div className="flex items-center justify-center min-h-screen p-4 bg-gray-100">
       <Suspense fallback={
         <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100">
           <div className="animate-pulse">

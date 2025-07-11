@@ -77,7 +77,7 @@ const Dashboard = ({collapsed, onLogout }) => {
     "transition-[margin] duration-300 ease-in-out",
     collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
   )}>
-    <div className="min-h-screen py-20">
+    <div className="min-h-screen py-20 bg-gray-100">
       {/* Header */}
      
     <header className="fixed top-0 left-0 right-0 z-50 flex h-[60px] items-center justify-between bg-white px-4 shadow-md transition-colors">
@@ -223,8 +223,8 @@ const Dashboard = ({collapsed, onLogout }) => {
       </div>
 
       {/* Sales & Users Bar Chart */}
-      <div className="bg-white shadow overflow-hidden rounded-lg">
-        <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
+      <div className="bg-white shadow overflow-hidden rounded-lg bg-gray-100">
+        <div className="px-4 py-5 sm:px-6 border-b border-gray-200 ">
           <h3 className="text-lg leading-6 font-medium text-gray-900">Monthly Sales & User Growth</h3>
         </div>
         <div className="p-6">

@@ -120,7 +120,7 @@ const EditUser = ({ userId, onUpdate, onDelete, onClose }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center border-b p-4">
+      <div className="flex justify-between items-center border-b p-4 bg-gray-100">
         <h2 className="text-base font-semibold">Edit User</h2>
         <button
           onClick={onClose}

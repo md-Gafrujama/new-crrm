@@ -103,10 +103,10 @@ const AllUsers = ({collapsed}) => {
     <Header/>
     <Sidebar/>
       <div className={cn(
-    "transition-[margin] duration-300 ease-in-out",
+    "transition-[margin] duration-300 ease-in-out bg-gray-100",
     collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
   )}>
-    <div className="container mx-auto px-4 py-20">
+    <div className="container mx-auto px-4 py-20 bg-gray-100">
       <div className="flex justify-between items-center mb-8 max-w-6xl mx-auto">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800">User Management</h1>
         <div className='flex flex-col lg:flex-row md:flex-row gap-2'>

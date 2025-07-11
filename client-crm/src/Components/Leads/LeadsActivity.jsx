@@ -273,7 +273,7 @@ const LeadsActivity = ({collapsed}) => {
     "transition-[margin] duration-300 ease-in-out",
     collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
   )}>
-    <div className="min-h-screen bg-gray-50 p-20">
+    <div className="min-h-screen bg-gray-100 p-20">
       <header className="mb-8">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 relative w-full">
   {/* For small screens: Column layout */}
