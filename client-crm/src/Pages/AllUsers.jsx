@@ -4,7 +4,7 @@ import EditUser from '../Components/Forms/EditUser';
 import axios from 'axios';
 import { API_BASE_URL } from '../config/api'; 
 import { Header } from '../Components/common/Header';
-import { Sidebar } from '../Components/common/sidebar';
+import { Sidebar,useSidebar } from '../Components/common/sidebar';
 import { cn } from "../utils/cn";
 
 const AllUsers = ({collapsed}) => {
@@ -14,7 +14,7 @@ const AllUsers = ({collapsed}) => {
   const [error, setError] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
-
+  const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
   useEffect(() => {
    const fetchUsers = async () => {
     
@@ -100,8 +100,13 @@ const AllUsers = ({collapsed}) => {
 
   return (
     <>
-    <Header/>
-    <Sidebar/>
+    <Header 
+              onToggleSidebar={toggleSidebar} 
+          />
+           <Sidebar 
+                    isOpen={isSidebarOpen} 
+                    onClose={closeSidebar}
+            >
       <div className={cn(
     "transition-[margin] duration-300 ease-in-out bg-gray-100",
     collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
@@ -211,6 +216,7 @@ const AllUsers = ({collapsed}) => {
       )}
     </div>
     </div>
+    </Sidebar>
     </>
   );
 };

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { API_BASE_URL } from '../../config/api'; 
 import { Header } from '../common/Header';
-import { Sidebar } from '../common/sidebar';
+import { Sidebar,useSidebar } from '../common/sidebar';
 import { cn } from "../../utils/cn";
 
 const download = async () => {
@@ -59,6 +59,7 @@ const LeadsActivity = ({collapsed}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedLead, setSelectedLead] = useState(null);
+  const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
 
   const handlegobacktodashboard = useCallback(() => {
     navigate("/dashboard");
@@ -267,8 +268,13 @@ const LeadsActivity = ({collapsed}) => {
 
   return (
     <>
-    <Header/>
-    <Sidebar/>
+  <Header 
+            onToggleSidebar={toggleSidebar} 
+        />
+         <Sidebar 
+                  isOpen={isSidebarOpen} 
+                  onClose={closeSidebar}
+          >
         <div className={cn(
     "transition-[margin] duration-300 ease-in-out",
     collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
@@ -361,6 +367,7 @@ const LeadsActivity = ({collapsed}) => {
       )}
     </div>
     </div>
+    </Sidebar>
    </>
   );
 };

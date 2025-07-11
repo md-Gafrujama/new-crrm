@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { API_BASE_URL } from '../../config/api';
 import { LoadingSpinner, TableHeader, CommentRow, ViewCommentPopup, DeleteConfirmationPopup } from '../common/CommentComponents';
 import { Header } from '../common/Header';
-import { Sidebar } from '../common/sidebar';
+import { Sidebar,useSidebar } from '../common/sidebar';
 import { cn } from "../../utils/cn";
 
 const QuoreComments = ({collapsed}) => {
@@ -15,7 +15,8 @@ const QuoreComments = ({collapsed}) => {
   const [viewPopupOpen, setViewPopupOpen] = useState(false);
   const [deletePopupOpen, setDeletePopupOpen] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
-
+  const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
+  
   useEffect(() => {
     fetchComments();
   }, []);
@@ -46,8 +47,13 @@ const QuoreComments = ({collapsed}) => {
 
   return (
     <>
-     <Header/>
-        <Sidebar/>
+     <Header 
+               onToggleSidebar={toggleSidebar} 
+           />
+            <Sidebar 
+                     isOpen={isSidebarOpen} 
+                     onClose={closeSidebar}
+             >
           <div className={cn(
         "transition-[margin] duration-300 ease-in-out",
         collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
@@ -125,6 +131,7 @@ const QuoreComments = ({collapsed}) => {
       )}
     </div>
     </div>
+    </Sidebar>
     </>
   );
 };

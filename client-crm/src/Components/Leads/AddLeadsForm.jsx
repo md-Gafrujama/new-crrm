@@ -5,12 +5,14 @@ import axios from 'axios';
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
 import { API_BASE_URL } from '../../config/api'; 
 import { Header } from '../common/Header';
-import { Sidebar } from '../common/sidebar';
+import { Sidebar,useSidebar } from '../common/sidebar';
+import { cn } from '../../utils/cn';
 
 
 const AddLeadsForm = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
   const [formData, setFormData] = useState({
     leadtitle: '',
     firstName: '',
@@ -110,27 +112,20 @@ const AddLeadsForm = () => {
     <>
      {localStorage.getItem('userType') === 'admin' && (
        <>
-       <Header/>
-       <Sidebar/>
-       <button
-         type="button"
-         onClick={handlegobacktodashboard}
-         className="cursor-pointer flex items-center gap-2 m-3 px-2 p-2 bg-[#ff8633] text-white rounded-lg transition-colors hover:bg-[#e57328] ml-auto bg-gray-100"
-       >
-         <svg
-           xmlns="http://www.w3.org/2000/svg"
-           className="h-5 w-5 group-hover:transform group-hover:-translate-x-1 transition-transform"
-           viewBox="0 0 20 20"
-           fill="currentColor"
-         >
-           <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-         </svg>
-         <span>Back to Dashboard</span>
-       </button>
+      <Header onToggleSidebar={toggleSidebar} />
+      <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar}>
+       </Sidebar>
        </>
      )}
      
-    <div className="flex items-center justify-center min-h-screen p-4 bg-gray-100">
+    <div className={cn(
+      "flex items-center justify-center min-h-screen p-4",
+      localStorage.getItem('userType') === 'admin' 
+        ? isSidebarOpen 
+          ? "md:ml-64" 
+          : "md:ml-20"
+        : ""
+    )}>
       <Suspense fallback={
         <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100">
           <div className="animate-pulse">
