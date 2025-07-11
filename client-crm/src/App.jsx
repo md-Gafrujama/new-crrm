@@ -17,12 +17,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import AddLeadsForm from './Components/Leads/AddLeadsForm.jsx';
 import LeadsActivity from './Components/Leads/LeadsActivity.jsx';
 import AlertsandReminderForm from './Components/Forms/AlertsandReminderForm.jsx';
-import Quoreb2b from './Components/Forms/Quoreb2b.jsx';
-import Comparebazar from './Components/Forms/Comparebazar.jsx';
+import Quoreb2b from './Components/ExternalData/Quoreb2b.jsx';
+import Comparebazar from './Components/ExternalData/Comparebazar.jsx';
 import ContactQuore from './Components/Forms/ContactQuore.jsx';
 import QuoreandCompareComments from './Pages/QuoreandCompareComments.jsx';
-import QuoreLeads from './Components/Forms/QuoreLeads.jsx';
+import QuoreLeads from './Components/Leads/QuoreLeads.jsx';
 import { ThemeProvider } from './contexts/theme-context.jsx';
+import CompareComments from './Components/ExternalData/CompareComments.jsx';
+import QuoreComments from './Components/ExternalData/QuoreComments.jsx';
 
 function App() {
   
@@ -49,6 +51,7 @@ function App() {
     localStorage.removeItem("token"); 
     setIsLoggedIn(false);
     setUserType(null);
+    
   };
 
   return (
@@ -88,6 +91,7 @@ function App() {
             <Route path="/contactquore" element={<ContactQuore />} />
              <Route path="/quoreleads" element={<QuoreLeads />} />
 
+
             {/* OTP Component tabhi navigate hoga , when otp  is sent */}
 
             <Route path="/otp" element={  localStorage.getItem("emailSent") === "true" ? <OTPPage />: <Navigate to="/forgetPassword" replace /> } />
@@ -105,6 +109,8 @@ function App() {
           <Route path="/alerts-and-reminder-admin" element={<AlertsandReminderForm />} />
           <Route path="/leadsactivity" element={<LeadsActivity />} />
           <Route path="/quore-compare-comments" element={<QuoreandCompareComments />} />
+          <Route path="/compare-comments" element={<CompareComments />} />
+          <Route path="/quore-comments" element={<QuoreComments />} />
         </Route>
 
         {/* Fallback */}
