@@ -7,10 +7,10 @@ import {
   ChevronUp,
   X,
 } from "lucide-react";
-import { navbarLinks } from "../../constants";
-import { cn } from "../../utils/cn";
+import { navbarLinks } from "../constants";
+import { cn } from "../../../utils/cn";
 import PropTypes from "prop-types";
-import { useTheme } from "../../hooks/use-theme";
+import { useTheme } from "../../../hooks/use-theme";
 
 export const Sidebar = ({ isOpen, onClose, children }) => {
   const { theme } = useTheme();

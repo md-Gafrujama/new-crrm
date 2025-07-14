@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Pages/login.jsx';
-import Sign from './Components/Forms/sign.jsx';
+import Sign from './Components/Admin/Forms/sign.jsx'
 import Dashboard from './Pages/dashboard.jsx';
 import UserProfile from './Pages/userProfile.jsx';
 import Register from './Components/Forms/register.jsx';

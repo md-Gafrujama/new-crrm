@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { API_BASE_URL } from '../../config/api';
+import { API_BASE_URL } from '../../../config/api';
 import { LoadingSpinner, TableHeader, CommentRow, ViewCommentPopup, DeleteConfirmationPopup } from '../common/CommentComponents';
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
-import { cn } from "../../utils/cn";
+import { cn } from "../../../utils/cn";
 
 const QuoreComments = ({collapsed}) => {
   const [comments, setComments] = useState([]);

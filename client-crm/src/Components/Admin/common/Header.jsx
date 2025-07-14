@@ -1,4 +1,4 @@
-import { useTheme } from "../../hooks/use-theme";
+import { useTheme } from "../../../hooks/use-theme";
 import React, { useEffect, useState } from 'react';
 import { Bell, ChevronsLeft, Moon, Search, Sun,Menu } from "lucide-react";
 import { useNavigate } from 'react-router-dom';

@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { API_BASE_URL } from '../../config/api'; 
-import { Header } from '../common/Header';
-import { Sidebar,useSidebar } from '../common/sidebar';
+import { Header } from '../Admin/common/Header';
+import { Sidebar,useSidebar } from '../Admin/common/sidebar';
 
 
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));

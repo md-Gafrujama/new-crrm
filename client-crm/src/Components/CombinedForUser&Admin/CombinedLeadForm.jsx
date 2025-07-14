@@ -1,8 +1,8 @@
 
 import 'react-toastify/dist/ReactToastify.css';
-import { Header } from '../common/Header';
-import { Sidebar,useSidebar } from '../common/sidebar';
-import AddLeadsForm from '../Leads/AddLeadsForm';
+import { Header } from '../Admin/common/Header';
+import { Sidebar,useSidebar } from '../Admin/common/sidebar';
+import AddLeadsForm from '../Admin/Leads/AddLeadsForm';
 
 
 
