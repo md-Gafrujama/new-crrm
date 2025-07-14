@@ -13,27 +13,27 @@ export const TableHeader = ({ children }) => (
 );
 
 export const CommentRow = ({ comment, onView, onDelete }) => (
-  <tr className="hover:bg-gray-50">
+  <tr className="hover:bg-gray-50 dark:hover:bg-gray-300">
     <td className="px-6 py-4 whitespace-nowrap">
       <div className="flex items-center">
         <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
-          <span className="text-gray-600 font-medium">
+          <span className="text-gray-800 dark:text-gray-400 font-medium">
             {comment.firstName?.charAt(0)}{comment.lastName?.charAt(0)}
           </span>
         </div>
         <div className="ml-4">
-          <div className="text-sm font-medium text-gray-900">
+          <div className="text-sm font-medium text-gray-900 dark:text-gray-400">
             {comment.firstName} {comment.lastName}
           </div>
         </div>
       </div>
     </td>
     <td className="px-6 py-4">
-      <div className="text-sm text-left text-gray-900 line-clamp-2">
+      <div className="text-sm text-left text-gray-900 dark:text-gray-400 line-clamp-2">
         {comment.comment}
       </div>
     </td>
-    <td className="px-6 flex flex-row gap-4 py-4 whitespace-nowrap text-left text-sm font-medium">
+    <td className="px-6 flex flex-row gap-4 py-4 whitespace-nowrap text-left dark:text-gray-400 text-sm font-medium">
       <div className="flex items-center justify-center space-x-2">
         <h1>View</h1>
         <button onClick={onView} className="p-1 text-blue-500 hover:text-blue-700 transition-colors">
@@ -56,12 +56,12 @@ export const CommentRow = ({ comment, onView, onDelete }) => (
 
 export const ViewCommentPopup = ({ comment, onClose, activeTab }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-    <div className="bg-white rounded-lg shadow-xl p-6 max-w-2xl w-full">
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 max-w-2xl w-full">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-gray-800">Comment Details</h2>
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">Comment Details</h2>
         <button
           onClick={onClose}
-          className="text-gray-500 hover:text-gray-700"
+          className="text-gray-500 dark:text-gray-400 hover:text-gray-700"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -72,19 +72,19 @@ export const ViewCommentPopup = ({ comment, onClose, activeTab }) => (
       <div className="space-y-4">
         <div className="flex items-center">
           <div className="flex-shrink-0 h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
-            <span className="text-gray-600 font-medium text-xl">
+            <span className="text-gray-600 dark:text-gray-400 font-medium text-xl">
               {comment.firstName?.charAt(0)}{comment.lastName?.charAt(0)}
             </span>
           </div>
           <div className="ml-4">
-            <h3 className="text-lg font-medium text-gray-900">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-400">
               {comment.firstName} {comment.lastName}
             </h3>
           </div>
         </div>
 
-        <div className="bg-gray-50 p-4 rounded-lg">
-          <p className="text-gray-800 whitespace-pre-line">
+        <div className="bg-gray-50 dark:border dark:border-slate-400 dark:bg-slate-800 p-4 rounded-lg">
+          <p className="text-gray-800 dark:text-gray-400 whitespace-pre-line">
             Commented "{comment.comment}" on{" "}
             <span className="font-semibold">
               {comment.companyName || (activeTab === 'compare' ? 'Compare Bazar' : 'Quore B2B')}
@@ -107,22 +107,22 @@ export const ViewCommentPopup = ({ comment, onClose, activeTab }) => (
 
 export const DeleteConfirmationPopup = ({ onClose, onConfirm }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-    <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full">
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 max-w-md w-full">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-gray-800">Confirm Deletion</h2>
-        <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">Confirm Deletion</h2>
+        <button onClick={onClose} className="text-gray-500 dark:text-gray-400 hover:text-gray-700">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
 
-      <p className="mb-6">Are you sure you want to delete this comment? This action cannot be undone.</p>
+      <p className="mb-6 dark:text-gray-400">Are you sure you want to delete this comment? This action cannot be undone.</p>
 
       <div className="flex justify-end space-x-3">
         <button
           onClick={onClose}
-          className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="px-4 py-2 border border-gray-300 dark:border dark:border-gray-700 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-400 hover:bg-gray-50"
         >
           Cancel
         </button>

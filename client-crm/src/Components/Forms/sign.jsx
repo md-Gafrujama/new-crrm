@@ -133,7 +133,7 @@ const handleSubmit = async (e) => {
            >
     <div className="flex items-center justify-center min-h-screen p-20">
       <Suspense fallback={
-        <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100">
+        <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-3/4 mb-6 mx-auto"></div>
             <div className="h-4 bg-gray-200 rounded w-1/2 mb-8 mx-auto"></div>
@@ -142,13 +142,13 @@ const handleSubmit = async (e) => {
       }>
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100 transition-all hover:shadow-2xl"
+          className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100 dark:border-slate-700 transition-all hover:shadow-2xl"
         >
 
 
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">Create Account</h2>
-            <p className="text-gray-500">Add Employees</p>
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-400 mb-2">Create Account</h2>
+            <p className="text-gray-500 dark:text-gray-400">Add Employees</p>
           </div>
 
           {/* Profile Photo Upload */}
@@ -184,7 +184,7 @@ const handleSubmit = async (e) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
                 First Name
               </label>
               <input
@@ -194,13 +194,13 @@ const handleSubmit = async (e) => {
                 value={formData.firstName}
                 onChange={handleChange}
                 required
-                className="w-full text-center px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 w-full text-center px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="John"
                 autoComplete="given-name"
               />
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
                 Last Name
               </label>
               <input
@@ -210,7 +210,7 @@ const handleSubmit = async (e) => {
                 value={formData.lastName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 text-center py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 w-full px-4 text-center py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="Doe"
                 autoComplete="family-name"
               />
@@ -220,7 +220,7 @@ const handleSubmit = async (e) => {
 
 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
  <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               Email
             </label>
             <input
@@ -230,14 +230,14 @@ const handleSubmit = async (e) => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4  text-center py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+              className="dark:text-gray-400 w-full px-4  text-center py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
               placeholder="your@email.com"
               autoComplete="email"
             />
           </div>
 
           <div className="mb-4">
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               Phone Number
             </label>
             <input
@@ -246,7 +246,7 @@ const handleSubmit = async (e) => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4  text-center py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+              className="dark:text-gray-400 w-full px-4  text-center py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
               placeholder="+1 (123) 456-7890"
               autoComplete="tel"
             />
@@ -255,7 +255,7 @@ const handleSubmit = async (e) => {
          
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-3 text-center">Account Type</label>
+            <label className="block text-sm font-medium text-gray-800 dark:text-gray-400 mb-3 text-center">Account Type</label>
             <div className="flex justify-center space-x-6">
               <label className="flex items-center space-x-2 cursor-pointer">
                 <input
@@ -269,7 +269,7 @@ const handleSubmit = async (e) => {
                 <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition ${formData.role === 'user' ? 'border-[#ff8633]' : 'border-gray-300'}`}>
                   {formData.role === 'user' && <div className="w-3 h-3 rounded-full bg-[#ff8633]"></div>}
                 </div>
-                <span className="text-gray-700">User</span>
+                <span className="text-gray-700 dark:text-gray-400">User</span>
               </label>
               <label className="flex items-center space-x-2 cursor-pointer">
                 <input
@@ -283,7 +283,7 @@ const handleSubmit = async (e) => {
                 <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition ${formData.role === 'admin' ? 'border-[#ff8633]' : 'border-gray-300'}`}>
                   {formData.role === 'admin' && <div className="w-3 h-3 rounded-full bg-[#ff8633]"></div>}
                 </div>
-                <span className="text-gray-700">Admin</span>
+                <span className="text-gray-700 dark:text-gray-400">Admin</span>
               </label>
             </div>
           </div>
@@ -291,7 +291,7 @@ const handleSubmit = async (e) => {
 
 <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
  <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               Username
             </label>
             <input
@@ -301,14 +301,14 @@ const handleSubmit = async (e) => {
               value={formData.username}
               onChange={handleChange}
               required
-              className="w-full text-center px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+              className="dark:text-gray-400 w-full text-center px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
               placeholder="john_doe"
               autoComplete="username"
             />
           </div>
 
           <div className="relative mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               Password
             </label>
             <input
@@ -319,13 +319,13 @@ const handleSubmit = async (e) => {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all pr-12"
+              className="dark:text-gray-400 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all pr-12"
               autoComplete="new-password"
             />
             <Suspense fallback={<div className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 bg-gray-300 rounded-full"></div>}>
               <button
                 type="button"
-                className="absolute right-3 top-3/4 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                className="absolute right-3 top-3/4 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >

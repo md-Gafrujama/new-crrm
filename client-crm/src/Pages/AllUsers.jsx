@@ -109,11 +109,11 @@ const AllUsers = ({collapsed}) => {
             >
       <div className={cn(
     "transition-[margin] duration-300 ease-in-out",
-    collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
+    collapsed ? "md:ml-[70px]" : "md:ml-[0px]"
   )}>
-    <div className="container mx-auto px-4 py-20">
+    <div className="container mx-auto px-4">
       <div className="flex justify-between items-center mb-8 max-w-6xl mx-auto">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800">User Management</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 dark:text-gray-400">User Management</h1>
         <div className='flex flex-col lg:flex-row md:flex-row gap-2'>
         <button
           onClick={handleAddUser}
@@ -137,7 +137,7 @@ const AllUsers = ({collapsed}) => {
       ) : (
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
           {users.map((user) => (
-            <div key={user.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <div key={user.id} className="bg-white dark:bg-slate-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
               <div className="relative">
                 <img
                   src={user.photo || 'https://randomuser.me/api/portraits/men/1.jpg'}
@@ -161,10 +161,10 @@ const AllUsers = ({collapsed}) => {
               </div>
 
               <div className="p-4">
-                <h2 className="text-xl font-semibold text-gray-800">
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-400">
                   {user.firstName} {user.lastName} ({user.username})
                 </h2>
-                <p className="text-gray-600 mb-2 capitalize">{user.role}</p>
+                <p className="text-gray-600 dark:text-gray-200 mb-2 capitalize">{user.role}</p>
 
                 <div className="flex items-center text-gray-500 mb-2">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -181,19 +181,19 @@ const AllUsers = ({collapsed}) => {
                   <span>Joined {new Date(user.createdAt).toLocaleDateString()}</span>
                 </div>
 
-                <div className="text-gray-700 mt-2">
+                <div className="text-gray-700 dark:text-gray-300 mt-2">
                   <span className="font-medium">Task:</span> {user.assignedWork || 'No task assigned'}
                 </div>
 
                 <div className="mt-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Status:
                   </label>
                   <input
                     type="text"
                     value={user.statusOfWork || ''}
                     readOnly
-                    className="w-full border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
+                    className="w-full border-gray-300 dark:border-slate-700 rounded-md shadow-sm bg-gray-100 dark:bg-slate-300 p-2 text-center cursor-not-allowed"
                   />
                 </div>
               </div>

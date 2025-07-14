@@ -1771,8 +1771,10 @@ import React, { useState, lazy, Suspense, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import AddLeadsForm from '../Components/Leads/AddLeadsForm';
+// import AddLeadsForm from '../Components/Leads/AddLeadsForm';
+import CombinedLeadForm from '../Components/Leads/CombinedLeadForm';
 import AlertsandReminderForm from '../Components/Forms/AlertsandReminderForm';
+import CombinedAlertReminder from '../Components/Forms/CombinedAlertReminder';
 import RealtimeTracking from '../Components/Forms/RealtimeTracking';
 import axios from 'axios';
 import { API_BASE_URL } from '../config/api';
@@ -3174,7 +3176,8 @@ const UserProfile = ({ onLogout }) => {
             )}
 
             {activeTab === 'addleads' && (
-              <AddLeadsForm />
+              // <AddLeadsForm />
+              <CombinedLeadForm/>
             )}
 
             {activeTab === 'realtimetracking' && (
@@ -3182,7 +3185,7 @@ const UserProfile = ({ onLogout }) => {
             )}
 
             {activeTab === 'alertsandreminder' && (
-              <AlertsandReminderForm />
+              <CombinedAlertReminder />
             )}
 
           </div>

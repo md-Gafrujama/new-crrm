@@ -25,6 +25,8 @@ import QuoreLeads from './Components/Leads/QuoreLeads.jsx';
 import { ThemeProvider } from './contexts/theme-context.jsx';
 import CompareComments from './Components/ExternalData/CompareComments.jsx';
 import QuoreComments from './Components/ExternalData/QuoreComments.jsx';
+import CombinedLeadForm from './Components/Leads/CombinedLeadForm.jsx';
+import CombinedAlertReminder from './Components/Forms/CombinedAlertReminder.jsx';
 
 function App() {
   
@@ -105,8 +107,9 @@ function App() {
           <Route path="/userProfile" element={<UserProfile onLogout={handleLogout} />} />
           <Route path="/users" element={<AllUsers />} />
           <Route path="/edit-user/:userId" element={<EditUser />} />
-          <Route path="/add-leads-as-admin" element={<AddLeadsForm />} />
-          <Route path="/alerts-and-reminder-admin" element={<AlertsandReminderForm />} />
+          {/* <Route path="/add-leads-as-admin" element={<AddLeadsForm />} /> */}
+          <Route path="/add-leads-as-admin" element={<CombinedLeadForm />} />
+          <Route path="/alerts-and-reminder-admin" element={<CombinedAlertReminder />} />
           <Route path="/leadsactivity" element={<LeadsActivity />} />
           <Route path="/quore-compare-comments" element={<QuoreandCompareComments />} />
           <Route path="/compare-comments" element={<CompareComments />} />

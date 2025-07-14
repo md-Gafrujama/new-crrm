@@ -110,14 +110,6 @@ const AddLeadsForm = () => {
 
   return (
     <>
-     {localStorage.getItem('userType') === 'admin' && (
-       <>
-      <Header onToggleSidebar={toggleSidebar} />
-      <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar}>
-       </Sidebar>
-       </>
-     )}
-     
     <div className={cn(
       "flex items-center justify-center min-h-screen p-4",
       localStorage.getItem('userType') === 'admin' 
@@ -136,17 +128,17 @@ const AddLeadsForm = () => {
       }>
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100 transition-all hover:shadow-2xl"
+          className="bg-white dark:bg-slate-800 dark:border-slate-700 p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100 transition-all hover:shadow-2xl"
         >
           <div className="absolute top-4 right-4">
        
           </div>
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">Add the Leads</h2>
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-400 mb-2">Add the Leads</h2>
           </div>
 
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               Lead Title
             </label>
             <input
@@ -156,7 +148,7 @@ const AddLeadsForm = () => {
               value={formData.leadtitle}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-lg border text-center border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+              className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 rounded-lg border text-center border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
               placeholder="Eg. New Lead"
               autoComplete="leadtitle"
             />
@@ -166,7 +158,7 @@ const AddLeadsForm = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
                 First Name
               </label>
               <input
@@ -176,13 +168,13 @@ const AddLeadsForm = () => {
                 value={formData.firstName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="John"
                 autoComplete="given-name"
               />
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
                 Last Name
               </label>
               <input
@@ -192,7 +184,7 @@ const AddLeadsForm = () => {
                 value={formData.lastName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="Doe"
                 autoComplete="family-name"
               />
@@ -201,7 +193,7 @@ const AddLeadsForm = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Email</label>
               <input
                 type="email"
                 id="email"
@@ -209,20 +201,20 @@ const AddLeadsForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="your@email.com"
                 autoComplete="email"
               />
             </div>
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Phone Number</label>
               <input
                 type="tel"
                 id="phone"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg text-center border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 rounded-lg text-center border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="+1 (123) 456-7890"
                 autoComplete="tel"
               />
@@ -233,7 +225,7 @@ const AddLeadsForm = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label htmlFor="companyname" className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+              <label htmlFor="companyname" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Company Name</label>
               <input
                 type="text"
                 id="companyname"
@@ -241,13 +233,13 @@ const AddLeadsForm = () => {
                 value={formData.companyname}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="Eg. quore/tcs"
                 autoComplete="organization"
               />
             </div>
             <div>
-              <label htmlFor="jobtitle" className="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
+              <label htmlFor="jobtitle" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Job Title</label>
               <input
                 type="text"
                 id="jobtitle"
@@ -255,7 +247,7 @@ const AddLeadsForm = () => {
                 value={formData.jobtitle}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3  text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3  text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="Eg. lead/manager"
                 autoComplete="organization-title"
               />
@@ -265,7 +257,7 @@ const AddLeadsForm = () => {
 
 
           <div className="mb-4">
-            <label htmlFor="industry" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="industry" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               Select Industry
             </label>
             <select
@@ -274,7 +266,7 @@ const AddLeadsForm = () => {
               value={formData.industry}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 cursor-pointer rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+              className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 cursor-pointer rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
             >
               <option value="">Select an industry</option>
               <option value="Technology">Technology</option>
@@ -289,7 +281,7 @@ const AddLeadsForm = () => {
 
 
           <div className="mb-4">
-            <label htmlFor="new" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="new" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               New
             </label>
             <select
@@ -298,7 +290,7 @@ const AddLeadsForm = () => {
               value={formData.status}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 cursor-pointer rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+              className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 cursor-pointer rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
             >
               <option value="">New</option>
               <option value="Contacted">Contacted</option>
@@ -315,7 +307,7 @@ const AddLeadsForm = () => {
 
 
           <div className="mb-4">
-            <label htmlFor="serviceinterestedin" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="serviceinterestedin" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               Service Interested In
             </label>
             <select
@@ -324,7 +316,7 @@ const AddLeadsForm = () => {
               value={formData.serviceinterestedin}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 cursor-pointer rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+              className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 cursor-pointer rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
             >
               <option value="">Service Interested In</option>
               <option value="Email Marketing">Email Marketing</option>
@@ -335,7 +327,7 @@ const AddLeadsForm = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label htmlFor="topicofwork" className="block text-sm font-medium text-gray-700 mb-1">Topic Of Work</label>
+              <label htmlFor="topicofwork" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Topic Of Work</label>
               <input
                 type="text"
                 id="topicofwork"
@@ -343,13 +335,13 @@ const AddLeadsForm = () => {
                 value={formData.topicofwork}
                 onChange={handleChange}
                 required
-                className="w-full px-4  text-center py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4  text-center py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="Eg. Sales / Marketing"
                 autoComplete="off"
               />
             </div>
             <div>
-              <label htmlFor="expectedtoclose" className="block text-sm font-medium text-gray-700 mb-1">Expected To Close</label>
+              <label htmlFor="expectedtoclose" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">Expected To Close</label>
               <input
                 type="date"
                 id="expectedtoclose"
@@ -357,7 +349,7 @@ const AddLeadsForm = () => {
                 value={formData.expectedtoclose}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3  text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3  text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 autoComplete="off"
               />
             </div>
@@ -365,7 +357,7 @@ const AddLeadsForm = () => {
 
 
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               Notes For Future
             </label>
             <input
@@ -375,7 +367,7 @@ const AddLeadsForm = () => {
               value={formData.notesforfuture}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+              className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
               placeholder='Eg. Need to maintain it in future'
               autoComplete="notesforfuture"
             />

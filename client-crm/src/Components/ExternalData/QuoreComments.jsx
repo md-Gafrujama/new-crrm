@@ -58,12 +58,12 @@ const QuoreComments = ({collapsed}) => {
         "transition-[margin] duration-300 ease-in-out",
         collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
       )}>
-    <div className="min-h-screen bg-gray-50 p-20">
+    <div className="min-h-screen bg-gray-50  dark:bg-slate-800 p-20">
       <header className="mb-8">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 relative w-full">
           <div className="md:hidden sm:hidden w-full flex flex-col items-center space-y-4 mb-4">
             <div className="flex justify-center w-full items-center">
-              <h1 className="text-base font-bold text-gray-800">
+              <h1 className="text-base font-bold text-gray-800 dark:text-gray-400">
                 Quore B2B 
               </h1>
             </div>
@@ -71,7 +71,7 @@ const QuoreComments = ({collapsed}) => {
 
           <div className="hidden sm:flex md:flex w-full justify-between items-center">
             <div className="flex items-center absolute left-1/2 transform -translate-x-1/2">
-              <h1 className="text-3xl md:text-lg lg:text-3xl font-bold text-gray-800 mr-2">
+              <h1 className="text-3xl md:text-lg lg:text-3xl font-bold text-gray-800 dark:text-gray-400 mr-2 mb-10">
                 Quore B2B Comments
               </h1>
             </div>
@@ -84,17 +84,17 @@ const QuoreComments = ({collapsed}) => {
         {loading ? (
           <LoadingSpinner />
         ) : (
-          <div className="bg-white rounded-lg shadow p-6">
+          <div className="bg-white dark:bg-slate-800 rounded-lg dark:border dark:border-gray-70 shadow p-6">
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y dark:divide-gray-700 divide-gray-200">
+                <thead className="bg-gray-50 dark:bg-slate-800">
                   <tr>
                     <TableHeader>Name</TableHeader>
                     <TableHeader>Comment</TableHeader>
                     <TableHeader>Actions</TableHeader>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-slate-800 divide-y divide-gray-200">
                   {comments.map(comment => (
                     <CommentRow 
                       key={comment.id} 

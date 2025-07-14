@@ -279,31 +279,16 @@ const LeadsActivity = ({collapsed}) => {
     "transition-[margin] duration-300 ease-in-out",
     collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
   )}>
-    <div className="min-h-screen bg-gray-50 p-20">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 p-20">
       <header className="mb-8">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 relative w-full">
-  {/* For small screens: Column layout */}
-  <div className="md:hidden sm:hidden  w-full flex flex-col items-center space-y-4 mb-4">
-    <div className="flex justify-center w-full items-center">
-       <h1 className="text-base font-bold text-gray-800">
-      Leads Activity
-    </h1>
-      <button onClick={download} className="text-gray-600 hover:text-[#ff8633] transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  {/* For medium+ screens: Original row layout */}
-  <div className="hidden sm:flex md:flex w-full justify-between items-center">
+  <div className="sm:flex md:flex w-full justify-between items-center">
     
     <div className="flex items-center absolute left-1/2 transform -translate-x-1/2">
-      <h1 className="text-3xl md:text-lg lg:text-3xl  font-bold text-gray-800 mr-2">
+      <h1 className="text-3xl md:text-lg lg:text-3xl  font-bold text-gray-800 dark:text-gray-400 mr-2">
         Leads Activity
       </h1>
-      <button onClick={download} className="text-gray-600 hover:text-[#ff8633] transition-colors">
+      <button onClick={download} className="text-gray-600 dark:text-gray-400 hover:text-[#ff8633] transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
@@ -312,7 +297,7 @@ const LeadsActivity = ({collapsed}) => {
     <div className="w-10"></div> {/* Spacer to balance the flex layout */}
   </div>
 </div>
-        <div className="flex flex-wrap gap-4 mt-4">
+        <div className="flex flex-wrap gap-4 mt-10">
           <StatCard title="Total Users" value={stats.userNumber} icon="👥" />
           <StatCard title="Total Leads" value={stats.leadsNumber} icon="📊" />
           <StatCard title="Total Companies" value={stats.company} icon="🏢" />
@@ -374,16 +359,16 @@ const LeadsActivity = ({collapsed}) => {
 
 // Sub-components for better code organization and lazy loading
 const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen bg-gray-100">
+  <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-slate-800">
     <div className="text-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
-      <p className="mt-4 text-lg font-medium text-gray-700">Loading data...</p>
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-400 dark:border-slate-300 mx-auto"></div>
+      <p className="mt-4 text-lg font-medium text-gray-700 dark:text-gray-400">Loading data...</p>
     </div>
   </div>
 );
 
 const ErrorDisplay = ({ error }) => (
-  <div className="flex items-center justify-center min-h-screen bg-gray-100">
+  <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-slate-800">
     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded max-w-md">
       <h2 className="font-bold text-xl mb-2">Error</h2>
       <p>{error}</p>
@@ -394,7 +379,7 @@ const ErrorDisplay = ({ error }) => (
 
 
 const StatCard = React.memo(({ title, value, icon }) => (
-  <div className="bg-white p-4 rounded-lg shadow flex-1 min-w-[200px]">
+  <div className="bg-white dark:bg-slate-800 p-4 rounded-lg shadow flex-1 min-w-[200px]">
     <div className="flex items-center">
       <div className="p-3 rounded-full bg-indigo-100 text-indigo-600 mr-4">
         <span className="text-xl">{icon}</span>
@@ -417,12 +402,12 @@ const LeadsTable = React.memo(({ leadsData, setSelectedLead, setCurrentLead, set
   }, []);
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 lg:col-span-2">
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6 lg:col-span-2">
       <div className="flex justify-center gap-10 items-center mb-4 border-b pb-2">
-        <h2 className="text-xl font-semibold text-center text-gray-700">
+        <h2 className="text-xl font-semibold text-center text-gray-700 dark:text-gray-400">
           Leads ({leadsData.length})
         </h2>
-        <button onClick={download} className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-colors">
+        <button onClick={download} className="flex items-center gap-2 px-4 py-2 bg-[#ff8633] hover:bg-blue-600 text-white rounded-md transition-colors">
           Download Leads
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -430,8 +415,8 @@ const LeadsTable = React.memo(({ leadsData, setSelectedLead, setCurrentLead, set
         </button>
       </div>
       <div className="overflow-x-auto w-full">
-        <table className="min-w-full divide-y divide-gray-200 table-fixed">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 table-fixed">
+          <thead className="bg-gray-50 dark:bg-slate-800">
             <tr>
               <TableHeader className="w-1/4">Title</TableHeader>
               <TableHeader className="w-1/4">Contact</TableHeader>
@@ -439,7 +424,7 @@ const LeadsTable = React.memo(({ leadsData, setSelectedLead, setCurrentLead, set
               <TableHeader className="w-1/4">Actions</TableHeader>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-gray-700">
             {leadsData.map((lead) => (
               <LeadRow key={lead.id} lead={lead} formatDate={formatDate} setSelectedLead={setSelectedLead} setCurrentLead={setCurrentLead} setViewPopupOpen={setViewPopupOpen} setEditPopupOpen={setEditPopupOpen} setDeletePopupOpen={setDeletePopupOpen} />
             ))}
@@ -451,7 +436,7 @@ const LeadsTable = React.memo(({ leadsData, setSelectedLead, setCurrentLead, set
 });
 
 const TableHeader = ({ children, className }) => (
-  <th className={`px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider ${className}`}>
+  <th className={`px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider ${className}`}>
     {children}
   </th>
 );
@@ -459,12 +444,12 @@ const TableHeader = ({ children, className }) => (
 // View Lead Popup
 const ViewLeadPopup = React.memo(({ lead, onClose,onViewClick,onEditClick,onDeleteClick  }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-    <div className="bg-white rounded-lg shadow-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-gray-800">Lead Details</h2>
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">Lead Details</h2>
         <button
           onClick={onClose}
-          className="text-gray-500 hover:text-gray-700"
+          className="text-gray-500 dark:text-gray-400 hover:text-gray-700"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -473,7 +458,7 @@ const ViewLeadPopup = React.memo(({ lead, onClose,onViewClick,onEditClick,onDele
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="text-left">
+        <div className="text-left dark:text-gray-400">
           <h3 className="font-semibold mb-2">Contact Information</h3>
           <p><strong>Name:</strong>  {lead.customerFirstName} {lead.customerLastName}</p>
           <p><strong>Email:</strong> {lead.emailAddress}</p>
@@ -481,14 +466,14 @@ const ViewLeadPopup = React.memo(({ lead, onClose,onViewClick,onEditClick,onDele
           <p><strong>Job Title:</strong> {lead.jobTitle || 'Not specified'}</p>
         </div>
 
-        <div className="text-left">
+        <div className="text-left dark:text-gray-400">
           <h3 className="font-semibold mb-2">Company Information</h3>
           <p><strong>Company Name:</strong>  {lead.companyName || 'Not Specified'}</p>
           <p><strong>Industry:</strong>  {lead.industry || 'Not Specified'}</p>
         </div>
 
 
-        <div className="text-left">
+        <div className="text-left dark:text-gray-400">
           <h3 className="font-semibold mb-2">Lead Details</h3>
           <p><strong>Title:</strong>  {lead.title || 'On Progress'}</p>
           <p><strong>Status:</strong>  {lead.status || 'On Progress'}</p>
@@ -514,7 +499,7 @@ const ViewLeadPopup = React.memo(({ lead, onClose,onViewClick,onEditClick,onDele
           }) : 'Not specified'}</p>
         </div>
 
-        <div className="text-left">
+        <div className="text-left dark:text-gray-400">
           <h3 className="font-semibold mb-2">Tracking</h3>
           <p><strong>Status:</strong>  {lead.status || 'On Progress'}</p>
           <p><strong>Email:</strong> {lead.emailAddress}</p>
@@ -568,12 +553,12 @@ const EditLeadPopup = ({ lead, onClose, onSave }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white shadow-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-slate-800 shadow-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-800">Edit Lead</h2>
+          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">Edit Lead</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 dark:text-gray-400 hover:text-gray-700"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -588,57 +573,57 @@ const EditLeadPopup = ({ lead, onClose, onSave }) => {
               <h3 className="font-semibold text-[#ff8633]">Contact Information </h3>
               <div className="flex flex-row gap-4">
                 <div>
-                  <label className="block text-base  font-medium text-gray-700">First Name</label>
+                  <label className="block text-base  font-medium text-gray-700 dark:text-gray-400">First Name</label>
                   <input
                     type="text"
                     name="customerFirstName"
                     value={editedLead.customerFirstName || ''}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                    className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                   />
                 </div>
                 <div>
-                  <label className="block text-base  font-medium text-gray-700">Last Name</label>
+                  <label className="block text-base  font-medium text-gray-700 dark:text-gray-400">Last Name</label>
                   <input
                     type="text"
                     name="customerLastName"
                     value={editedLead.customerLastName || ''}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                    className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Email</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Email</label>
                 <input
                   type="email"
                   name="emailAddress"
                   value={editedLead.emailAddress || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                  className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Phone</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Phone</label>
                 <input
                   type="tel"
                   name="phoneNumber"
                   value={editedLead.phoneNumber || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                  className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Job Title</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Job Title</label>
                 <input
                   type="text"
                   name="jobTitle"
                   value={editedLead.jobTitle || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                  className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 />
               </div>
 
@@ -648,24 +633,24 @@ const EditLeadPopup = ({ lead, onClose, onSave }) => {
             <div className="space-y-4">
               <h3 className="font-semibold text-[#ff8633]">Company Information</h3>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Company Name</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Company Name</label>
                 <input
                   type="text"
                   name="companyName"
                   value={editedLead.companyName || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                  className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 />
               </div>
 
 
                <div>
-                <label className="block text-sm font-medium text-gray-700">Industry</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Industry</label>
                 <select
                   name="industry"
                   value={editedLead.industry || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                  className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 >
                   <option value="">Industry</option>
                   <option value="Technology">Technology</option>
@@ -685,12 +670,12 @@ const EditLeadPopup = ({ lead, onClose, onSave }) => {
             <div className="space-y-4">
               <h3 className="font-semibold text-[#ff8633]">Lead Details</h3>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Status</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Status</label>
                 <select
                   name="status"
                   value={editedLead.status || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                  className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 >
                   <option value="">New</option>
                   <option value="Contacted">Contacted</option>
@@ -706,26 +691,26 @@ const EditLeadPopup = ({ lead, onClose, onSave }) => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Topic of Work</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Topic of Work</label>
                 <input
                   type="text"
                   name="topicOfWork"
                   value={editedLead.topicOfWork || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                  className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 />
               </div>
 
               
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Expected Closing Date</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Expected Closing Date</label>
                 <input
                   type="date"
                   name="closingDate"
                   value={editedLead.closingDate ? editedLead.closingDate.split('T')[0] : ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                  className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 />
               </div>
             </div>
@@ -736,12 +721,12 @@ const EditLeadPopup = ({ lead, onClose, onSave }) => {
               
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Notes</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Notes</label>
                 <textarea
                   name="notes"
                   value={editedLead.notes || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                  className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                   rows="3"
                 />
               </div>
@@ -752,7 +737,7 @@ const EditLeadPopup = ({ lead, onClose, onSave }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-400 hover:bg-gray-50"
             >
               Cancel
             </button>
@@ -772,12 +757,12 @@ const EditLeadPopup = ({ lead, onClose, onSave }) => {
 // Delete Popup
 const DeleteConfirmationPopup = React.memo(({ lead, onClose, onConfirm }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-    <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full">
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 max-w-md w-full">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-gray-800">Confirm Deletion</h2>
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">Confirm Deletion</h2>
         <button
           onClick={onClose}
-          className="text-gray-500 hover:text-gray-700"
+          className="text-gray-500 dark:text-gray-400 hover:text-gray-700"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -785,14 +770,14 @@ const DeleteConfirmationPopup = React.memo(({ lead, onClose, onConfirm }) => (
         </button>
       </div>
 
-      <p className="mb-6">
+      <p className="mb-6 dark:text-gray-400">
         Are you sure you want to delete the lead for <strong>{lead.customerFirstName} {lead.customerLastName}</strong> from <strong>{lead.companyName || 'Unknown Company'}</strong>?
       </p>
 
       <div className="flex justify-end space-x-3">
         <button
           onClick={onClose}
-          className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="px-4 py-2 border border-gray-300 dark:border-slate-400 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-400 dark:hover:bg-gray-200 hover:bg-gray-50"
         >
           Cancel
         </button>
@@ -823,10 +808,10 @@ const StatusItem = ({ completed, title, changedBy, description, date }) => {
       <div className="flex-1 pb-8">
         <div className="flex justify-between items-start">
           <h3 className={`font-medium ${completed ? 'text-green-600' : 'text-gray-600'}`}>{title}</h3>
-          <span className="text-xs text-gray-500">{date}</span>
+          <span className="text-xs text-gray-500 dark:text-gray-400">{date}</span>
         </div>
-        <p className="text-sm text-gray-500 mt-1">Changed by: {changedBy}</p>
-        <p className="text-sm text-gray-600 mt-2">{description}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Changed by: {changedBy}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{description}</p>
       </div>
     </li>
   );
@@ -834,9 +819,9 @@ const StatusItem = ({ completed, title, changedBy, description, date }) => {
 
 const StatBlock = ({ value, label }) => {
   return (
-    <div className="bg-gray-50 p-3 rounded-lg">
+    <div className="bg-gray-50 dark:bg-slate-800 p-3 rounded-lg">
       <p className="text-2xl font-bold text-[#ff8633]">{value}</p>
-      <p className="text-xs text-gray-500">{label}</p>
+      <p className="text-xs text-gray-500 dark:text-gray-400">{label}</p>
     </div>
   );
 };
@@ -882,12 +867,12 @@ const StatusHistoryPopup = ({ lead, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-[#ff8633]">Status History</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 dark:text-gray-400 hover:text-gray-700"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -895,16 +880,16 @@ const StatusHistoryPopup = ({ lead, onClose }) => {
           </button>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 dark:text-gray-400">
           <h3 className="text-lg font-semibold">{lead.customerFirstName} {lead.customerLastName}</h3>
-          <p className="text-gray-600">{lead.companyName || "TechCorp Solutions"}</p>
+          <p className="text-gray-600 dark:text-gray-400">{lead.companyName || "TechCorp Solutions"}</p>
           <p className="text-sm mt-1">
             Current Status: <span className="font-medium">{lead.status}</span>
           </p>
         </div>
 
         <div className="mb-6">
-          <h4 className="font-medium text-gray-700 mb-4">Status Timeline</h4>
+          <h4 className="font-medium text-gray-700 dark:text-gray-400 mb-4">Status Timeline</h4>
           <ul className="space-y-4">
             {statusHistory.map((status, index) => (
               <StatusItem
@@ -934,14 +919,14 @@ const StatusHistoryPopup = ({ lead, onClose }) => {
 const LeadRow = React.memo(({ lead, formatDate,setSelectedLead ,setCurrentLead,setViewPopupOpen,setEditPopupOpen,setDeletePopupOpen}) => (
   <tr>
     <td className="px-6 py-4 whitespace-nowrap">
-      <div className="text-sm font-medium text-gray-900">{lead.title}</div>
+      <div className="text-sm font-medium text-gray-900 dark:text-gray-400">{lead.title}</div>
     </td>
     <td className="px-6 py-4 whitespace-nowrap">
-      <div className="text-sm text-gray-900">
+      <div className="text-sm text-gray-900 dark:text-gray-400">
         {lead.customerFirstName || "N/A"} {lead.customerLastName || ""}
       </div>
-      <div className="text-sm text-gray-900">{lead.emailAddress || "N/A"}</div>
-      <div className="text-sm text-gray-500">{lead.phoneNumber || "N/A"}</div>
+      <div className="text-sm text-gray-900 dark:text-gray-400">{lead.emailAddress || "N/A"}</div>
+      <div className="text-sm text-gray-500 dark:text-gray-400">{lead.phoneNumber || "N/A"}</div>
     </td>
     <td className="px-6 py-4 whitespace-nowrap">
       <button

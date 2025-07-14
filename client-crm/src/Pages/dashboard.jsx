@@ -57,15 +57,15 @@ const Dashboard = ({collapsed, onLogout }) => {
         >
        <div className={cn(
     "transition-[margin] duration-300 ease-in-out",
-    collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
+    collapsed ? "md:ml-[70px]" : "md:ml-[0px]"
   )}>
-    <div className="min-h-screen py-20">
+    <div className="min-h-screen">
       {/* Header */}
       <main className="mx-auto px-4 py-6 sm:px-0 lg:px-0">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
           {stats.map((stat, index) => (
-            <div key={index} className="bg-white overflow-hidden shadow rounded-lg">
+            <div key={index} className="bg-white dark:bg-slate-800 overflow-hidden shadow rounded-lg">
               <div className="px-4 py-5 sm:p-6">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 bg-indigo-500 rounded-md p-3">
@@ -74,9 +74,9 @@ const Dashboard = ({collapsed, onLogout }) => {
                     </svg>
                   </div>
                   <div className="ml-5 w-0 flex-1">
-                    <dt className="text-sm font-medium text-gray-500 truncate">{stat.title}</dt>
+                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{stat.title}</dt>
                     <dd className="flex items-baseline">
-                      <div className="text-2xl font-semibold text-gray-900">{stat.value}</div>
+                      <div className="text-2xl font-semibold text-gray-900 dark:text-gray-400">{stat.value}</div>
                       <div className={`ml-2 flex items-baseline text-sm font-semibold ${stat.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
                         {stat.change}
                         <svg
@@ -107,9 +107,9 @@ const Dashboard = ({collapsed, onLogout }) => {
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* User Distribution Pie Chart */}
-        <div className="bg-white shadow overflow-hidden rounded-lg">
-          <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">User Distribution</h3>
+        <div className="bg-white dark:bg-slate-800 shadow overflow-hidden rounded-lg">
+          <div className="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-400">User Distribution</h3>
           </div>
           <div className="p-6">
             <ResponsiveContainer width="100%" height={250}>
@@ -134,9 +134,9 @@ const Dashboard = ({collapsed, onLogout }) => {
         </div>
 
         {/* Revenue Trend Line Chart */}
-        <div className="bg-white shadow overflow-hidden rounded-lg">
-          <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">Weekly Revenue</h3>
+        <div className="bg-white dark:bg-slate-800 shadow overflow-hidden rounded-lg">
+          <div className="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-slate-700">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-400">Weekly Revenue</h3>
           </div>
           <div className="p-6">
             <ResponsiveContainer width="100%" height={250}>
@@ -153,9 +153,9 @@ const Dashboard = ({collapsed, onLogout }) => {
       </div>
 
       {/* Sales & Users Bar Chart */}
-      <div className="bg-white shadow overflow-hidden rounded-lg">
-        <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">Monthly Sales & User Growth</h3>
+      <div className="bg-white dark:bg-slate-800 shadow overflow-hidden rounded-lg">
+        <div className="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-slate-700">
+          <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-400">Monthly Sales & User Growth</h3>
         </div>
         <div className="p-6">
           <ResponsiveContainer width="100%" height={300}>
