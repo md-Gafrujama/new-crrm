@@ -28,7 +28,7 @@ const qb2b = {
 
     async getContact(req, res) {
         try {
-            const contact = await prisma.QB2b.findMany();
+            const contact = await prisma.Qb2b.findMany();
             return res.status(200).json(contact);
         } catch (error) {
             console.error("Error fetching data", error);
