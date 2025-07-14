@@ -25,8 +25,8 @@ import QuoreLeads from './Components/Leads/QuoreLeads.jsx';
 import { ThemeProvider } from './contexts/theme-context.jsx';
 import CompareComments from './Components/ExternalData/CompareComments.jsx';
 import QuoreComments from './Components/ExternalData/QuoreComments.jsx';
-import CombinedLeadForm from './Components/Leads/CombinedLeadForm.jsx';
-import CombinedAlertReminder from './Components/Forms/CombinedAlertReminder.jsx';
+import CombinedLeadForm from './Components/CombinedForUser&Admin/CombinedLeadForm.jsx';
+import CombinedAlertReminder from './Components/CombinedForUser&Admin/CombinedAlertReminder.jsx';
 
 function App() {
   

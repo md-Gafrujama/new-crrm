@@ -2,7 +2,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
-import AddLeadsForm from './AddLeadsForm';
+import AddLeadsForm from '../Leads/AddLeadsForm';
 
 
 
