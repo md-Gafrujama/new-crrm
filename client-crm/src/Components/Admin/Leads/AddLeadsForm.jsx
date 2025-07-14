@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
-import { API_BASE_URL } from '../../config/api'; 
+import { API_BASE_URL } from '../../../config/api'; 
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
-import { cn } from '../../utils/cn';
+import { cn } from '../../../utils/cn';
 
 
 const AddLeadsForm = () => {

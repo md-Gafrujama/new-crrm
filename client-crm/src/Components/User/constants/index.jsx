@@ -8,32 +8,22 @@ export const navbarLinks = [
             {
                 label: "Dashboard",
                 icon: Home,
-                path: "/",
+                path: "/user-dashboard",
             },
             {
-                label: "Analytics",
+                label: "My Profile",
                 icon: ChartColumn,
-                path: "/analytics",
+                path: "/userProfile",
             },
         ],
     },
     {
-        title: "Customers",
+        title: "Leads",
         links: [
             {
-                label: "All users",
+                label: "All Leads",
                 icon: Users,
-                path: "/users",
-            },
-            {
-                label: "Add user",
-                icon: UserPlus,
-                path: "/sign",
-            },
-            {
-                label: "Leads Activity",
-                icon: UserCheck,
-                path: "/leadsactivity",
+                path: "/user-leads",
             },
             {
                 label: "Add Leads",
@@ -43,18 +33,13 @@ export const navbarLinks = [
         ],
     },
     {
-        title: "External Data",
+        title: "Social Media",
         links: [
             {
-                label: "Quoreb2b",
+                label: "Connect",
                 icon: Package,
-                path: "/quore-comments",
+                path: "/connect-social-media",
             },
-            {
-                label: "CompareBazar",
-                icon: PackagePlus,
-                path: "/compare-comments",
-            }
         ],
     },
     {
@@ -83,7 +68,7 @@ export const navbarLinks = [
             {
                 label: "Settings",
                 icon: Settings,
-                path: "/settings",
+                path: "/user-settings",
             }
         ],
     },

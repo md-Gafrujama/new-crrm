@@ -6,7 +6,7 @@ import React, { useState, lazy, Suspense } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import axios from "axios";
-import { API_BASE_URL } from '../../config/api'; 
+import { API_BASE_URL } from '../../../config/api'; 
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
 

@@ -4,29 +4,30 @@ import Login from './Pages/login.jsx';
 import Sign from './Components/Admin/Forms/sign.jsx'
 import Dashboard from './Pages/dashboard.jsx';
 import UserProfile from './Pages/userProfile.jsx';
-import Register from './Components/Forms/register.jsx';
+import Register from './Components/Admin/Forms/register.jsx';
 import './App.css';
 import ProtectedRoute from './Pages/protectedRoute.js';
-import ForgetPassword from './Components/Forms/forgetPassword.jsx';
+import ForgetPassword from './Components/Admin/Forms/forgetPassword.jsx';
 import OTPPage from './Pages/Otp.jsx';
-import  UpdatePassword from "./Components/Forms/UpdatePassword.jsx"
+import  UpdatePassword from "./Components/Admin/Forms/UpdatePassword.jsx"
 import AllUsers from './Pages/AllUsers.jsx';
-import EditUser from './Components/Forms/EditUser.jsx';
+import EditUser from './Components/Admin/Forms/EditUser.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AddLeadsForm from './Components/Leads/AddLeadsForm.jsx';
-import LeadsActivity from './Components/Leads/LeadsActivity.jsx';
-import AlertsandReminderForm from './Components/Forms/AlertsandReminderForm.jsx';
-import Quoreb2b from './Components/ExternalData/Quoreb2b.jsx';
-import Comparebazar from './Components/ExternalData/Comparebazar.jsx';
-import ContactQuore from './Components/Forms/ContactQuore.jsx';
-import QuoreandCompareComments from './Pages/QuoreandCompareComments.jsx';
-import QuoreLeads from './Components/Leads/QuoreLeads.jsx';
+import LeadsActivity from './Components/Admin/Leads/LeadsActivity.jsx';
+import Quoreb2b from './Components/Admin/ExternalData/Quoreb2b.jsx';
+import Comparebazar from './Components/Admin/ExternalData/Comparebazar.jsx';
+import ContactQuore from './Components/Admin/Forms/ContactQuore.jsx';
+import QuoreLeads from './Components/Admin/Leads/QuoreLeads.jsx';
 import { ThemeProvider } from './contexts/theme-context.jsx';
-import CompareComments from './Components/ExternalData/CompareComments.jsx';
-import QuoreComments from './Components/ExternalData/QuoreComments.jsx';
+import CompareComments from './Components/Admin/ExternalData/CompareComments.jsx';
+import QuoreComments from './Components/Admin/ExternalData/QuoreComments.jsx';
 import CombinedLeadForm from './Components/CombinedForUser&Admin/CombinedLeadForm.jsx';
 import CombinedAlertReminder from './Components/CombinedForUser&Admin/CombinedAlertReminder.jsx';
+import UserLeads from './Components/User/Leads/UserLeads.jsx';
+import ConnectSocialMedia from './Pages/ConnectSocialMedia.jsx';
+import UserSettings from './Pages/UserSettings.jsx';
+import UserDashboard from './Pages/UserDashboard.jsx';
 
 function App() {
   
@@ -75,7 +76,7 @@ function App() {
               userType === "admin" ? (
                 <Navigate to="/dashboard" replace />
               ) : (
-                <Navigate to="/userProfile" replace />
+                <Navigate to="/user-dashboard" replace />
               )
             ) : (
               <Navigate to="/login" replace />
@@ -91,7 +92,7 @@ function App() {
             <Route path="/quorecomment" element={<Quoreb2b />} />
             <Route path="/comparebazarcomment" element={<Comparebazar />} />
             <Route path="/contactquore" element={<ContactQuore />} />
-             <Route path="/quoreleads" element={<QuoreLeads />} />
+            <Route path="/quoreleads" element={<QuoreLeads />} />
 
 
             {/* OTP Component tabhi navigate hoga , when otp  is sent */}
@@ -107,13 +108,15 @@ function App() {
           <Route path="/userProfile" element={<UserProfile onLogout={handleLogout} />} />
           <Route path="/users" element={<AllUsers />} />
           <Route path="/edit-user/:userId" element={<EditUser />} />
-          {/* <Route path="/add-leads-as-admin" element={<AddLeadsForm />} /> */}
-          <Route path="/add-leads-as-admin" element={<CombinedLeadForm />} />
+          <Route path="/add-leads" element={<CombinedLeadForm />} />
           <Route path="/alerts-and-reminder-admin" element={<CombinedAlertReminder />} />
           <Route path="/leadsactivity" element={<LeadsActivity />} />
-          <Route path="/quore-compare-comments" element={<QuoreandCompareComments />} />
+          <Route path="/user-leads" element={<UserLeads />} />
           <Route path="/compare-comments" element={<CompareComments />} />
           <Route path="/quore-comments" element={<QuoreComments />} />
+          <Route path="/connect-social-media" element={<ConnectSocialMedia />} />
+          <Route path="/user-settings" element={<UserSettings/>} />
+          <Route path="/user-dashboard" element={<UserDashboard/>} />
         </Route>
 
         {/* Fallback */}

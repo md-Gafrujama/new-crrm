@@ -72,7 +72,7 @@ const Login = () => {
           navigate('/dashboard', { replace: true });
           window.location.reload();
         } else {
-          navigate('/userProfile', { replace: true });
+          navigate('/user-dashboard', { replace: true });
         }
       }
     } catch (error) {

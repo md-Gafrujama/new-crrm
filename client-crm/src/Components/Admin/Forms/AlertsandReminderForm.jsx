@@ -2,9 +2,9 @@ import React, { useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { API_BASE_URL } from '../../config/api'; 
-import { Header } from '../Admin/common/Header';
-import { Sidebar,useSidebar } from '../Admin/common/sidebar';
+import { API_BASE_URL } from '../../../config/api'; 
+import { Header } from '../../Admin/common/Header';
+import { Sidebar,useSidebar } from '../../Admin/common/sidebar';
 
 
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));

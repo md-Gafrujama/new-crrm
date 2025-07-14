@@ -1,7 +1,7 @@
 import React, { useState, Suspense, lazy } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { API_BASE_URL } from '../../config/api'; 
+import { API_BASE_URL } from '../../../config/api'; 
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
 
