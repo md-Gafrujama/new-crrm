@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 
 export const UserHeader = ({ onToggleSidebar }) => {
     const { theme, setTheme } = useTheme();
-    console.log('Current theme in Header:', theme);
     const toggleTheme = () => {
   setTheme(theme === "light" ? "dark" : "light");
 };
@@ -38,7 +37,7 @@ const handleLogout = () => {
     setIsLoggedIn(false);
     setUserType(null);
     navigate('/login', { replace: true });
-    //  window.location.reload();
+    window.location.reload();
 };
     return (
  <header className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between bg-white/80 px-6 shadow-sm backdrop-blur-md transition-colors dark:bg-slate-900">
