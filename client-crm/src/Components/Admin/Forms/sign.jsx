@@ -131,7 +131,7 @@ const handleSubmit = async (e) => {
                    isOpen={isSidebarOpen} 
                    onClose={closeSidebar}
            >
-    <div className="flex items-center justify-center min-h-screen p-20">
+    <div className="flex items-center justify-center min-h-screen p-5">
       <Suspense fallback={
         <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100">
           <div className="animate-pulse">

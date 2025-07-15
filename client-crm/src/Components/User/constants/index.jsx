@@ -1,4 +1,4 @@
-import { ChartColumn, Home, NotepadText, Package, PackagePlus, Settings, ShoppingBag, UserCheck, UserPlus, Users } from "lucide-react";
+import { Share2,Radar,FileText,BellPlus,LayoutDashboard,UserCircle,List,FilePlus,Settings,} from "lucide-react";
 
 
 export const navbarLinks = [
@@ -7,12 +7,12 @@ export const navbarLinks = [
         links: [
             {
                 label: "Dashboard",
-                icon: Home,
+                icon: LayoutDashboard,
                 path: "/user-dashboard",
             },
             {
                 label: "My Profile",
-                icon: ChartColumn,
+                icon: UserCircle,
                 path: "/userProfile",
             },
         ],
@@ -22,12 +22,12 @@ export const navbarLinks = [
         links: [
             {
                 label: "All Leads",
-                icon: Users,
+                icon: List,
                 path: "/user-leads",
             },
             {
                 label: "Add Leads",
-                icon: UserCheck,
+                icon: FilePlus,
                 path: "/add-leads",
             }
         ],
@@ -37,7 +37,7 @@ export const navbarLinks = [
         links: [
             {
                 label: "Connect",
-                icon: Package,
+                icon: Share2,
                 path: "/connect-social-media",
             },
         ],
@@ -47,17 +47,17 @@ export const navbarLinks = [
         links: [
             {
                 label: "Real Time Tracking",
-                icon: Package,
+                icon: Radar,
                 path: "/real-time-tracking",
             },
             {
                 label: "Alerts And Remainder",
-                icon: PackagePlus,
+                icon: BellPlus,
                 path: "/alerts-and-reminder-admin",
             },
             {
                 label: "Reports",
-                icon: ShoppingBag,
+                icon: FileText,
                 path: "/reports",
             },
         ],

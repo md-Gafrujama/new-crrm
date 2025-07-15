@@ -26,7 +26,16 @@ const QuoreComments = ({collapsed}) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
-        toast.error("Please log in to view comments");
+              toast.error("Please log in to view comments", {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            style: { fontSize: '1.2rem' }, 
+                          });
         return;
       }
 
@@ -39,7 +48,16 @@ const QuoreComments = ({collapsed}) => {
       setComments(response.data);
     } catch (error) {
       console.error('Error fetching comments:', error);
-      toast.error("Failed to fetch comments");
+            toast.error("Failed to fetch comments", {
+                          position: "top-right",
+                          autoClose: 5000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          style: { fontSize: '1.2rem' }, 
+                        });
     } finally {
       setLoading(false);
     }
@@ -56,7 +74,7 @@ const QuoreComments = ({collapsed}) => {
              >
           <div className={cn(
         "transition-[margin] duration-300 ease-in-out",
-        collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
+        collapsed ? "md:ml-[70px]" : "md:ml-[0px]"
       )}>
     <div className="min-h-screen bg-gray-50  dark:bg-slate-800 p-20">
       <header className="mb-8">
@@ -84,9 +102,9 @@ const QuoreComments = ({collapsed}) => {
         {loading ? (
           <LoadingSpinner />
         ) : (
-          <div className="bg-white dark:bg-slate-800 rounded-lg dark:border dark:border-gray-70 shadow p-6">
+          <div className="bg-white dark:bg-slate-800 rounded-lg dark:border dark:border-gray-700 shadow p-6">
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y dark:divide-gray-700 divide-gray-200">
+              <table className="min-w-full divide-y dark:divide-gray-800 divide-gray-200">
                 <thead className="bg-gray-50 dark:bg-slate-800">
                   <tr>
                     <TableHeader>Name</TableHeader>

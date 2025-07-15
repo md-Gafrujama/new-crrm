@@ -55,7 +55,16 @@ const handleCheckboxChange = (e) => {
     setIsSubmitting(true);
     try {
       if (!formData.industry || !formData.serviceinterestedin || !formData.status) {
-        toast.error("Please select all dropdown fields.");
+              toast.error("Please select all dropdown fields", {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            style: { fontSize: '1.2rem' }, 
+                          });
         setIsSubmitting(false);
         return;
       }

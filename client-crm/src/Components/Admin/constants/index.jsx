@@ -1,4 +1,4 @@
-import { ChartColumn, Home, NotepadText, Package, PackagePlus, Settings, ShoppingBag, UserCheck, UserPlus, Users } from "lucide-react";
+import { ChartColumn, Building2,LayoutDashboard, FileText,Radar,BellPlus,FilePlus,NotepadText, Package, PackagePlus, Settings, ShoppingBag, UserCheck, UserPlus, Users } from "lucide-react";
 
 
 export const navbarLinks = [
@@ -7,7 +7,7 @@ export const navbarLinks = [
         links: [
             {
                 label: "Dashboard",
-                icon: Home,
+                icon: LayoutDashboard,
                 path: "/",
             },
             {
@@ -37,7 +37,7 @@ export const navbarLinks = [
             },
             {
                 label: "Add Leads",
-                icon: UserCheck,
+                icon: FilePlus,
                 path: "/add-leads",
             }
         ],
@@ -47,12 +47,12 @@ export const navbarLinks = [
         links: [
             {
                 label: "Quoreb2b",
-                icon: Package,
+                icon: Building2,
                 path: "/quore-comments",
             },
             {
                 label: "CompareBazar",
-                icon: PackagePlus,
+                icon: Building2,
                 path: "/compare-comments",
             }
         ],
@@ -62,17 +62,17 @@ export const navbarLinks = [
         links: [
             {
                 label: "Real Time Tracking",
-                icon: Package,
+                icon: Radar,
                 path: "/real-time-tracking",
             },
             {
                 label: "Alerts And Remainder",
-                icon: PackagePlus,
+                icon: BellPlus,
                 path: "/alerts-and-reminder-admin",
             },
             {
                 label: "Reports",
-                icon: ShoppingBag,
+                icon: FileText,
                 path: "/reports",
             },
         ],

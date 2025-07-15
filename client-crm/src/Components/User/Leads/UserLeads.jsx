@@ -591,6 +591,24 @@ const UserLeads = ({ collapsed, onLogout }) => {
         throw new Error("Lead ID is missing. Cannot update lead.");
       }
 
+        const payload = {
+        uid: updatedLead.uid,
+        cid: updatedLead.cid,
+        title: updatedLead.title,
+        customerFirstName: updatedLead.customerFirstName,
+        customerLastName: updatedLead.customerLastName,
+        emailAddress: updatedLead.emailAddress,
+        phoneNumber: updatedLead.phoneNumber,
+        companyName: updatedLead.companyName,
+        jobTitle: updatedLead.jobTitle,
+        topicOfWork: updatedLead.topicOfWork,
+        industry: updatedLead.industry,
+        status: updatedLead.status,
+        serviceInterestedIn: updatedLead.serviceInterestedIn,
+        closingDate: updatedLead.closingDate,
+        notes: updatedLead.notes,
+      };
+
       const token = localStorage.getItem("token");
 
       // Update lead with Axios
@@ -614,7 +632,8 @@ const UserLeads = ({ collapsed, onLogout }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        style: { fontSize: "1.2rem" },
+        theme:"dark",
+        style: { fontSize: "1.2rem"},
       });
 
       // Refresh leads data with Axios
@@ -719,17 +738,30 @@ const UserLeads = ({ collapsed, onLogout }) => {
   });
 
   // Combine all leads from all status categories
-  const allCombinedLeads = [
-    ...leadsData.allNewLeads,
-    ...leadsData.allContacted,
-    ...leadsData.allEngaged,
-    ...leadsData.allQualified,
-    ...leadsData.allProposalSent,
-    ...leadsData.allNegotiation,
-    ...leadsData.allClosedWon,
-    ...leadsData.allClosedLost,
-    ...leadsData.allOnHold,
-    ...leadsData.allDoNotContact,
+  // const allCombinedLeads = [
+  //   ...leadsData.allNewLeads,
+  //   ...leadsData.allContacted,
+  //   ...leadsData.allEngaged,
+  //   ...leadsData.allQualified,
+  //   ...leadsData.allProposalSent,
+  //   ...leadsData.allNegotiation,
+  //   ...leadsData.allClosedWon,
+  //   ...leadsData.allClosedLost,
+  //   ...leadsData.allOnHold,
+  //   ...leadsData.allDoNotContact,
+  // ];
+
+    const allCombinedLeads = [
+    ...(leadsData?.allNewLeads || []),
+    ...(leadsData?.allContacted || []),
+    ...(leadsData?.allEngaged || []),
+    ...(leadsData?.allQualified || []),
+    ...(leadsData?.allProposalSent || []),
+    ...(leadsData?.allNegotiation || []),
+    ...(leadsData?.allClosedWon || []),
+    ...(leadsData?.allClosedLost || []),
+    ...(leadsData?.allOnHold || []),
+    ...(leadsData?.allDoNotContact || []),
   ];
 
   const [leadsLoading, setLeadsLoading] = useState(false);

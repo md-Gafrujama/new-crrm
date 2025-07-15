@@ -207,7 +207,16 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
         "Failed to update profile";
 
       setApiError(errorMessage);
-      toast.error(errorMessage);
+            toast.error(errorMessage , {
+                          position: "top-right",
+                          autoClose: 5000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          style: { fontSize: '1.2rem' }, 
+                        });
     } finally {
       setIsSaving(false);
     }
@@ -247,7 +256,16 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
           error.message ||
           "Failed to load profile data";
 
-        toast.error(errorMessage);
+              toast.error(errorMessage , {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            style: { fontSize: '1.2rem' }, 
+                          });
         setLoading(false);
         onLogout();
       }

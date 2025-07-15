@@ -71,7 +71,16 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
         message: e.message,
         stack: e.stack,
       });
-      toast.error(e.message || "Reailtime Tracking  Failed. Please try again.");
+            toast.error(e.message || "Realtime Traking Failed, Please try again!", {
+                          position: "top-right",
+                          autoClose: 5000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          style: { fontSize: '1.2rem' }, 
+                        });
     } finally {
       setIsSubmitting(false);
     }

@@ -50,7 +50,16 @@ const AddLeadsForm = () => {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('No authentication token found');
       if (!formData.industry || !formData.serviceinterestedin || !formData.status) {
-        toast.error("Please select all dropdown fields.");
+        toast.error("Please select all dropdown fields.", {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            style: { fontSize: '1.2rem' }, 
+                          });
         setIsSubmitting(false);
         return;
       }
@@ -102,7 +111,16 @@ const AddLeadsForm = () => {
         message: e.message,
         stack: e.stack,
       });
-      toast.error(e.message || "Lead Creation Failed. Please try again.");
+            toast.error(e.message || "Lead Creation Failed. Please try again!", {
+                          position: "top-right",
+                          autoClose: 5000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          style: { fontSize: '1.2rem' }, 
+                        });
     } finally {
       setIsSubmitting(false);
     }

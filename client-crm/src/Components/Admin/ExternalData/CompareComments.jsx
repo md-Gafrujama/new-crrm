@@ -25,7 +25,16 @@ const CompareComments = ({collapsed}) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
-        toast.error("Please log in to view comments");
+        toast.error("Please log in to view comments", {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            style: { fontSize: '1.2rem' }, 
+                          });
         return;
       }
 
@@ -38,7 +47,16 @@ const CompareComments = ({collapsed}) => {
       setComments(response.data);
     } catch (error) {
       console.error('Error fetching comments:', error);
-      toast.error("Failed to fetch comments");
+      toast.error("Failed to fetch comments", {
+                          position: "top-right",
+                          autoClose: 5000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          style: { fontSize: '1.2rem' }, 
+                        });
     } finally {
       setLoading(false);
     }
@@ -55,7 +73,7 @@ const CompareComments = ({collapsed}) => {
              >
         <div className={cn(
         "transition-[margin] duration-300 ease-in-out",
-        collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
+        collapsed ? "md:ml-[70px]" : "md:ml-[0px]"
       )}>
     <div className="min-h-screen bg-gray-50 dark:bg-slate-800 p-20">
       <header className="mb-8">
@@ -93,7 +111,7 @@ const CompareComments = ({collapsed}) => {
                     <TableHeader>Actions</TableHeader>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-slate-800 divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-slate-800 divide-y dark:divide-gray-700 divide-gray-200">
                   {comments.map(comment => (
                     <CommentRow 
                       key={comment.id} 

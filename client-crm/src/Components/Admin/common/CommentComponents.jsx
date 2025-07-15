@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const LoadingSpinner = () => (
   <div className="flex items-center justify-center min-h-[200px]">
     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#ff8633]"></div>
@@ -13,7 +11,7 @@ export const TableHeader = ({ children }) => (
 );
 
 export const CommentRow = ({ comment, onView, onDelete }) => (
-  <tr className="hover:bg-gray-50 dark:hover:bg-gray-300">
+  <tr>
     <td className="px-6 py-4 whitespace-nowrap">
       <div className="flex items-center">
         <div className="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">

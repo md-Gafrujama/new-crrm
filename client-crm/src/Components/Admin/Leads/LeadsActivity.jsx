@@ -93,7 +93,6 @@ const LeadsActivity = ({collapsed}) => {
         serviceInterestedIn: updatedLead.serviceInterestedIn,
         closingDate: updatedLead.closingDate,
         notes: updatedLead.notes,
-        // createdAt and updatedAt are usually handled by the backend
       };
 
       const token = localStorage.getItem('token');
@@ -277,9 +276,9 @@ const LeadsActivity = ({collapsed}) => {
           >
         <div className={cn(
     "transition-[margin] duration-300 ease-in-out",
-    collapsed ? "md:ml-[70px]" : "md:ml-[240px]"
+    collapsed ? "md:ml-[70px]" : "md:ml-[0px]"
   )}>
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 p-20">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 p-5">
       <header className="mb-8">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 relative w-full">
   <div className="sm:flex md:flex w-full justify-between items-center">
@@ -385,8 +384,8 @@ const StatCard = React.memo(({ title, value, icon }) => (
         <span className="text-xl">{icon}</span>
       </div>
       <div>
-        <h3 className="text-sm font-medium text-gray-500">{title}</h3>
-        <p className="text-2xl font-bold text-gray-800">{value}</p>
+        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-200">{title}</h3>
+        <p className="text-2xl font-bold text-gray-800 dark:text-gray-400">{value}</p>
       </div>
     </div>
   </div>
