@@ -3,16 +3,11 @@ import React, { useState, lazy, Suspense, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-// import AddLeadsForm from '../Components/Leads/AddLeadsForm';
-import CombinedLeadForm from '../Components/CombinedForUser&Admin/CombinedLeadForm';
-// import AlertsandReminderForm from '../Components/Forms/AlertsandReminderForm';
-import CombinedAlertReminder from '../Components/CombinedForUser&Admin/CombinedAlertReminder';
-import RealtimeTracking from '../Components/Admin/Forms/RealtimeTracking';
 import axios from 'axios';
 import { API_BASE_URL } from '../config/api';
 import { UserHeader } from '../Components/User/common/UserHeader';
 import { UserSidebar,useSidebarUser } from '../Components/User/common/UserSidebar';
-
+import { useTheme } from '../hooks/use-theme';
 
 
 const UserSettings = ({ onLogout }) => {
@@ -24,6 +19,7 @@ const UserSettings = ({ onLogout }) => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarUser();
+  const { theme, setTheme } = useTheme();
 
 
   // UserProfile.jsx
@@ -87,6 +83,7 @@ const UserSettings = ({ onLogout }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
+          theme: theme === 'dark' ? 'dark' : 'light',
           style: { fontSize: '1.2rem' },
         });
         setLoading(false);
@@ -218,6 +215,7 @@ const UserSettings = ({ onLogout }) => {
                                             pauseOnHover: true,
                                             draggable: true,
                                             progress: undefined,
+                                            theme: theme === 'dark' ? 'dark' : 'light',
                                             style: { fontSize: '1.2rem' }, 
                                           });
                         return;
@@ -247,6 +245,7 @@ const UserSettings = ({ onLogout }) => {
                                             pauseOnHover: true,
                                             draggable: true,
                                             progress: undefined,
+                                            theme: theme === 'dark' ? 'dark' : 'light',
                                             style: { fontSize: '1.2rem' }, 
                                           });
                         setCurrentPassword('');

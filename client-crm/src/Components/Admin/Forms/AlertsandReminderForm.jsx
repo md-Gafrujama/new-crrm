@@ -5,13 +5,14 @@ import axios from 'axios';
 import { API_BASE_URL } from '../../../config/api'; 
 import { Header } from '../../Admin/common/Header';
 import { Sidebar,useSidebar } from '../../Admin/common/sidebar';
-
+import { useTheme } from '../../../hooks/use-theme';
 
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
 
 const AlertsandReminder = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [formData, setFormData] = useState({
     alerttopic:'',
     reminder:'',
@@ -47,6 +48,7 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
+              theme: theme === 'dark' ? 'dark' : 'light',
               style: { fontSize: '1.2rem' }, 
             });
         navigate('/login');
@@ -78,6 +80,7 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
+              theme: theme === 'dark' ? 'dark' : 'light',
               style: { fontSize: '1.2rem' }, 
             });
           const userType = localStorage.getItem('userType'); 
@@ -97,6 +100,7 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
               pauseOnHover: true,
               draggable: true,
               progress: undefined,
+              theme: theme === 'dark' ? 'dark' : 'light',
               style: { fontSize: '1.2rem' }, 
             });
     } finally {

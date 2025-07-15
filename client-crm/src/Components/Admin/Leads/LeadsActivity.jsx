@@ -7,6 +7,7 @@ import { API_BASE_URL } from '../../../config/api';
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
 import { cn } from "../../../utils/cn";
+import { useTheme } from "../../../hooks/use-theme";
 
 const download = async () => {
   try {
@@ -49,6 +50,7 @@ const LeadsActivity = ({collapsed}) => {
   const [currentLead, setCurrentLead] = useState(null);
   const [isSaving, setIsSaving] = useState(false); // Add this line
   const [apiError, setApiError] = useState(null);
+  const { theme, setTheme } = useTheme();
 
 
   const [stats, setStats] = useState({
@@ -178,6 +180,7 @@ const LeadsActivity = ({collapsed}) => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
+                    theme: theme === 'dark' ? 'dark' : 'light',
                     style: { fontSize: '1.2rem' }, 
                   });
       navigate('/login');
@@ -204,6 +207,7 @@ const LeadsActivity = ({collapsed}) => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
+                    theme: theme === 'dark' ? 'dark' : 'light',
                     style: { fontSize: '1.2rem' }, 
                   });
       navigate('/login');
@@ -241,6 +245,7 @@ const LeadsActivity = ({collapsed}) => {
                   pauseOnHover: true,
                   draggable: true,
                   progress: undefined,
+                  theme: theme === 'dark' ? 'dark' : 'light',
                   style: { fontSize: '1.2rem' }, 
                 });
                 if (err.response?.status === 401) {

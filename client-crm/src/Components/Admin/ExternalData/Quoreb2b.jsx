@@ -5,12 +5,13 @@ import axios from 'axios';
 import { API_BASE_URL } from '../../../config/api'; 
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
-
+import { useTheme } from '../../../hooks/use-theme';
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
 
 const Quoreb2b = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -62,6 +63,7 @@ const Quoreb2b = () => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      theme: theme === 'dark' ? 'dark' : 'light',
       style: { fontSize: '1.2rem' },
     });
 
@@ -77,7 +79,19 @@ const Quoreb2b = () => {
 
   } catch (e) {
     console.error("Comment Failed - Full Error:", e);
-    toast.error(e.message || "Comment Failed. Please try again.");
+    
+    
+    toast.error(e.message || "Comment failed! Please try again.", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: theme === 'dark' ? 'dark' : 'light',
+      style: { fontSize: '1.2rem' },
+    });
   } finally {
     setIsSubmitting(false);
   }

@@ -9,6 +9,7 @@ const Lock = lazy(() => import('lucide-react').then(module => ({ default: module
 import { API_BASE_URL } from '../../../config/api';
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
+import { useTheme } from '../../../hooks/use-theme';
 
 const UpdatePassword = () => {
   const navigate = useNavigate();

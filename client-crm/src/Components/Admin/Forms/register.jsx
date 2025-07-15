@@ -9,6 +9,7 @@ import axios from "axios";
 import { API_BASE_URL } from '../../../config/api'; 
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
+import { useTheme } from "../../../hooks/use-theme";
 
 // Lazy loaded components
 const PhoneInput = lazy(() => import('react-phone-input-2'));
@@ -41,6 +42,7 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
   
   const [errors, setErrors] = useState({
     firstName: '',
@@ -196,6 +198,7 @@ const Register = () => {
                   pauseOnHover: true,
                   draggable: true,
                   progress: undefined,
+                  theme: theme === 'dark' ? 'dark' : 'light',
                   style: { fontSize: '1.2rem' }, 
                 });
     setTimeout(() => navigate("/dashboard"), 2000);
@@ -210,6 +213,7 @@ const Register = () => {
                   pauseOnHover: true,
                   draggable: true,
                   progress: undefined,
+                  theme: theme === 'dark' ? 'dark' : 'light',
                   style: { fontSize: '1.2rem' }, 
                 });
   } finally {

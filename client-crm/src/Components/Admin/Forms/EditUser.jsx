@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../../../config/api';
-
+import { useTheme } from '../../../hooks/use-theme';
 const EditUser = ({ userId, onUpdate, onDelete, onClose }) => {
   // const { userId } = useParams();
   const navigate = useNavigate();

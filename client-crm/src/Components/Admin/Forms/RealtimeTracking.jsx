@@ -6,10 +6,12 @@ const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.cs
 import { API_BASE_URL } from '../../../config/api'; 
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
+import { useTheme } from '../../../hooks/use-theme';
 
 const RealtimeTracking = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [formData, setFormData] = useState({
     email: '',
     phone: '',
@@ -56,6 +58,7 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      theme: theme === 'dark' ? 'dark' : 'light',
       style: { fontSize: '1.2rem' }, // Increased font size
     });
     const userType = localStorage.getItem('userType'); 
@@ -79,6 +82,7 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
                           pauseOnHover: true,
                           draggable: true,
                           progress: undefined,
+                          theme: theme === 'dark' ? 'dark' : 'light',
                           style: { fontSize: '1.2rem' }, 
                         });
     } finally {
@@ -88,9 +92,9 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
 
   return (
     <>
-    <div className="flex items-center justify-center min-h-screen p-4">
+    <div className="flex items-center justify-center">
       <Suspense fallback={
-        <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100">
+        <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-3/4 mb-6 mx-auto"></div>
             <div className="h-4 bg-gray-200 rounded w-1/2 mb-8 mx-auto"></div>
@@ -99,50 +103,23 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
       }>
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100 transition-all hover:shadow-2xl"
+          className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl w-full max-w-2xl dark:border dark:border-gray-700 border border-gray-100 transition-all hover:shadow-2xl"
         >
           <div className="absolute top-4 right-4">
-    {localStorage.getItem('userType') === 'admin' && (
-      <>
-      <Header 
-                onToggleSidebar={toggleSidebar} 
-            />
-             <Sidebar 
-                      isOpen={isSidebarOpen} 
-                      onClose={closeSidebar}
-              >
-  <button
-    type="button"
-    onClick={handlegobacktodashboard}
-    className="cursor-pointer flex items-center gap-2 m-3 px-2 p-2 bg-[#ff8633] text-white rounded-lg transition-colors hover:bg-[#e57328] ml-auto"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-5 w-5 group-hover:transform group-hover:-translate-x-1 transition-transform"
-      viewBox="0 0 20 20"
-      fill="currentColor"
-    >
-      <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-    </svg>
-    <span>Back to Dashboard</span>
-  </button>
-  </Sidebar>
-  </>
-)}
           </div>
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">Realtime Tracking</h2>
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-400 mb-2">Realtime Tracking</h2>
           </div>
 
             <div className='mb-10'>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
               <input
                 type="tel"
                 id="phone"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg text-center border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                className="dark:text-gray-400 dark:border-slate-700 dark:bg-slate-800 w-full px-4 py-3 rounded-lg text-center border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="+1 (123) 456-7890"
                 autoComplete="tel"
               />

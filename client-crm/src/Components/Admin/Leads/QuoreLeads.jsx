@@ -6,10 +6,12 @@ const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.cs
 import { API_BASE_URL } from '../../../config/api'; 
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
+import { useTheme } from '../../../hooks/use-theme';
 
 const QuoreLeads = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [formData, setFormData] = useState({
     Name: '',
     email: '',
@@ -63,6 +65,7 @@ const handleCheckboxChange = (e) => {
                             pauseOnHover: true,
                             draggable: true,
                             progress: undefined,
+                            theme: theme === 'dark' ? 'dark' : 'light',
                             style: { fontSize: '1.2rem' }, 
                           });
         setIsSubmitting(false);
@@ -92,6 +95,7 @@ const handleCheckboxChange = (e) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      theme: theme === 'dark' ? 'dark' : 'light',
       style: { fontSize: '1.2rem' }, 
     });
     const userType = localStorage.getItem('userType'); 
@@ -107,7 +111,17 @@ const handleCheckboxChange = (e) => {
         message: e.message,
         stack: e.stack,
       });
-      toast.error(e.message || "Quore Lead Creation Failed. Please try again.");
+           toast.error(e.message || "Quore Lead Creation Failed. Please try again!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: theme === 'dark' ? 'dark' : 'light',
+      style: { fontSize: '1.2rem' }, 
+    });
     } finally {
       setIsSubmitting(false);
     }

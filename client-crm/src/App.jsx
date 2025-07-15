@@ -28,6 +28,7 @@ import UserLeads from './Components/User/Leads/UserLeads.jsx';
 import ConnectSocialMedia from './Pages/ConnectSocialMedia.jsx';
 import UserSettings from './Pages/UserSettings.jsx';
 import UserDashboard from './Pages/UserDashboard.jsx';
+import CombinedRealtimeTracking from './Components/CombinedForUser&Admin/CombinedRealtimeTracking.jsx';
 
 function App() {
   
@@ -117,6 +118,7 @@ function App() {
           <Route path="/connect-social-media" element={<ConnectSocialMedia />} />
           <Route path="/user-settings" element={<UserSettings/>} />
           <Route path="/user-dashboard" element={<UserDashboard/>} />
+          <Route path="/realtime-tracking" element={<CombinedRealtimeTracking/>} />
         </Route>
 
         {/* Fallback */}

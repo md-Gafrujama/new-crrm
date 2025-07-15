@@ -7,12 +7,13 @@ import { API_BASE_URL } from '../../../config/api';
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
 import { cn } from '../../../utils/cn';
-
+import { useTheme } from '../../../hooks/use-theme';
 
 const AddLeadsForm = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
+  const { theme, setTheme } = useTheme();
   const [formData, setFormData] = useState({
     leadtitle: '',
     firstName: '',
@@ -58,6 +59,7 @@ const AddLeadsForm = () => {
                             pauseOnHover: true,
                             draggable: true,
                             progress: undefined,
+                            theme: theme === 'dark' ? 'dark' : 'light',
                             style: { fontSize: '1.2rem' }, 
                           });
         setIsSubmitting(false);
@@ -96,6 +98,7 @@ const AddLeadsForm = () => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      theme: theme === 'dark' ? 'dark' : 'light',
       style: { fontSize: '1.2rem' }, // Increased font size
     });
     const userType = localStorage.getItem('userType'); 
@@ -119,6 +122,7 @@ const AddLeadsForm = () => {
                           pauseOnHover: true,
                           draggable: true,
                           progress: undefined,
+                          theme: theme === 'dark' ? 'dark' : 'light',
                           style: { fontSize: '1.2rem' }, 
                         });
     } finally {

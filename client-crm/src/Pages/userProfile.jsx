@@ -5,6 +5,7 @@ import { API_BASE_URL } from '../config/api';
 import { UserHeader } from '../Components/User/common/UserHeader';
 import { useSidebarUser, UserSidebar } from '../Components/User/common/UserSidebar';
 import { cn } from "../utils/cn";
+import { useTheme } from '../hooks/use-theme';
 
 const ProfileofUser = ({ collapsed, onLogout }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -13,6 +14,7 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
   const [isSaving, setIsSaving] = useState(false);
   const [apiError, setApiError] = useState(null);
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarUser();
+  const { theme, setTheme } = useTheme();
 
   // Edit Profile Popup
   const EditProfilePopup = ({ profile, onClose, onSave }) => {
@@ -191,6 +193,7 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+        theme: theme === 'dark' ? 'dark' : 'light',
       });
 
       // Refresh user data
@@ -215,6 +218,7 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
                           pauseOnHover: true,
                           draggable: true,
                           progress: undefined,
+                          theme: theme === 'dark' ? 'dark' : 'light',
                           style: { fontSize: '1.2rem' }, 
                         });
     } finally {
@@ -264,6 +268,7 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
                             pauseOnHover: true,
                             draggable: true,
                             progress: undefined,
+                            theme: theme === 'dark' ? 'dark' : 'light',
                             style: { fontSize: '1.2rem' }, 
                           });
         setLoading(false);

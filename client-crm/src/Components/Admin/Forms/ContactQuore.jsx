@@ -5,12 +5,13 @@ import axios from 'axios';
 import { API_BASE_URL } from '../../../config/api'; 
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
-
+import { useTheme } from '../../../hooks/use-theme';
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
 
 const ContactQuore = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -63,6 +64,7 @@ const ContactQuore = () => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      theme: theme === 'dark' ? 'dark' : 'light',
       style: { fontSize: '1.2rem' }, // Increased font size
     });
     const userType = localStorage.getItem('userType'); 
@@ -86,6 +88,7 @@ const ContactQuore = () => {
                           pauseOnHover: true,
                           draggable: true,
                           progress: undefined,
+                          theme: theme === 'dark' ? 'dark' : 'light',
                           style: { fontSize: '1.2rem' }, 
                         });
     } finally {

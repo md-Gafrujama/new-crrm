@@ -1,13 +1,12 @@
 import React, { useState, lazy, Suspense, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import CombinedLeadForm from "../../CombinedForUser&Admin/CombinedLeadForm";
 import axios from "axios";
 import { API_BASE_URL } from "../../../config/api";
 import { UserHeader } from "../common/UserHeader";
 import { UserSidebar, useSidebarUser } from "../common/UserSidebar";
 import { cn } from "../../../utils/cn";
+import { useTheme } from "../../../hooks/use-theme";
 
 const download = async () => {
   try {
@@ -70,7 +69,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarUser();
-
+  const { theme, setTheme } = useTheme();
   // Add these state declarations near your other state declarations
   const [viewPopupOpen, setViewPopupOpen] = useState(false);
   const [editPopupOpen, setEditPopupOpen] = useState(false);
@@ -632,7 +631,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme:"dark",
+        theme: theme === 'dark' ? 'dark' : 'light',
         style: { fontSize: "1.2rem"},
       });
 
@@ -657,6 +656,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+        theme: theme === 'dark' ? 'dark' : 'light',
         style: { fontSize: "1.2rem" },
       });
     } finally {
@@ -685,6 +685,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+        theme: theme === 'dark' ? 'dark' : 'light',
         style: { fontSize: "1.2rem" },
       });
 
@@ -708,6 +709,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+        theme: theme === 'dark' ? 'dark' : 'light',
         style: { fontSize: "1.2rem" },
       });
     }
@@ -829,6 +831,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
+          theme: theme === 'dark' ? 'dark' : 'light',
           style: { fontSize: "1.2rem" },
         });
         setLoading(false);
@@ -916,6 +919,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
+            theme: theme === 'dark' ? 'dark' : 'light',
             style: { fontSize: "1.2rem" },
           });
           navigate("/login");
@@ -944,6 +948,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
+          theme: theme === 'dark' ? 'dark' : 'light',
           style: { fontSize: "1.2rem" },
         });
       } finally {

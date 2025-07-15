@@ -7,7 +7,7 @@ import { LoadingSpinner, TableHeader, CommentRow, ViewCommentPopup, DeleteConfir
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
 import { cn } from "../../../utils/cn";
-
+import { useTheme } from '../../../hooks/use-theme';
 const QuoreComments = ({collapsed}) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -16,6 +16,7 @@ const QuoreComments = ({collapsed}) => {
   const [deletePopupOpen, setDeletePopupOpen] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
+  const { theme, setTheme } = useTheme();
   
   useEffect(() => {
     fetchComments();
@@ -34,6 +35,7 @@ const QuoreComments = ({collapsed}) => {
                             pauseOnHover: true,
                             draggable: true,
                             progress: undefined,
+                            theme: theme === 'dark' ? 'dark' : 'light',
                             style: { fontSize: '1.2rem' }, 
                           });
         return;
@@ -56,6 +58,7 @@ const QuoreComments = ({collapsed}) => {
                           pauseOnHover: true,
                           draggable: true,
                           progress: undefined,
+                          theme: theme === 'dark' ? 'dark' : 'light',
                           style: { fontSize: '1.2rem' }, 
                         });
     } finally {

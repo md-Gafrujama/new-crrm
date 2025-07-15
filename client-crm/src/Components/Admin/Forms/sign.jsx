@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_BASE_URL } from '../../../config/api'; 
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
+import { useTheme } from '../../../hooks/use-theme';
 
 // Lazy load components and icons
 const Eye = lazy(() => import('lucide-react').then(module => ({ default: module.Eye })));
@@ -16,6 +17,7 @@ const Sign = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
+  const { theme, setTheme } = useTheme();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -47,6 +49,7 @@ const Sign = () => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
+                    theme: theme === 'dark' ? 'dark' : 'light',
                     style: { fontSize: '1.2rem' }, 
                   });
       return;
@@ -101,6 +104,7 @@ const handleSubmit = async (e) => {
                   pauseOnHover: true,
                   draggable: true,
                   progress: undefined,
+                  theme: theme === 'dark' ? 'dark' : 'light',
                   style: { fontSize: '1.2rem' }, 
                 });
     setTimeout(() => navigate("/dashboard"), 2000);
@@ -115,6 +119,7 @@ const handleSubmit = async (e) => {
                   pauseOnHover: true,
                   draggable: true,
                   progress: undefined,
+                  theme: theme === 'dark' ? 'dark' : 'light',
                   style: { fontSize: '1.2rem' }, 
                 });
   } finally {

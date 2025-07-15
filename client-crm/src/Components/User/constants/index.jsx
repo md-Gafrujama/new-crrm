@@ -48,7 +48,7 @@ export const navbarLinks = [
             {
                 label: "Real Time Tracking",
                 icon: Radar,
-                path: "/real-time-tracking",
+                path: "/realtime-tracking",
             },
             {
                 label: "Alerts And Remainder",
