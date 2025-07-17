@@ -12,7 +12,7 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarUser();
     <>
         <UserHeader onToggleSidebar={toggleSidebar} />
         <UserSidebar isOpen={isSidebarOpen} onClose={closeSidebar} >
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
+    <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
       <div className="mx-auto px-4 sm:px-6 lg:px-0 py-8">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Main Dashboard */}

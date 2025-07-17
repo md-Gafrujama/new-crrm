@@ -1012,11 +1012,11 @@ const UserLeads = ({ collapsed, onLogout }) => {
           {/* Main Content */}
           <div
             className={cn(
-              "transition-all duration-300 ease-in-out min-h-screen bg-gray-50 dark:bg-slate-900",
+              "transition-all duration-300 ease-in-out min-h-screen bg-slate-100 dark:bg-slate-900",
               collapsed ? "md:ml-[70px]" : "md:ml-[0px]"
             )}
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-slate-900">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-slate-900 bg-slate-100">
               <div className="flex flex-col items-center">
                 <div className="w-full bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
                   <div className="bg-gradient-to-r from-[#ff8633] to-[#ff9a5a] p-6">

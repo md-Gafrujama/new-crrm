@@ -47,7 +47,7 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="bg-gray-50 dark:bg-slate-800 rounded-xl shadow-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-400">Edit Profile</h2>
             <button
@@ -323,7 +323,7 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
         "transition-all duration-300 ease-in-out min-h-screen bg-gray-50 dark:bg-slate-900",
         collapsed ? "md:ml-[70px]" : "md:ml-[0px]"
       )}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 dark:bg-slate-900">
+        <div className="max-w-6xl mx-auto px-4 bg-slate-100 sm:px-6 lg:px-8 py-8 dark:bg-slate-900">
           <div className="flex flex-col items-center">
             <div className="w-full max-w-4xl bg-gray-50 dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
               <div className="bg-gradient-to-r from-[#ff8633] to-[#ff9a5a] p-4 sm:p-6 text-center">

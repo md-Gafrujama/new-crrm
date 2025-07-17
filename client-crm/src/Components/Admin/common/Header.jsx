@@ -8,9 +8,6 @@ import PropTypes from "prop-types";
 export const Header = ({ onToggleSidebar }) => {
     const { theme, setTheme } = useTheme();
     console.log('Current theme in Header:', theme);
-    const toggleTheme = () => {
-  setTheme(theme === "light" ? "dark" : "light");
-};
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("loggedIn") === "true");
   const [userType, setUserType] = useState(localStorage.getItem("userType"));
   const navigate = useNavigate();
