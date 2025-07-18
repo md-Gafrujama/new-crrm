@@ -163,6 +163,66 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
     );
   };
 
+  const handleSaveUserProfile = async (updatedUser) => {
+    try {
+      setIsSaving(true);
+      setApiError(null);
+
+      if (!updatedUser.id) {
+        throw new Error('User ID is missing. Cannot update profile.');
+      }
+
+      const token = localStorage.getItem('token');
+
+      const response = await axios.put(
+        `${API_BASE_URL}/api/update-profile/${updatedUser.id}`,
+        {
+          email: updatedUser.email,
+          phoneNumber: updatedUser.phoneNumber,
+          about: updatedUser.about,
+          skills: updatedUser.skills,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      setEditProfilePopupOpen(false);
+
+      toast.success("Profile updated successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        theme: theme === 'dark' ? 'dark' : 'light',
+      });
+
+      // Refresh user data
+      const { data } = await axios.get(`${API_BASE_URL}/api/allUser`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      const matchedUser = data.find(user => user.id === updatedUser.id);
+      setCurrentUser(matchedUser);
+
+    } catch (err) {
+      console.error("Profile update error:", err);
+      const errorMessage = err.response?.data?.message || err.message || "Failed to update profile";
+
+      setApiError(errorMessage);
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        theme: theme === 'dark' ? 'dark' : 'light',
+        style: { fontSize: '1.2rem' },
+      });
+
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   const handleSaveLead = async (updatedLead) => {
     try {
       setIsSaving(true);
@@ -210,17 +270,17 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
         "Failed to update profile";
 
       setApiError(errorMessage);
-            toast.error(errorMessage , {
-                          position: "top-right",
-                          autoClose: 5000,
-                          hideProgressBar: false,
-                          closeOnClick: true,
-                          pauseOnHover: true,
-                          draggable: true,
-                          progress: undefined,
-                          theme: theme === 'dark' ? 'dark' : 'light',
-                          style: { fontSize: '1.2rem' }, 
-                        });
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: theme === 'dark' ? 'dark' : 'light',
+        style: { fontSize: '1.2rem' },
+      });
     } finally {
       setIsSaving(false);
     }
@@ -260,17 +320,17 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
           error.message ||
           "Failed to load profile data";
 
-              toast.error(errorMessage , {
-                            position: "top-right",
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: theme === 'dark' ? 'dark' : 'light',
-                            style: { fontSize: '1.2rem' }, 
-                          });
+        toast.error(errorMessage, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: theme === 'dark' ? 'dark' : 'light',
+          style: { fontSize: '1.2rem' },
+        });
         setLoading(false);
         onLogout();
       }
@@ -318,125 +378,126 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
     <>
       <UserHeader onToggleSidebar={toggleSidebar} />
       <UserSidebar isOpen={isSidebarOpen} onClose={closeSidebar} >
-      
-      <div className={cn(
-        "transition-all duration-300 ease-in-out min-h-screen bg-gray-50 dark:bg-slate-900",
-        collapsed ? "md:ml-[70px]" : "md:ml-[0px]"
-      )}>
-        <div className="max-w-6xl mx-auto px-4 bg-slate-100 sm:px-6 lg:px-8 py-8 dark:bg-slate-900">
-          <div className="flex flex-col items-center">
-            <div className="w-full max-w-4xl bg-gray-50 dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
-              <div className="bg-gradient-to-r from-[#ff8633] to-[#ff9a5a] p-4 sm:p-6 text-center">
-  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10">
-    {/* Avatar */}
-    <div className="flex justify-center">
-      <img 
-        className="h-20 w-20 sm:h-25 sm:w-25 rounded-full border-4 border-white shadow-md" 
-        src={user.avatar} 
-        alt="User avatar"
-      />
-    </div>
-    
-    {/* Name and Role */}
-    <div className="text-center sm:text-left">
-      <h1 className="text-xl sm:text-2xl font-bold text-white">{user.name}</h1>
-      <p className="text-white/90 capitalize text-sm sm:text-base">{user.role}</p>
-    </div>
-  </div>
-</div>
-              
-              {/* Profile Content */}
-              <div className="p-6 md:p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {/* Personal Info Section */}
-                  <div className="space-y-6 text-center lg:text-left">
-                    <div>
-                      <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-400 mb-4 pb-2 border-b border-gray-200">
-                        Personal Information
-                      </h2>
-                      <div className="space-y-4">
-                        <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-100">Email</p>
-                          <p className="mt-1 text-gray-800 dark:text-gray-400">{user.email}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-100">Phone</p>
-                          <p className="mt-1 text-gray-800 dark:text-gray-400">{user.phoneNumber}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-100">Member Since</p>
-                          <p className="mt-1 text-gray-800 dark:text-gray-400">{user.joinDate}</p>
-                        </div>
-                      </div>
+
+        <div className={cn(
+          "transition-all duration-300 ease-in-out min-h-screen bg-gray-50 dark:bg-slate-900",
+          collapsed ? "md:ml-[70px]" : "md:ml-[0px]"
+        )}>
+          <div className="max-w-6xl mx-auto px-4 bg-slate-100 sm:px-6 lg:px-8 py-8 dark:bg-slate-900">
+            <div className="flex flex-col items-center">
+              <div className="w-full max-w-4xl bg-gray-50 dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
+                <div className="bg-gradient-to-r from-[#ff8633] to-[#ff9a5a] p-4 sm:p-6 text-center">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10">
+                    {/* Avatar */}
+                    <div className="flex justify-center">
+                      <img
+                        className="h-20 w-20 sm:h-25 sm:w-25 rounded-full border-4 border-white shadow-md"
+                        src={user.avatar}
+                        alt="User avatar"
+                      />
                     </div>
 
-                    <div>
-                      <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-400 mb-4 pb-2 border-b border-gray-200">
-                        Work Information
-                      </h2>
-                      <div className="space-y-4">
-                        <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-100">Assigned Work</p>
-                          <p className="mt-1 text-gray-800 dark:text-gray-400">{user.assignedWork}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-500 dark:text-gray-100">Status</p>
-                          <p className="mt-1 text-gray-800 dark:text-gray-400 capitalize">{user.statusOfWork}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* About & Skills Section */}
-                  <div className="space-y-6">
-                    <div>
-                      <h2 className="text-xl font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200 dark:text-gray-400">
-                        About
-                      </h2>
-                      <p className="text-gray-600 dark:text-gray-200">{user.bio}</p>
-                    </div>
-
-                    <div>
-                      <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-400 mb-4 pb-2 border-b border-gray-200">
-                        Skills
-                      </h2>
-                      <div className="flex flex-wrap gap-2">
-                        {user.skills.map((skill, index) => (
-                          <span 
-                            key={index} 
-                            className="px-3 py-1 bg-[#ff8633]/10 text-[#ff8633] rounded-full text-sm font-medium"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
+                    {/* Name and Role */}
+                    <div className="text-center sm:text-left">
+                      <h1 className="text-xl sm:text-2xl font-bold text-white">{user.name}</h1>
+                      <p className="text-white/90 capitalize text-sm sm:text-base">{user.role}</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-                  <button 
-                    onClick={() => setEditProfilePopupOpen(true)}
-                    className="px-6 py-2 bg-[#ff8633] hover:bg-[#e67328] text-white rounded-lg font-medium transition-colors shadow-md"
-                  >
-                    Edit Profile
-                  </button>
+                {/* Profile Content */}
+                <div className="p-6 md:p-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Personal Info Section */}
+                    <div className="space-y-6 text-center lg:text-left">
+                      <div>
+                        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-400 mb-4 pb-2 border-b border-gray-200">
+                          Personal Information
+                        </h2>
+                        <div className="space-y-4">
+                          <div>
+                            <p className="text-sm font-medium text-gray-500 dark:text-gray-100">Email</p>
+                            <p className="mt-1 text-gray-800 dark:text-gray-400">{user.email}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-500 dark:text-gray-100">Phone</p>
+                            <p className="mt-1 text-gray-800 dark:text-gray-400">{user.phoneNumber}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-500 dark:text-gray-100">Member Since</p>
+                            <p className="mt-1 text-gray-800 dark:text-gray-400">{user.joinDate}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-400 mb-4 pb-2 border-b border-gray-200">
+                          Work Information
+                        </h2>
+                        <div className="space-y-4">
+                          <div>
+                            <p className="text-sm font-medium text-gray-500 dark:text-gray-100">Assigned Work</p>
+                            <p className="mt-1 text-gray-800 dark:text-gray-400">{user.assignedWork}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium text-gray-500 dark:text-gray-100">Status</p>
+                            <p className="mt-1 text-gray-800 dark:text-gray-400 capitalize">{user.statusOfWork}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* About & Skills Section */}
+                    <div className="space-y-6">
+                      <div>
+                        <h2 className="text-xl font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200 dark:text-gray-400">
+                          About
+                        </h2>
+                        <p className="text-gray-600 dark:text-gray-200">{user.bio}</p>
+                      </div>
+
+                      <div>
+                        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-400 mb-4 pb-2 border-b border-gray-200">
+                          Skills
+                        </h2>
+                        <div className="flex flex-wrap gap-2">
+                          {user.skills.map((skill, index) => (
+                            <span
+                              key={index}
+                              className="px-3 py-1 bg-[#ff8633]/10 text-[#ff8633] rounded-full text-sm font-medium"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                    <button
+                      onClick={() => setEditProfilePopupOpen(true)}
+                      className="px-6 py-2 bg-[#ff8633] hover:bg-[#e67328] text-white rounded-lg font-medium transition-colors shadow-md"
+                    >
+                      Edit Profile
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Edit Profile Popup */}
-        {editProfilePopupOpen && (
-          <EditProfilePopup
-            profile={user}
-            onClose={() => setEditProfilePopupOpen(false)}
-            onSave={handleSaveLead}
-          />
-        )}
-      </div>
+          {/* Edit Profile Popup */}
+          {editProfilePopupOpen && (
+            <EditProfilePopup
+              profile={user}
+              onClose={() => setEditProfilePopupOpen(false)}
+              onSave={handleSaveUserProfile}  // ✅ correct!
+            />
+          )}
+
+        </div>
       </UserSidebar>
     </>
   );

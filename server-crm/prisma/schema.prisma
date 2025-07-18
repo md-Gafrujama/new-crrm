@@ -30,6 +30,8 @@ model User { //status like block/unblock,, loggedIn time  ..
   statusOfWork   String?
   statusOfAccount         String?    
   loggedInTime   DateTime?
+  about          String?      
+  skills         String[] 
 }
 
 model company {  
