@@ -7,6 +7,7 @@ import { Sidebar,useSidebar } from '../Components/Admin/common/sidebar';
 import { cn } from "../utils/cn";
 import { Bell, ChevronsLeft, Moon, Search, Sun } from "lucide-react";
 import { useTheme } from "../hooks/use-theme";  
+import Footer  from '../Components/Admin/common/Footer';
 
 const Dashboard = ({collapsed, onLogout }) => {
 
@@ -179,6 +180,7 @@ const Dashboard = ({collapsed, onLogout }) => {
     </div>
     </div>
     </Sidebar>
+    <Footer/>
     </>
   );
 };

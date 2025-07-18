@@ -1,7 +1,8 @@
 import { cn } from "../../../utils/cn";
-const Footer = ({collapsed}) => {
+
+export const UserFooter = ({ collapsed }) => {
     return (
-         <div className={cn(
+        <div className={cn(
             "transition-all duration-300 ease-in-out",
             collapsed ? "md:ml-[70px]" : "md:ml-[230px]"
         )}>
@@ -15,7 +16,7 @@ const Footer = ({collapsed}) => {
                             href="#"
                             className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
                         >
-                            Privacy Policy (Admin Side)
+                            Privacy Policy (User Side)
                         </a>
                         <a
                             href="#"
@@ -35,5 +36,3 @@ const Footer = ({collapsed}) => {
         </div>
     );
 };
-
-export default Footer;

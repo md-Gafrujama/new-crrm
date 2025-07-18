@@ -8,6 +8,7 @@ import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
 import { cn } from "../../../utils/cn";
 import { useTheme } from "../../../hooks/use-theme";
+import Footer from "../common/Footer";
 
 const download = async () => {
   try {
@@ -357,6 +358,7 @@ const LeadsActivity = ({collapsed}) => {
     </div>
     </div>
     </Sidebar>
+    <Footer/>
    </>
   );
 };

@@ -6,6 +6,7 @@ import { API_BASE_URL } from '../../../config/api';
 import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
 import { useTheme } from '../../../hooks/use-theme';
+import Footer from '../common/Footer';
 
 // Lazy load components and icons
 const Eye = lazy(() => import('lucide-react').then(module => ({ default: module.Eye })));
@@ -355,6 +356,7 @@ const handleSubmit = async (e) => {
       </Suspense>
     </div>
     </Sidebar>
+    <Footer/>
     </>
   );
 };

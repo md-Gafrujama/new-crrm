@@ -6,6 +6,7 @@ import { UserHeader } from '../Components/User/common/UserHeader';
 import { useSidebarUser, UserSidebar } from '../Components/User/common/UserSidebar';
 import { cn } from "../utils/cn";
 import { useTheme } from '../hooks/use-theme';
+import { UserFooter } from '../Components/User/common/UserFooter';
 
 const ProfileofUser = ({ collapsed, onLogout }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -499,6 +500,7 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
 
         </div>
       </UserSidebar>
+      <UserFooter/>
     </>
   );
 };

@@ -8,6 +8,7 @@ import { API_BASE_URL } from '../config/api';
 import { UserHeader } from '../Components/User/common/UserHeader';
 import { UserSidebar,useSidebarUser } from '../Components/User/common/UserSidebar';
 import { useTheme } from '../hooks/use-theme';
+import { UserFooter } from '../Components/User/common/UserFooter';
 
 
 const UserSettings = ({ onLogout }) => {
@@ -306,6 +307,7 @@ const UserSettings = ({ onLogout }) => {
       </div>
     </div>
     </UserSidebar>
+    <UserFooter/>
     </>
   );
 };
