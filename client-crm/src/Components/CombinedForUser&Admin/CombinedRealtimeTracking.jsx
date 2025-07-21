@@ -5,7 +5,8 @@ import { Sidebar,useSidebar } from '../Admin/common/sidebar';
 import RealtimeTracking from '../Admin/Forms/RealtimeTracking';
 import { UserHeader } from '../User/common/UserHeader';
 import { UserSidebar ,useSidebarUser} from '../User/common/UserSidebar';
-
+import { UserFooter } from '../User/common/UserFooter';
+import Footer from '../Admin/common/Footer';
 
 const CombinedRealtimeTracking = ({collapsed}) => {
 const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
@@ -18,6 +19,7 @@ const { isSidebarOpenUser, toggleSidebarUser, closeSidebarUser } = useSidebarUse
   <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} >
    <RealtimeTracking />
   </Sidebar>
+  <Footer/>
   </>
 )}
   
@@ -27,6 +29,7 @@ const { isSidebarOpenUser, toggleSidebarUser, closeSidebarUser } = useSidebarUse
   <UserSidebar isOpen={isSidebarOpenUser} onClose={closeSidebarUser} >
    <RealtimeTracking />
    </UserSidebar>
+   <UserFooter/>
   </>
 )}
    </>

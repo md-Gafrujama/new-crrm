@@ -7,6 +7,7 @@ import { Header } from '../Components/Admin/common/Header';
 import { Sidebar,useSidebar } from '../Components/Admin/common/sidebar';
 import { cn } from "../utils/cn";
 import { useTheme } from '../hooks/use-theme';
+import Footer from '../Components/Admin/common/Footer';
 
 const AllUsers = ({collapsed}) => {
   const navigate = useNavigate();
@@ -218,6 +219,7 @@ const AllUsers = ({collapsed}) => {
     </div>
     </div>
     </Sidebar>
+    <Footer/>
     </>
   );
 };

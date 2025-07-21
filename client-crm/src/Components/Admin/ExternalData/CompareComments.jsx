@@ -8,6 +8,7 @@ import { Header } from '../common/Header';
 import { Sidebar,useSidebar } from '../common/sidebar';
 import { cn } from "../../../utils/cn";
 import { useTheme } from '../../../hooks/use-theme';
+import Footer from '../common/Footer';
 
 const CompareComments = ({collapsed}) => {
   const [comments, setComments] = useState([]);
@@ -68,13 +69,8 @@ const CompareComments = ({collapsed}) => {
 
   return (
     <>
-     <Header 
-               onToggleSidebar={toggleSidebar} 
-           />
-            <Sidebar 
-                     isOpen={isSidebarOpen} 
-                     onClose={closeSidebar}
-             >
+     <Header onToggleSidebar={toggleSidebar} />
+      <Sidebar isOpen={isSidebarOpen}  onClose={closeSidebar}>
         <div className={cn(
         "transition-[margin] duration-300 ease-in-out",
         collapsed ? "md:ml-[70px]" : "md:ml-[0px]"
@@ -153,6 +149,7 @@ const CompareComments = ({collapsed}) => {
     </div>
     </div>
     </Sidebar>
+    <Footer/>
     </>
   );
 };

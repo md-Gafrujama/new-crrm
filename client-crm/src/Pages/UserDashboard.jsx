@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserHeader } from '../Components/User/common/UserHeader';
 import { UserSidebar,useSidebarUser } from '../Components/User/common/UserSidebar';
+import { UserFooter } from '../Components/User/common/UserFooter';
 
 const UserDashboard = () => {
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarUser();
@@ -132,6 +133,7 @@ const UserDashboard = () => {
       </div>
     </div>
     </UserSidebar>
+    <UserFooter/>
     </>
   );
 };

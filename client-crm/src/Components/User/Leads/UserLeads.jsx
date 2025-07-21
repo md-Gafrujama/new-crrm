@@ -7,6 +7,7 @@ import { UserHeader } from "../common/UserHeader";
 import { UserSidebar, useSidebarUser } from "../common/UserSidebar";
 import { cn } from "../../../utils/cn";
 import { useTheme } from "../../../hooks/use-theme";
+import { UserFooter } from "../common/UserFooter";
 
 const download = async () => {
   try {
@@ -1255,6 +1256,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
           )}
         </div>
       </UserSidebar>
+      <UserFooter/>
     </>
   );
 };

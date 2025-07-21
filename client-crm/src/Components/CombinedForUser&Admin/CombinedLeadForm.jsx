@@ -5,8 +5,8 @@ import { Sidebar,useSidebar } from '../Admin/common/sidebar';
 import AddLeadsForm from '../Admin/Leads/AddLeadsForm';
 import { UserHeader } from '../User/common/UserHeader';
 import { UserSidebar ,useSidebarUser} from '../User/common/UserSidebar';
-
-
+import { UserFooter } from '../User/common/UserFooter';
+import Footer from '../Admin/common/Footer';
 
 const CombinedLeadForm = ({collapsed}) => {
 const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
@@ -19,6 +19,7 @@ const { isSidebarOpenUser, toggleSidebarUser, closeSidebarUser } = useSidebarUse
   <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} >
    <AddLeadsForm/>
   </Sidebar>
+  <Footer/>
   </>
 )}
   
@@ -28,6 +29,7 @@ const { isSidebarOpenUser, toggleSidebarUser, closeSidebarUser } = useSidebarUse
   <UserSidebar isOpen={isSidebarOpenUser} onClose={closeSidebarUser} >
    <AddLeadsForm/>
    </UserSidebar>
+   <UserFooter/>
   </>
 )}
    </>

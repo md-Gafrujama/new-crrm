@@ -3,6 +3,7 @@ import React, { useState, lazy, Suspense, useEffect } from 'react';
 import { UserHeader } from '../Components/User/common/UserHeader';
 import { UserSidebar,useSidebarUser } from '../Components/User/common/UserSidebar';
 import { useTheme } from '../hooks/use-theme';
+import { UserFooter } from '../Components/User/common/UserFooter';
 
 const ConnectSocialMedia = ({ onLogout }) => {
 const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarUser();
@@ -115,6 +116,7 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarUser();
       </div>
     </div>
     </UserSidebar>
+    <UserFooter/>
     </>
   );
 };

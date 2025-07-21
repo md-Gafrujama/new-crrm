@@ -42,11 +42,13 @@ connectDB();
   import recentActivities from "./api/customer/recentActivities.api.js";
   import addUser from "./api/customer/user.routes.js";
   import userData  from "./api/customer/userData.routes.js";
+  import editUser from "./api/customer/editProfile.routes.js"
   app.use("/api/allUser",allUser);
   app.use("/api/addComp",company);
   app.use("/api/recent",recentActivities);
   app.use("/api/addUser",addUser);
   app.use("/api/usersData",userData);
+  app.use("/api",editUser);
 
   import compBaz from "./api/external/compBaz.routes.js";
   import qb2b from "./api/external/qb2b.routes.js";
