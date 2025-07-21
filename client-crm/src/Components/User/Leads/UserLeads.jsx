@@ -62,8 +62,6 @@ const download = async () => {
 };
 
 const UserLeads = ({ collapsed, onLogout }) => {
-  const [userData, setUserData] = useState(null);
-  const [allUsers, setAllUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const [currentPassword, setCurrentPassword] = useState("");
@@ -77,6 +75,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
   const [deletePopupOpen, setDeletePopupOpen] = useState(false);
   const [editProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [currentLead, setCurrentLead] = useState(null);
+  const [selectedLead, setSelectedLead] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [apiError, setApiError] = useState(null);
 
@@ -91,7 +90,9 @@ const UserLeads = ({ collapsed, onLogout }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">Lead Details</h2>
+          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">
+            Lead Details
+          </h2>
           <button
             onClick={onClose}
             className="text-gray-500 dark:text-gray-400 hover:text-gray-700"
@@ -270,7 +271,9 @@ const UserLeads = ({ collapsed, onLogout }) => {
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div className="bg-white dark:bg-slate-800 shadow-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">Edit Lead</h2>
+            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">
+              Edit Lead
+            </h2>
             <button
               onClick={onClose}
               className="text-gray-500 dark:text-gray-400 hover:text-gray-700"
@@ -534,7 +537,9 @@ const UserLeads = ({ collapsed, onLogout }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 max-w-md w-full">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">Confirm Deletion</h2>
+          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-400">
+            Confirm Deletion
+          </h2>
           <button
             onClick={onClose}
             className="text-gray-500 dark:text-gray-400 hover:text-gray-700"
@@ -582,6 +587,265 @@ const UserLeads = ({ collapsed, onLogout }) => {
     </div>
   );
 
+  const StatusItem = ({ completed, title, changedBy, description, date }) => {
+    return (
+      <li className="flex gap-4">
+        <div className="flex flex-col items-center">
+          <div
+            className={`w-6 h-6 rounded-full flex items-center justify-center ${
+              completed ? "bg-green-500" : "bg-gray-300"
+            }`}
+          >
+            {completed && (
+              <svg
+                className="w-4 h-4 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            )}
+          </div>
+          <div
+            className={`w-0.5 h-full ${
+              completed ? "bg-green-500" : "bg-gray-300"
+            }`}
+          ></div>
+        </div>
+        <div className="flex-1 pb-8">
+          <div className="flex justify-between items-start">
+            <h3
+              className={`font-medium ${
+                completed ? "text-green-600" : "text-gray-600"
+              }`}
+            >
+              {title}
+            </h3>
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              {date}
+            </span>
+          </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            Changed by: {changedBy}
+          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            {description}
+          </p>
+        </div>
+      </li>
+    );
+  };
+
+  const StatusHistoryPopup = ({ lead, onClose }) => {
+    const statusHistory = [
+      {
+        title: "New",
+        changedBy: "System",
+        description: "Lead created from LinkedIn",
+        date: "22-5-2025",
+        completed: true,
+      },
+      {
+        title: "Contacted",
+        changedBy: "John Smith",
+        description: "Initial outreach call completed",
+        date: "30-5-2025",
+        completed: true,
+      },
+      {
+        title: "Engaged",
+        changedBy: "John Smith",
+        description: "Responded positively, showed interest",
+        date: "2-6-2025",
+        completed: true,
+      },
+      {
+        title: "Qualified",
+        changedBy: "John Smith",
+        description: "Budget confirmed, decision maker identified",
+        date: "10-6-2025",
+        completed: true,
+      },
+      {
+        title: "Demo Scheduled",
+        changedBy: "John Smith",
+        description: "Demo scheduled for next week",
+        date: "15-6-2025",
+        completed: false,
+      },
+    ];
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold text-[#ff8633]">Status History</h2>
+            <button
+              onClick={onClose}
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-700"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div className="mb-6 dark:text-gray-400">
+            <h3 className="text-lg font-semibold">
+              {lead.customerFirstName} {lead.customerLastName}
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              {lead.companyName || "TechCorp Solutions"}
+            </p>
+            <p className="text-sm mt-1">
+              Current Status: <span className="font-medium">{lead.status}</span>
+            </p>
+          </div>
+
+          <div className="mb-6">
+            <h4 className="font-medium text-gray-700 dark:text-gray-400 mb-4">
+              Status Timeline
+            </h4>
+            <ul className="space-y-4">
+              {statusHistory.map((status, index) => (
+                <StatusItem
+                  key={index}
+                  completed={status.completed}
+                  title={status.title}
+                  changedBy={status.changedBy}
+                  description={status.description}
+                  date={status.date}
+                />
+              ))}
+            </ul>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="bg-gray-50 dark:bg-slate-800 p-3 rounded-lg">
+              <p className="text-2xl font-bold text-[#ff8633]">5</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Total Changes
+              </p>
+            </div>
+            <div className="bg-gray-50 dark:bg-slate-800 p-3 rounded-lg">
+              <p className="text-2xl font-bold text-[#ff8633]">399</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Days in Pipeline
+              </p>
+            </div>
+            <div className="bg-gray-50 dark:bg-slate-800 p-3 rounded-lg">
+              <p className="text-2xl font-bold text-[#ff8633]">7</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Days in Current Status
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // const handleSaveLead = async (updatedLead) => {
+  //   try {
+  //     setIsSaving(true);
+  //     setApiError(null);
+
+  //     if (!updatedLead.id) {
+  //       throw new Error("Lead ID is missing. Cannot update lead.");
+  //     }
+
+  //     const payload = {
+  //       uid: updatedLead.uid,
+  //       cid: updatedLead.cid,
+  //       title: updatedLead.title,
+  //       customerFirstName: updatedLead.customerFirstName,
+  //       customerLastName: updatedLead.customerLastName,
+  //       emailAddress: updatedLead.emailAddress,
+  //       phoneNumber: updatedLead.phoneNumber,
+  //       companyName: updatedLead.companyName,
+  //       jobTitle: updatedLead.jobTitle,
+  //       topicOfWork: updatedLead.topicOfWork,
+  //       industry: updatedLead.industry,
+  //       status: updatedLead.status,
+  //       serviceInterestedIn: updatedLead.serviceInterestedIn,
+  //       closingDate: updatedLead.closingDate,
+  //       notes: updatedLead.notes,
+  //     };
+
+  //     const token = localStorage.getItem("token");
+
+  //     // Update lead with Axios
+  //     const response = await axios.put(
+  //       `${API_BASE_URL}/api/leads/update-lead/${updatedLead.id}`,
+  //       payload,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+
+  //     setEditPopupOpen(false);
+  //     toast.success("Lead updated successfully!", {
+  //       position: "top-right",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: theme === "dark" ? "dark" : "light",
+  //       style: { fontSize: "1.2rem" },
+  //     });
+
+  //     // Refresh leads data with Axios
+  //     const { data } = await axios.get(`${API_BASE_URL}/api/leads`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+  //     setLeadsData(data.data);
+  //   } catch (err) {
+  //     console.error("Lead update error:", err);
+
+  //     // Enhanced error handling with Axios
+  //     const errorMessage =
+  //       err.response?.data?.message || err.message || "Failed to update lead";
+
+  //     setApiError(errorMessage);
+  //     toast.error(errorMessage, {
+  //       position: "top-right",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: theme === "dark" ? "dark" : "light",
+  //       style: { fontSize: "1.2rem" },
+  //     });
+  //   } finally {
+  //     setIsSaving(false);
+  //   }
+  // };
+
+
   const handleSaveLead = async (updatedLead) => {
     try {
       setIsSaving(true);
@@ -591,7 +855,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
         throw new Error("Lead ID is missing. Cannot update lead.");
       }
 
-        const payload = {
+      const payload = {
         uid: updatedLead.uid,
         cid: updatedLead.cid,
         title: updatedLead.title,
@@ -622,6 +886,27 @@ const UserLeads = ({ collapsed, onLogout }) => {
           },
         }
       );
+      setLeadsData(prevData => {
+      const newData = JSON.parse(JSON.stringify(prevData));
+      
+      // Helper function to update leads in any status array
+      const updateStatusArray = (arr) => 
+        arr.map(lead => lead.id === updatedLead.id ? response.data : lead);
+      
+      return {
+        ...newData,
+        allNewLeads: updateStatusArray(newData.allNewLeads || []),
+        allContacted: updateStatusArray(newData.allContacted || []),
+        allEngaged: updateStatusArray(newData.allEngaged || []),
+        allQualified: updateStatusArray(newData.allQualified || []),
+        allProposalSent: updateStatusArray(newData.allProposalSent || []),
+        allNegotiation: updateStatusArray(newData.allNegotiation || []),
+        allClosedWon: updateStatusArray(newData.allClosedWon || []),
+        allClosedLost: updateStatusArray(newData.allClosedLost || []),
+        allOnHold: updateStatusArray(newData.allOnHold || []),
+        allDoNotContact: updateStatusArray(newData.allDoNotContact || []),
+      };
+    });
 
       setEditPopupOpen(false);
       toast.success("Lead updated successfully!", {
@@ -632,15 +917,9 @@ const UserLeads = ({ collapsed, onLogout }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: theme === 'dark' ? 'dark' : 'light',
-        style: { fontSize: "1.2rem"},
+        theme: theme === "dark" ? "dark" : "light",
+        style: { fontSize: "1.2rem" },
       });
-
-      // Refresh leads data with Axios
-      const { data } = await axios.get(`${API_BASE_URL}/api/leads`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setLeadsData(data.data);
     } catch (err) {
       console.error("Lead update error:", err);
 
@@ -657,13 +936,14 @@ const UserLeads = ({ collapsed, onLogout }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: theme === 'dark' ? 'dark' : 'light',
+        theme: theme === "dark" ? "dark" : "light",
         style: { fontSize: "1.2rem" },
       });
     } finally {
       setIsSaving(false);
     }
   };
+
 
   const handleDeleteLead = async (leadId) => {
     try {
@@ -686,7 +966,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: theme === 'dark' ? 'dark' : 'light',
+        theme: theme === "dark" ? "dark" : "light",
         style: { fontSize: "1.2rem" },
       });
 
@@ -710,7 +990,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: theme === 'dark' ? 'dark' : 'light',
+        theme: theme === "dark" ? "dark" : "light",
         style: { fontSize: "1.2rem" },
       });
     }
@@ -754,7 +1034,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
   //   ...leadsData.allDoNotContact,
   // ];
 
-    const allCombinedLeads = [
+  const allCombinedLeads = [
     ...(leadsData?.allNewLeads || []),
     ...(leadsData?.allContacted || []),
     ...(leadsData?.allEngaged || []),
@@ -832,7 +1112,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: theme === 'dark' ? 'dark' : 'light',
+          theme: theme === "dark" ? "dark" : "light",
           style: { fontSize: "1.2rem" },
         });
         setLoading(false);
@@ -843,66 +1123,10 @@ const UserLeads = ({ collapsed, onLogout }) => {
     loadUserProfile();
   }, [onLogout]);
 
-  // Find the matching user from allUsers - prioritize ID match
-  const matchedUser =
-    allUsers.find((user) => user.id === (userData?.userId || "")) ||
-    allUsers.find((user) => user.username === (userData?.username || ""));
 
-  const user = currentUser
-    ? {
-        name: `${currentUser.firstName} ${currentUser.lastName}`,
-        email: currentUser.email,
-        role: currentUser.role,
-        joinDate: new Date(currentUser.createdAt).toLocaleDateString(),
-        lastLogin: "Recently",
-        avatar:
-          currentUser.photo || "https://randomuser.me/api/portraits/men/32.jpg",
-        bio: `User with username ${currentUser.username}`,
-        skills: ["User Management", "Profile Editing"],
-        leadsActivity: [
-          {
-            id: 1,
-            project: "User Profile",
-            status: "In Progress",
-            lastUpdate: "Recently",
-          },
-        ],
-        assignedWork: currentUser.assignedWork || "No assigned work",
-        statusOfWork: currentUser.statusOfWork || "Unknown",
-        phoneNumber: currentUser.phoneNumber || "Not provided",
-      }
-    : {
-        name: "User",
-        email: "No email",
-        role: "user",
-        joinDate: "Unknown",
-        lastLogin: "Unknown",
-        avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-        bio: "User information not available",
-        skills: [],
-        leadsActivity: [],
-        assignedWork: "No data",
-        statusOfWork: "Unknown",
-        phoneNumber: "Not provided",
-      };
 
   const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    alerttopic: "",
-    reminder: "",
-    alertdate: "",
-    remindertime: "",
-    description: "",
-  });
 
-  const handleChange = React.useCallback((e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }, []);
 
   // the leads of the user
   useEffect(() => {
@@ -920,7 +1144,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: theme === 'dark' ? 'dark' : 'light',
+            theme: theme === "dark" ? "dark" : "light",
             style: { fontSize: "1.2rem" },
           });
           navigate("/login");
@@ -949,7 +1173,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: theme === 'dark' ? 'dark' : 'light',
+          theme: theme === "dark" ? "dark" : "light",
           style: { fontSize: "1.2rem" },
         });
       } finally {
@@ -968,42 +1192,6 @@ const UserLeads = ({ collapsed, onLogout }) => {
     );
   }
 
-  const handleNewPass = async (e) => {
-    e.preventDefault();
-
-    if (newPassword !== confirmPassword) {
-      console.error("New passwords do not match!");
-      return;
-    }
-
-    const data = {
-      currentPassword,
-      newPassword,
-      confirmPassword,
-    };
-
-    console.log("Submitted Password Data:", data);
-
-    // Simulated API call
-    try {
-      const response = await changepass(data);
-      console.log("API Response:", response);
-    } catch (error) {
-      console.error("Error changing password:", error);
-    }
-  };
-
-  const changepass = async (data) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          success: true,
-          message: "Password updated successfully!",
-          data,
-        });
-      }, 1000);
-    });
-  };
 
   return (
     <>
@@ -1117,7 +1305,8 @@ const UserLeads = ({ collapsed, onLogout }) => {
                                     </div>
                                   </td>
                                   <td className="px-6 py-4 whitespace-nowrap">
-                                    <span
+                                    <button
+                                      onClick={() => setSelectedLead(lead)}
                                       className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                                         lead.status === "New"
                                           ? "bg-blue-100 text-blue-800"
@@ -1141,7 +1330,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
                                       }`}
                                     >
                                       {lead.status}
-                                    </span>
+                                    </button>
                                   </td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {lead.serviceInterestedIn}
@@ -1254,9 +1443,16 @@ const UserLeads = ({ collapsed, onLogout }) => {
               onConfirm={handleDeleteLead}
             />
           )}
+
+          {selectedLead && (
+            <StatusHistoryPopup
+              lead={selectedLead}
+              onClose={() => setSelectedLead(null)}
+            />
+          )}
         </div>
       </UserSidebar>
-      <UserFooter/>
+      <UserFooter />
     </>
   );
 };

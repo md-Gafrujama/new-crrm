@@ -388,23 +388,26 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
             <div className="flex flex-col items-center">
               <div className="w-full max-w-4xl bg-gray-50 dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
                 <div className="bg-gradient-to-r from-[#ff8633] to-[#ff9a5a] p-4 sm:p-6 text-center">
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10">
-                    {/* Avatar */}
-                    <div className="flex justify-center">
-                      <img
-                        className="h-20 w-20 sm:h-25 sm:w-25 rounded-full border-4 border-white shadow-md"
-                        src={user.avatar}
-                        alt="User avatar"
-                      />
-                    </div>
+  <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-10">
+    {/* Avatar with optimized sizing */}
+    <div className="flex justify-center">
+      <img
+        className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-36 lg:w-36 xl:h-40 xl:w-40 2xl:h-44 2xl:w-44 rounded-full border-4 border-white shadow-md object-cover"
+        src={user.avatar}
+        alt="User avatar"
+        // These attributes help with image quality
+        loading="eager"
+        decoding="async"
+      />
+    </div>
 
-                    {/* Name and Role */}
-                    <div className="text-center sm:text-left">
-                      <h1 className="text-xl sm:text-2xl font-bold text-white">{user.name}</h1>
-                      <p className="text-white/90 capitalize text-sm sm:text-base">{user.role}</p>
-                    </div>
-                  </div>
-                </div>
+    {/* Name and Role */}
+    <div className="text-center sm:text-left">
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{user.name}</h1>
+      <p className="text-white/90 capitalize text-sm sm:text-base md:text-lg">{user.role}</p>
+    </div>
+  </div>
+</div>
 
                 {/* Profile Content */}
                 <div className="p-6 md:p-8">
@@ -454,7 +457,7 @@ const ProfileofUser = ({ collapsed, onLogout }) => {
                         <h2 className="text-xl font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200 dark:text-gray-400">
                           About
                         </h2>
-                        <p className="text-gray-600 dark:text-gray-200">{user.bio}</p>
+                        <p className="text-gray-600 dark:text-gray-400">{user.bio}</p>
                       </div>
 
                       <div>
