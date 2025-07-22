@@ -58,7 +58,7 @@ export const navbarLinks = [
             {
                 label: "Reports",
                 icon: FileText,
-                path: "/reports",
+                path: "/user-report",
             },
         ],
     },
