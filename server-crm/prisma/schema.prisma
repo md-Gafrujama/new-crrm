@@ -13,26 +13,47 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User { //status like block/unblock,, loggedIn time  ..
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  firstName      String
-  lastName       String
-  username       String   @unique
-  email          String   @unique
-  hashedPassword String
-  phoneNumber    String?
-  role           String
-  userType       String?
-  photo          String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  assignedWork   String?
-  statusOfWork   String?
-  statusOfAccount         String?    
-  loggedInTime   DateTime?
-  about          String?      
-  skills         String[] 
+model User {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName       String
+  lastName        String
+  username        String   @unique
+  email           String   @unique
+  hashedPassword  String
+  phoneNumber     String?
+  role            String
+  userType        String?
+  photo           String?
+  assignedWork    String?
+  statusOfWork    String?
+  locked          Boolean  @default(false)
+  loggedInTime    DateTime?
+  lastLoggedIn    DateTime?
+  about           String?
+  skills          String[]
+  lockedAt       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Optional: relationship to OTPs (one-to-many)
+  otps            OTP[]
 }
+
+model OTP {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  email           String   // reference by email
+  genOTP          String   // generated OTP
+  givenOTP        String[] // all submitted OTPs
+  attempts        Int      // number of attempts
+  statusOfAccount String?
+  createdAt       DateTime @default(now())
+  expiresAt       DateTime
+
+  // optional: relate back to user
+  user            User?    @relation(fields: [email], references: [email], onDelete: Cascade)
+}
+
+
 
 model company {  
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -86,17 +107,6 @@ model Alertsandremainder {
   date        DateTime
   time        String
   description String
-}
-
-model OTP {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  uid          String   
-  genOTP       String   
-  givenOTP     String?  
-  attempts     Int      
-  statusOfAccount         String?    
-  createdAt    DateTime @default(now())
-  expiresAt    DateTime                      
 }
 
 model Qb2b{

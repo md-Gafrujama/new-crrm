@@ -60,6 +60,9 @@ connectDB();
   app.use("/api/export", exportLead); 
   app.use("/api/leads",leadsRoutes);
 
+  import securityLock from "./api/security/security.routes.js";
+  app.use("/api/security",securityLock);
+
 import updatePassword from "./middleware/updatePassword.middleware.js";
 import jwtTokenMiddleware from "./middleware/jwtoken.middleware.js"; 
 

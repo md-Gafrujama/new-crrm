@@ -9,7 +9,6 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const NODE_ENV = process.env.NODE_ENV;
 const JWT_OPTIONS = { expiresIn: "1h" };
 
-// Helper functions
 const validateInput = (email, username, password) => {
   return (email || username) && password;
 };
@@ -29,12 +28,12 @@ const getUserByCredentials = async (email, username) => {
       firstName: true,
       lastName: true,
       role: true,
-      hashedPassword: true
+      hashedPassword: true,
+      locked:true
     }
   });
 };
 
-// Controller methods
 export const loginUser = async (req, res) => {
   const { email, username, password } = req.body;
 
@@ -49,6 +48,12 @@ export const loginUser = async (req, res) => {
 
     if (!user) {
       return res.status(404).json({ message: "No such user exists" });
+    }
+
+    if (user.locked) {
+      return res.status(403).json({
+        message: "You are locked. Please contact admin to unlock your account."
+      });
     }
 
     const validPassword = await bcrypt.compare(password, user.hashedPassword);
