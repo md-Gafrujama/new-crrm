@@ -29,6 +29,8 @@ import ConnectSocialMedia from './Pages/ConnectSocialMedia.jsx';
 import UserSettings from './Pages/UserSettings.jsx';
 import UserDashboard from './Pages/UserDashboard.jsx';
 import CombinedRealtimeTracking from './Components/CombinedForUser&Admin/CombinedRealtimeTracking.jsx';
+import UserReport from './Pages/UserReport.jsx';
+import AdminAnalytics from './Pages/AdminAnalytics.jsx';
 
 function App() {
   
@@ -119,6 +121,8 @@ function App() {
           <Route path="/user-settings" element={<UserSettings/>} />
           <Route path="/user-dashboard" element={<UserDashboard/>} />
           <Route path="/realtime-tracking" element={<CombinedRealtimeTracking/>} />
+          <Route path="/user-report" element={<UserReport/>} />
+          <Route path="/analytics" element={<AdminAnalytics/>} />
         </Route>
 
         {/* Fallback */}
