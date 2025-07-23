@@ -127,7 +127,7 @@ const handleLock = async () => {
   try {
     const token = localStorage.getItem("token");
     await axios.put(
-      `${API_BASE_URL}/api/userProfile/${userId}/lock`,
+      `${API_BASE_URL}/api/userProfile/${userId}`,
       { locked: true },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -156,7 +156,7 @@ const handleUnlock = async () => {
   try {
     const token = localStorage.getItem("token");
     await axios.put(
-      `${API_BASE_URL}/api/userProfile/${userId}/unlock`,
+      `${API_BASE_URL}/api/userProfile/${userId}`,
       { locked: false },
       { headers: { Authorization: `Bearer ${token}` } }
     );
