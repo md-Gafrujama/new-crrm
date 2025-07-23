@@ -15,3 +15,11 @@ export function convertLeadsToCSV(leads) {
   const parser = new Parser({ fields });
   return parser.parse(leads);
 }
+
+export function convertAlertsToCSV(alerts){
+  const fields = [
+    "id","uid","topic","remainder","date","time","descrition"
+  ];
+  const parser = new parser({fields});
+  return parser.parse(alerts);
+}

@@ -26,6 +26,7 @@ model User {
   photo           String?
   assignedWork    String?
   statusOfWork    String?
+  statusOfAccount String?
   locked          Boolean  @default(false)
   loggedInTime    DateTime?
   lastLoggedIn    DateTime?

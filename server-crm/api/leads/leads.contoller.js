@@ -8,8 +8,6 @@ import {
 import { convertLeadsToCSV, convertStringToISODateString } from '../../utilis/csvExporter.js';
 
 
-
-
 const leadsWork = {
 
   async addLeads(req, res) {
@@ -50,6 +48,7 @@ const leadsWork = {
       res.status(500).json({ error: "Failed to fetch leads" });
     }
   },
+
   async delLeads(req, res) {
     try {
       const lead = await deleteLeadById(req.params.id);
