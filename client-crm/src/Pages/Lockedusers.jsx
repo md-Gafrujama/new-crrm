@@ -6,16 +6,19 @@ import { Header } from '../Components/Admin/common/Header';
 import { Sidebar,useSidebar } from '../Components/Admin/common/sidebar';
 import { cn } from "../utils/cn";
 import Footer from '../Components/Admin/common/Footer';
+import { toast } from 'react-toastify';
+import { useTheme } from '../hooks/use-theme';
 
-const Lockedusers = ({collapsed}) => {
+const Lockedusers = ({collapsed,userId}) => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
-  
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
   const [isLocked, setIsLocked] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+   const { theme } = useTheme();
   useEffect(() => {
    const fetchUsers = async () => {
     
@@ -47,6 +50,35 @@ const Lockedusers = ({collapsed}) => {
 };
     fetchUsers();
   }, []);
+
+
+
+const handleUnlock = async () => {
+  setIsLoading(true);
+  try {
+    const token = localStorage.getItem("token");
+    await axios.put(
+      `${API_BASE_URL}/api/security/locked`,
+      { locked: false },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    setIsLocked(false);
+  } catch (error) {
+    toast.error(error.message || "Failed to Unlock User!", {
+                              position: "top-right",
+                              autoClose: 5000,
+                              hideProgressBar: false,
+                              closeOnClick: true,
+                              pauseOnHover: true,
+                              draggable: true,
+                              progress: undefined,
+                              theme: theme === 'dark' ? 'dark' : 'light',
+                              style: { fontSize: '1.2rem' }, 
+                            });
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleAddUser = () => {
     navigate('/sign');
@@ -124,18 +156,17 @@ const Lockedusers = ({collapsed}) => {
                   </svg>
                   <span className="truncate">{user.email}</span>
                 </div>
-                 <button
-        disabled={!isLocked || isLoading}
-        className={`w-full px-4 py-2 text-white rounded focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
-          !isLocked
-            ? 'bg-gray-400 cursor-not-allowed'
-            : isLoading
-            ? 'bg-green-400 cursor-wait'
-            : 'bg-green-500 hover:bg-green-600 focus:ring-green-500'
-        }`}
-      >
-        {isLoading && !isLocked ? 'Unlocking...' : 'Unlock User'}
-      </button>
+               <button
+    onClick={handleUnlock}
+    disabled={!isLocked || isLoading}
+    className={`w-full px-4 py-2 text-white rounded focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
+      !isLocked || isLoading
+        ? 'bg-gray-400 cursor-not-allowed'
+        : 'bg-green-500 hover:bg-green-600 focus:ring-green-500'
+    }`}
+  >
+    {isLoading ? 'Processing...' : 'Unlock User'}
+  </button>
               </div>
             </div>
           ))}
