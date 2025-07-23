@@ -25,6 +25,11 @@ export const navbarLinks = [
                 icon: Users,
                 path: "/users",
             },
+             {
+                label: "Locked users",
+                icon: UserPlus,
+                path: "/locked-users",
+            },
             {
                 label: "Add user",
                 icon: UserPlus,

@@ -31,6 +31,7 @@ import UserDashboard from './Pages/UserDashboard.jsx';
 import CombinedRealtimeTracking from './Components/CombinedForUser&Admin/CombinedRealtimeTracking.jsx';
 import UserReport from './Pages/UserReport.jsx';
 import AdminAnalytics from './Pages/AdminAnalytics.jsx';
+import Lockedusers from './Pages/Lockedusers.jsx';
 
 function App() {
   
@@ -123,6 +124,7 @@ function App() {
           <Route path="/realtime-tracking" element={<CombinedRealtimeTracking/>} />
           <Route path="/user-report" element={<UserReport/>} />
           <Route path="/analytics" element={<AdminAnalytics/>} />
+          <Route path="/locked-users" element={<Lockedusers/>} />
         </Route>
 
         {/* Fallback */}

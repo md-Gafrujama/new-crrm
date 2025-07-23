@@ -11,6 +11,8 @@ const EditUser = ({ userId, onUpdate, onDelete, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
+    const [isLocked, setIsLocked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -89,6 +91,33 @@ const EditUser = ({ userId, onUpdate, onDelete, onClose }) => {
     setSaving(false);
   }
 };
+
+
+  const handleUnlock = async () => {
+    if (!isLocked) return; // Already unlocked
+    
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setIsLocked(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+    const handleLock = async () => {
+    if (isLocked) return; // Already locked
+    
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setIsLocked(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
 
   const handleDelete = async () => {
@@ -208,6 +237,35 @@ const EditUser = ({ userId, onUpdate, onDelete, onClose }) => {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
           />
         </div>
+
+    <div className="flex gap-2">
+      <button
+        onClick={handleLock}
+        disabled={isLocked || isLoading}
+        className={`w-full px-4 py-2 text-white rounded focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
+          isLocked
+            ? 'bg-gray-400 cursor-not-allowed'
+            : isLoading
+            ? 'bg-red-400 cursor-wait'
+            : 'bg-red-500 hover:bg-red-600 focus:ring-red-500'
+        }`}
+      >
+        {isLoading && isLocked ? 'Locking...' : 'Lock User'}
+      </button>
+      <button
+        onClick={handleUnlock}
+        disabled={!isLocked || isLoading}
+        className={`w-full px-4 py-2 text-white rounded focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
+          !isLocked
+            ? 'bg-gray-400 cursor-not-allowed'
+            : isLoading
+            ? 'bg-green-400 cursor-wait'
+            : 'bg-green-500 hover:bg-green-600 focus:ring-green-500'
+        }`}
+      >
+        {isLoading && !isLocked ? 'Unlocking...' : 'Unlock User'}
+      </button>
+    </div>
 
         <button
           type="submit"
