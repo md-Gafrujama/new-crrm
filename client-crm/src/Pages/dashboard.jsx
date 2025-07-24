@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { API_BASE_URL } from '../config/api';
-import { Users, ShoppingCart, DollarSign, Package, Activity, AlertCircle, Clock, CheckCircle, XCircle, Server, Database, HardDrive, Bell, Mail, MessageSquare, Calendar,User,UserPlus,Tag,Settings,
-  TrendingUp, PieChart, BarChart2, LineChart
-} from 'lucide-react';
+import { Users, ShoppingCart, Package, Activity, AlertCircle, Clock, CheckCircle, XCircle, Server, Database, HardDrive, Bell, MessageSquare, Calendar,User,TrendingUp, } from 'lucide-react';
 import { Header } from '../Components/Admin/common/Header';
 import { Sidebar, useSidebar } from '../Components/Admin/common/sidebar';
 import { cn } from "../utils/cn";

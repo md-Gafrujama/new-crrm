@@ -4,9 +4,7 @@ import { UserHeader } from '../Components/User/common/UserHeader';
 import { UserSidebar,useSidebarUser } from '../Components/User/common/UserSidebar';
 import { UserFooter } from '../Components/User/common/UserFooter';
 import { PersonalDetails } from '../Components/User/common/PersonalDetails';
-import { Users, ShoppingCart, DollarSign, Package, Activity, AlertCircle, Clock, CheckCircle, XCircle, Server, Database, HardDrive, Bell, Mail, MessageSquare, Calendar,User,UserPlus,Tag,Settings,
-  TrendingUp, PieChart, BarChart2, LineChart
-} from 'lucide-react';
+import { Calendar} from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useTheme } from "../hooks/use-theme";  
 import axios from 'axios';

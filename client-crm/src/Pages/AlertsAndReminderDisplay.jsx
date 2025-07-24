@@ -3,17 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { API_BASE_URL } from '../config/api';
-import { Header } from '../Components/Admin/common/Header';
-import { Sidebar, useSidebar } from '../Components/Admin/common/sidebar';
 import { cn } from "../utils/cn";
 import { useTheme } from "../hooks/use-theme";
-import Footer from '../Components/Admin/common/Footer';
-import { Calendar, Clock, Edit, Trash2, Bell, AlertCircle, CheckCircle, XCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Calendar,Edit, Trash2, Bell, AlertCircle, XCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
 const AlertsAndReminderDisplay = ({ collapsed }) => {
   const navigate = useNavigate();
   const { theme } = useTheme();
-  const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
   const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -296,7 +292,6 @@ useEffect(() => {
             </div>
           </main>
         </div>
-      <Footer />
 
       {/* Edit Modal */}
       {editModalOpen && currentAlert && (
