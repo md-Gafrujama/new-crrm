@@ -73,7 +73,7 @@ export const navbarLinks = [
             {
                 label: "Alerts And Remainder",
                 icon: BellPlus,
-                path: "/alerts-and-reminder-admin",
+                path: "/add-alerts-and-reminder",
             },
             {
                 label: "Reports",

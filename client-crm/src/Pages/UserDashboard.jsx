@@ -4,11 +4,64 @@ import { UserHeader } from '../Components/User/common/UserHeader';
 import { UserSidebar,useSidebarUser } from '../Components/User/common/UserSidebar';
 import { UserFooter } from '../Components/User/common/UserFooter';
 import { PersonalDetails } from '../Components/User/common/PersonalDetails';
+import { Users, ShoppingCart, DollarSign, Package, Activity, AlertCircle, Clock, CheckCircle, XCircle, Server, Database, HardDrive, Bell, Mail, MessageSquare, Calendar,User,UserPlus,Tag,Settings,
+  TrendingUp, PieChart, BarChart2, LineChart
+} from 'lucide-react';
+import { toast } from 'react-toastify';
+import { useTheme } from "../hooks/use-theme";  
+import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
+import { useNavigate } from 'react-router-dom';
 
 const UserDashboard = ({onLogout}) => {
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarUser();
-  const { user, loading } = PersonalDetails(onLogout);
+  const { user} = PersonalDetails(onLogout);
+  const [alerts, setAlerts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const { theme, setTheme } = useTheme();
+     const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchAlerts = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId'); // Get the logged-in user's ID
+
+        if (!token || !userId) {
+          throw new Error('Please login to view alerts');
+        }
+
+        const response = await axios.get(`${API_BASE_URL}/api/alert`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        // Filter alerts to show ONLY the current user's alerts
+        const userAlerts = response.data.data
+          .filter(alert => alert.uid === userId) // Keep only alerts where uid matches userId
+          .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by newest first
+
+        setAlerts(userAlerts);
+      } catch (err) {
+        setError(err.message);
+        toast.error(err.message || "Failed to load alerts", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: theme === 'dark' ? 'dark' : 'light',
+          style: { fontSize: '1.2rem' },
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAlerts();
+  }, []);
 
   // Sample data
   const stats = [
@@ -59,32 +112,52 @@ const UserDashboard = ({onLogout}) => {
             ))}
           </div>
 
-          {/* Recent Activity and Projects */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Recent Activity */}
-            <div className="lg:col-span-1 bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
-              <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-400 mb-4">Recent Activity</h2>
-              <div className="space-y-4">
-                {recentActivities.map(activity => (
-                  <div key={activity.id} className="flex items-start">
-                    <span className="mr-3 mt-1">{activity.icon}</span>
-                    <div>
-                      <p className="text-gray-800 dark:text-gray-400">{activity.action}</p>
-                      <p className="text-gray-500 text-sm">{activity.time}</p>
-                    </div>
-                  </div>
-                ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+           <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+                <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                  <h2 className="text-lg dark:text-gray-400 font-semibold flex items-center">
+                    <Calendar className="h-5 w-5 mr-2 text-red-500" />
+                    Alerts and Reminders
+                  </h2>
+                </div>
+                <div className="p-6">
+          {alerts.map(alert => (
+   <div 
+  key={alert.id} 
+  className="dark:text-gray-400 bg-white dark:bg-gray-800 p-3 rounded shadow-sm flex items-center gap-4 overflow-x-auto"
+>
+  <span className="font-medium text-gray-900 text-left dark:text-white min-w-[100px]">{alert.topic}</span>
+  <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">
+    📅 {new Date(alert.date).toLocaleDateString()}
+  </span>
+  <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">
+    ⏰ {alert.time}
+  </span>
+  <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">
+    🔔 {alert.remainder}
+  </span>
+  {alert.description && (
+    <span className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-[200px]">
+      📝 {alert.description}
+    </span>
+  )}
+</div>
+  ))}
+                </div>
+                <div className="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-right">
+                  <button 
+                    onClick={() => navigate('/all-alerts-reminders')}
+                    className="text-sm font-medium text-[#ff8633]"
+                  >
+                    View All Events →
+                  </button>
+                </div>
               </div>
-              <Link to="#" className="mt-4 text-indigo-600 hover:text-indigo-800 text-sm font-medium inline-block">
-                View all activity →
-              </Link>
-            </div>
 
-            {/* Projects Table */}
-            <div className="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+            <div className="w-full bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-400">Your Projects</h2>
-                <Link to="#" className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-sm">
+                <Link to="#" className="px-4 py-2 bg-[#ff8633] text-white rounded-lg  text-sm">
                   + New Project
                 </Link>
               </div>
@@ -101,8 +174,8 @@ const UserDashboard = ({onLogout}) => {
                   <tbody className="divide-y divide-gray-200">
                     {projects.map(project => (
                       <tr key={project.id} >
-                        <td className="px-4 py-4 whitespace-nowrap">
-                          <Link to={`/projects/${project.id}`} className="text-indigo-600 hover:text-indigo-800 font-medium">
+                        <td className="px-4 py-4 whitespace-nowrap text-left">
+                          <Link to={`/projects/${project.id}`} className="text-[#ff8633] text-left font-medium">
                             {project.name}
                           </Link>
                         </td>

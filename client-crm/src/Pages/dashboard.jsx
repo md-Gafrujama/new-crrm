@@ -20,56 +20,42 @@ const Dashboard = ({ collapsed }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const fetchAlerts = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const storedUserId = localStorage.getItem('userId');
+    const fetchRecentAlerts = async () => {
+      try {
+        const token = localStorage.getItem('token');
 
-      if (!token || !storedUserId) {
-        throw new Error('Missing authentication data');
+        if (!token) {
+          throw new Error('Please login to view alerts');
+        }
+
+        const response = await axios.get(`${API_BASE_URL}/api/alert`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        const recentAlerts = response.data.data
+          .sort((a, b) => new Date(b.date) - new Date(a.date)) 
+          .slice(0, 5); 
+
+        setAlerts(recentAlerts);
+      } catch (error) {
+        toast.error(error.response?.data?.message || error.message || "Failed to load alerts", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: theme === 'dark' ? 'dark' : 'light',
+          style: { fontSize: '1.2rem' },
+        });
+      } finally {
+        setLoading(false);
       }
+    };
 
-      // Fetch alerts data
-      const alertsResponse = await axios.get(`${API_BASE_URL}/api/alert`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-
-      // Filter alerts for the current user
-      const userAlerts = alertsResponse.data.data.filter(
-        alert => alert.uid === storedUserId
-      );
-
-      // Sort alerts by date (most recent first)
-      const sortedAlerts = userAlerts.sort((a, b) => {
-        return new Date(b.date) - new Date(a.date);
-      });
-
-      setAlerts(sortedAlerts);
-      setLoading(false);
-
-    } catch (error) {
-      console.error('Error fetching alerts:', error);
-      const errorMessage = error.response?.data?.message ||
-        error.message ||
-        "Failed to load alerts";
-
-      toast.error(errorMessage, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: theme === 'dark' ? 'dark' : 'light',
-        style: { fontSize: '1.2rem' },
-      });
-      setLoading(false);
-    }
-  };
-
-  fetchAlerts();
-}, []);
+    fetchRecentAlerts();
+  }, []);
 
 
   // Sample data
@@ -347,7 +333,7 @@ const Dashboard = ({ collapsed }) => {
                 </div>
                 <div className="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-right">
                   <button 
-                    onClick={() => navigate('/admin/calendar')}
+                    onClick={() => navigate('/all-alerts-reminders')}
                     className="text-sm font-medium text-[#ff8633]"
                   >
                     View All Events →

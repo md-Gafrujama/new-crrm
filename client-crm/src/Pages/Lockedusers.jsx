@@ -53,28 +53,45 @@ const Lockedusers = ({collapsed,userId}) => {
 
 
 
-const handleUnlock = async () => {
+const handleUnlock = async (userId) => {
   setIsLoading(true);
   try {
     const token = localStorage.getItem("token");
     await axios.put(
-      `${API_BASE_URL}/api/security/locked`,
+      `${API_BASE_URL}/api/userProfile/${userId}`,
       { locked: false },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    setIsLocked(false);
+    
+    // Update the users state to reflect the unlocked user
+    setUsers(prev => ({
+      ...prev,
+      lockedAccounts: prev.lockedAccounts.filter(user => user.id !== userId)
+    }));
+    
+    toast.success("User unlocked successfully!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: theme === 'dark' ? 'dark' : 'light',
+      style: { fontSize: '1.2rem' }, 
+    });
   } catch (error) {
-    toast.error(error.message || "Failed to Unlock User!", {
-                              position: "top-right",
-                              autoClose: 5000,
-                              hideProgressBar: false,
-                              closeOnClick: true,
-                              pauseOnHover: true,
-                              draggable: true,
-                              progress: undefined,
-                              theme: theme === 'dark' ? 'dark' : 'light',
-                              style: { fontSize: '1.2rem' }, 
-                            });
+    toast.error(error.response?.data?.message || "Failed to unlock user", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: theme === 'dark' ? 'dark' : 'light',
+      style: { fontSize: '1.2rem' }, 
+    });
   } finally {
     setIsLoading(false);
   }
@@ -156,17 +173,17 @@ const handleUnlock = async () => {
                   </svg>
                   <span className="truncate">{user.email}</span>
                 </div>
-               <button
-    onClick={handleUnlock}
-    disabled={!isLocked || isLoading}
-    className={`w-full px-4 py-2 text-white rounded focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
-      !isLocked || isLoading
-        ? 'bg-gray-400 cursor-not-allowed'
-        : 'bg-green-500 hover:bg-green-600 focus:ring-green-500'
-    }`}
-  >
-    {isLoading ? 'Processing...' : 'Unlock User'}
-  </button>
+            <button
+  onClick={() => handleUnlock(user.id)}
+  disabled={isLoading}
+  className={`w-full px-4 py-2 text-white rounded focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
+    isLoading
+      ? 'bg-gray-400 cursor-not-allowed'
+      : 'bg-green-500 hover:bg-green-600 focus:ring-green-500'
+  }`}
+>
+  {isLoading ? 'Processing...' : 'Unlock User'}
+</button>
               </div>
             </div>
           ))}

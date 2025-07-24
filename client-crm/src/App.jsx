@@ -32,6 +32,7 @@ import CombinedRealtimeTracking from './Components/CombinedForUser&Admin/Combine
 import UserReport from './Pages/UserReport.jsx';
 import AdminAnalytics from './Pages/AdminAnalytics.jsx';
 import Lockedusers from './Pages/Lockedusers.jsx';
+import CombinedAlertReminderDisplay from './Components/CombinedForUser&Admin/CombinedAlertReminderDisplay.jsx';
 
 function App() {
   
@@ -113,7 +114,7 @@ function App() {
           <Route path="/users" element={<AllUsers />} />
           <Route path="/edit-user/:userId" element={<EditUser />} />
           <Route path="/add-leads" element={<CombinedLeadForm />} />
-          <Route path="/alerts-and-reminder-admin" element={<CombinedAlertReminder />} />
+          <Route path="/add-alerts-and-reminder" element={<CombinedAlertReminder />} />
           <Route path="/leadsactivity" element={<LeadsActivity />} />
           <Route path="/user-leads" element={<UserLeads />} />
           <Route path="/compare-comments" element={<CompareComments />} />
@@ -125,6 +126,7 @@ function App() {
           <Route path="/user-report" element={<UserReport/>} />
           <Route path="/analytics" element={<AdminAnalytics/>} />
           <Route path="/locked-users" element={<Lockedusers/>} />
+          <Route path="/all-alerts-reminders" element={<CombinedAlertReminderDisplay/>} />
         </Route>
 
         {/* Fallback */}
