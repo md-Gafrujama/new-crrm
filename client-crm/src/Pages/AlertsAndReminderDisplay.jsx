@@ -180,7 +180,7 @@ useEffect(() => {
                 </p>
               </div>
               <button
-                onClick={() => navigate('/alerts-and-reminder-admin')}
+                onClick={() => navigate('/add-alerts-and-reminder')}
                 className="mt-4 md:mt-0 flex items-center gap-2 px-4 py-2 bg-[#ff8633] hover:bg-[#e57328] text-white rounded-lg transition-colors"
               >
                 <Bell className="h-5 w-5" />
