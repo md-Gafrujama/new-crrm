@@ -36,21 +36,19 @@ model User {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  // Optional: relationship to OTPs (one-to-many)
   otps            OTP[]
 }
 
 model OTP {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  email           String   // reference by email
-  genOTP          String   // generated OTP
-  givenOTP        String[] // all submitted OTPs
-  attempts        Int      // number of attempts
+  email           String   
+  genOTP          String   
+  givenOTP        String[] 
+  attempts        Int      
   statusOfAccount String?
   createdAt       DateTime @default(now())
   expiresAt       DateTime
 
-  // optional: relate back to user
   user            User?    @relation(fields: [email], references: [email], onDelete: Cascade)
 }
 
@@ -95,9 +93,13 @@ model Lead {
   closingDate         DateTime?
   notes               String?
   createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  updatedAt          DateTime @updatedAt
+  
+ previousVersionId   String?  @db.ObjectId  
+  versionNumber       Int      @default(1)   
+  isCurrentVersion    Boolean  @default(true)
+  rootVersionId       String?  @db.ObjectId  
 }
-
 
 model Alertsandremainder {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
