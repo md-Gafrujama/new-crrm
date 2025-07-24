@@ -6,13 +6,34 @@ export function createLead(data) {
 
 export function fetchLeadsByUser(userId, userType) {
   const query = {
+    where: {
+      isCurrentVersion: true, 
+      ...(userType !== "admin" && { uid: userId }), 
+    },
     select: {
-      id: true, title: true, customerFirstName: true, customerLastName: true,
-      emailAddress: true, phoneNumber: true, jobTitle: true, topicOfWork: true,
-      industry: true, status: true, serviceInterestedIn: true, closingDate: true, notes: true,
+      id: true,
+      uid: true,
+      cid: true,
+      title: true,
+      customerFirstName: true,
+      customerLastName: true,
+      emailAddress: true,
+      phoneNumber: true,
+      companyName: true,
+      jobTitle: true,
+      topicOfWork: true,
+      industry: true,
+      status: true,
+      serviceInterestedIn: true,
+      closingDate: true,
+      notes: true,
+      rootId: true,
+      versionNumber: true,
+      createdAt: true,
+      updatedAt: true,
     },
   };
-  if (userType !== "admin") query.where = { uid: userId };
+
   return prisma.lead.findMany(query);
 }
 
