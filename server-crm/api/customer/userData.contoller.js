@@ -45,6 +45,7 @@ const data = {
             const allLeads = await prisma.Lead.count({
                 where: {
                     uid: userId,
+                    isCurrentVersion:true
                 }
             })
 
@@ -52,6 +53,7 @@ const data = {
                 where: {
                     uid: userId,
                     status: "New",
+                    isCurrentVersion:true
                 },
             });
 
@@ -59,6 +61,7 @@ const data = {
                 where: {
                     uid: userId,
                     status: "Contacted",
+                    isCurrentVersion:true
                 }
             })
 
@@ -66,6 +69,7 @@ const data = {
                 where: {
                     uid: userId,
                     status: "Engaged",
+                    isCurrentVersion:true
                 }
             })
 
@@ -73,6 +77,7 @@ const data = {
                 where: {
                     uid: userId,
                     status: "Qualified",
+                    isCurrentVersion:true
                 }
             })
 
@@ -80,6 +85,7 @@ const data = {
                 where: {
                     uid: userId,
                     status: "Proposal Sent",
+                    isCurrentVersion:true
                 }
             })
 
@@ -87,6 +93,7 @@ const data = {
                 where: {
                     uid: userId,
                     status: "Negotiation",
+                    isCurrentVersion:true
                 }
             })
 
@@ -94,6 +101,7 @@ const data = {
                 where: {
                     uid: userId,
                     status: "Closed Won",
+                    isCurrentVersion:true
                 }
             })
 
@@ -101,6 +109,7 @@ const data = {
                 where: {
                     uid: userId,
                     status: "Closed Lost",
+                    isCurrentVersion:true
                 }
             })
 
@@ -108,6 +117,7 @@ const data = {
                 where: {
                     uid: userId,
                     status: "On Hold",
+                    isCurrentVersion:true
                 }
             })
 
@@ -115,6 +125,7 @@ const data = {
                 where: {
                     uid: userId,
                     status: "Do Not Contact",
+                    isCurrentVersion:true
                 }
             })
 

@@ -2,7 +2,6 @@ import express from "express";
 import prisma from "../../prisma/prismaClient.js";
 const router = express.Router();
 
-// Delete lead by ID with error handling
 router.delete("/delete-lead/:id", async (req, res) => {
     const { id } = req.params;
     try {
@@ -19,7 +18,6 @@ router.delete("/delete-lead/:id", async (req, res) => {
     }
 });
 
-// Update lead by ID with error handling
 router.put("/update-lead/:id", async (req, res) => {
     const { id } = req.params;
     try {
@@ -40,9 +38,3 @@ router.put("/update-lead/:id", async (req, res) => {
 });
 
 export default router;
-
-
-
-
-
-
