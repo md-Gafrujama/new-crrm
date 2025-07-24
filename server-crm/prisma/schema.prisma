@@ -76,30 +76,30 @@ model company {
 }
 
 model Lead {
-  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+id String @id @default(auto()) @map("_id") @db.ObjectId
   uid                 String
-  cid                 String   @default("0")
+  cid                 String
   title               String
   customerFirstName   String
   customerLastName    String
   emailAddress        String
   phoneNumber         String
-  companyName         String?
-  jobTitle            String?
-  topicOfWork         String?
-  industry            String?  
-  status              String?   @default("New") 
-  serviceInterestedIn String? 
-  closingDate         DateTime?
+  companyName         String
+  jobTitle            String
+  topicOfWork         String
+  industry            String
+  status              String
+  serviceInterestedIn String
+  closingDate         DateTime
   notes               String?
-  createdAt           DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  
- previousVersionId   String?  @db.ObjectId  
-  versionNumber       Int      @default(1)   
+
+  rootId              String?   
+  versionNumber       Int      @default(1)
   isCurrentVersion    Boolean  @default(true)
-  rootVersionId       String?  @db.ObjectId  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 }
+
 
 model Alertsandremainder {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId

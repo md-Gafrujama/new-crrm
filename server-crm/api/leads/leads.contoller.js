@@ -3,7 +3,8 @@ import {
   fetchLeadsByUser,
   createLead,
   deleteLeadById,
-  updateLeadById
+  updateLeadById,
+  fetchLeadWithHistory
 } from "./leads.services.js";
 import { convertLeadsToCSV, convertStringToISODateString } from '../../utilis/csvExporter.js';
 
@@ -73,6 +74,18 @@ const leadsWork = {
       } else {
         res.status(500).json({ error: "Failed to update lead", details: error.message });
       }
+    }
+  },
+
+  async getLeadHistory(req, res) {
+    try {
+      const { id } = req.params;
+
+      const leadData = await fetchLeadWithHistory(id);
+      res.status(200).json(leadData);
+    } catch (error) {
+      console.error("Fetch Lead History Error:", error);
+      res.status(404).json({ error: "Lead not found", details: error.message });
     }
   }
 
