@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { API_BASE_URL } from '../config/api';
-import { UserHeader } from '../Components/User/common/UserHeader';
-import { UserSidebar,useSidebarUser } from '../Components/User/common/UserSidebar';
-import { useTheme } from '../hooks/use-theme';
-import { UserFooter } from '../Components/User/common/UserFooter';
+import { API_BASE_URL } from '../../../config/api';
+import { UserHeader } from '../common/UserHeader';
+import { UserSidebar,useSidebarUser } from '../common/UserSidebar';
+import { useTheme } from '../../../hooks/use-theme';
+import { UserFooter } from '../common/UserFooter';
 
 
 const UserSettings = ({ onLogout }) => {

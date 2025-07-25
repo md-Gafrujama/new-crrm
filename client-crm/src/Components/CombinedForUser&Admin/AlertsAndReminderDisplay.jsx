@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { API_BASE_URL } from '../config/api';
-import { cn } from "../utils/cn";
-import { useTheme } from "../hooks/use-theme";
+import { API_BASE_URL } from '../../config/api';
+import { cn } from "../../utils/cn";
+import { useTheme } from "../../hooks/use-theme";
 import { Calendar,Edit, Trash2, Bell, AlertCircle, XCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
 const AlertsAndReminderDisplay = ({ collapsed }) => {

@@ -1,9 +1,9 @@
 
 import React, { useState, lazy, Suspense, useEffect } from 'react';
-import { UserHeader } from '../Components/User/common/UserHeader';
-import { UserSidebar,useSidebarUser } from '../Components/User/common/UserSidebar';
-import { useTheme } from '../hooks/use-theme';
-import { UserFooter } from '../Components/User/common/UserFooter';
+import { UserHeader } from '../common/UserHeader';
+import { UserSidebar,useSidebarUser } from '../common/UserSidebar';
+import { useTheme } from '../../../hooks/use-theme';
+import { UserFooter } from '../common/UserFooter';
 
 const ConnectSocialMedia = ({ onLogout }) => {
 const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarUser();

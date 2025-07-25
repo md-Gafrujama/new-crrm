@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { API_BASE_URL } from '../config/api';
-import { UserHeader } from '../Components/User/common/UserHeader';
-import { useSidebarUser, UserSidebar } from '../Components/User/common/UserSidebar';
-import { cn } from "../utils/cn";
-import { useTheme } from '../hooks/use-theme';
-import { UserFooter } from '../Components/User/common/UserFooter';
+import { API_BASE_URL } from '../../../config/api';
+import { UserHeader } from '../common/UserHeader';
+import { useSidebarUser, UserSidebar } from '../common/UserSidebar';
+import { cn } from "../../../utils/cn";
+import { useTheme } from '../../../hooks/use-theme';
+import { UserFooter } from '../common/UserFooter';
 import { useNavigate } from 'react-router-dom';
 
 const UserReport = ({ collapsed, onLogout }) => {

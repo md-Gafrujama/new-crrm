@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Pages/login.jsx';
 import Sign from './Components/Admin/Forms/sign.jsx'
-import Dashboard from './Pages/dashboard.jsx';
-import UserProfile from './Pages/userProfile.jsx';
+import Dashboard from './Components/Admin/AdminPages/dashboard.jsx';
+import UserProfile from './Components/User/UserPages/userProfile.jsx';
 import Register from './Components/Admin/Forms/register.jsx';
 import './App.css';
 import ProtectedRoute from './Pages/protectedRoute.js';
 import ForgetPassword from './Components/Admin/Forms/forgetPassword.jsx';
 import OTPPage from './Pages/Otp.jsx';
 import  UpdatePassword from "./Components/Admin/Forms/UpdatePassword.jsx"
-import AllUsers from './Pages/AllUsers.jsx';
+import AllUsers from './Components/Admin/AdminPages/AllUsers.jsx';
 import EditUser from './Components/Admin/Forms/EditUser.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,13 +25,13 @@ import QuoreComments from './Components/Admin/ExternalData/QuoreComments.jsx';
 import CombinedLeadForm from './Components/CombinedForUser&Admin/CombinedLeadForm.jsx';
 import CombinedAlertReminder from './Components/CombinedForUser&Admin/CombinedAlertReminder.jsx';
 import UserLeads from './Components/User/Leads/UserLeads.jsx';
-import ConnectSocialMedia from './Pages/ConnectSocialMedia.jsx';
-import UserSettings from './Pages/UserSettings.jsx';
-import UserDashboard from './Pages/UserDashboard.jsx';
+import ConnectSocialMedia from './Components/User/UserPages/ConnectSocialMedia.jsx';
+import UserSettings from './Components/User/UserPages/UserSettings.jsx';
+import UserDashboard from './Components/User/UserPages/UserDashboard.jsx';
 import CombinedRealtimeTracking from './Components/CombinedForUser&Admin/CombinedRealtimeTracking.jsx';
-import UserReport from './Pages/UserReport.jsx';
-import AdminAnalytics from './Pages/AdminAnalytics.jsx';
-import Lockedusers from './Pages/Lockedusers.jsx';
+import UserReport from './Components/User/UserPages/UserReport.jsx';
+import AdminAnalytics from './Components/Admin/AdminPages/AdminAnalytics.jsx';
+import Lockedusers from './Components/Admin/AdminPages/Lockedusers.jsx';
 import CombinedAlertReminderDisplay from './Components/CombinedForUser&Admin/CombinedAlertReminderDisplay.jsx';
 
 function App() {

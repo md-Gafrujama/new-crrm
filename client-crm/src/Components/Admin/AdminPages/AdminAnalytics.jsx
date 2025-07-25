@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Footer from '../Components/Admin/common/Footer';
-import { Header } from '../Components/Admin/common/Header';
-import { Sidebar,useSidebar } from '../Components/Admin/common/sidebar';
-import { cn } from '../utils/cn';
+import Footer from '../common/Footer';
+import { Header } from '../common/Header';
+import { Sidebar,useSidebar } from '../common/sidebar';
+import { cn } from '../../../utils/cn';
 import { 
   Users, UserPlus, UserCheck, UserMinus,
   Briefcase, TrendingUp, PieChart, BarChart2, 

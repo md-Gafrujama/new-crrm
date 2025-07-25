@@ -2,7 +2,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { Header } from '../Admin/common/Header';
 import { Sidebar,useSidebar } from '../Admin/common/sidebar';
-import AlertsAndReminderDisplay from '../../Pages/AlertsAndReminderDisplay';
+import AlertsAndReminderDisplay from './AlertsAndReminderDisplay';
 import { UserHeader } from '../User/common/UserHeader';
 import { UserSidebar ,useSidebarUser} from '../User/common/UserSidebar';
 import { UserFooter } from '../User/common/UserFooter';

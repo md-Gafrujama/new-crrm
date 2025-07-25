@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import EditUser from '../Components/Admin/Forms/EditUser';
+import EditUser from '../Forms/EditUser';
 import axios from 'axios';
-import { API_BASE_URL } from '../config/api'; 
-import { Header } from '../Components/Admin/common/Header';
-import { Sidebar,useSidebar } from '../Components/Admin/common/sidebar';
-import { cn } from "../utils/cn";
-import { useTheme } from '../hooks/use-theme';
-import Footer from '../Components/Admin/common/Footer';
+import { API_BASE_URL } from '../../../config/api'; 
+import { Header } from '../common/Header';
+import { Sidebar,useSidebar } from '../common/sidebar';
+import { cn } from "../../../utils/cn";
+import { useTheme } from '../../../hooks/use-theme';
+import Footer from '../common/Footer';
 
 const AllUsers = ({collapsed}) => {
   const navigate = useNavigate();

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { API_BASE_URL } from '../config/api';
+import { API_BASE_URL } from '../../../config/api';
 import { Users, ShoppingCart, Package, Activity, AlertCircle, Clock, CheckCircle, XCircle, Server, Database, HardDrive, Bell, MessageSquare, Calendar,User,TrendingUp, } from 'lucide-react';
-import { Header } from '../Components/Admin/common/Header';
-import { Sidebar, useSidebar } from '../Components/Admin/common/sidebar';
-import { cn } from "../utils/cn";
-import { useTheme } from "../hooks/use-theme";  
-import Footer from '../Components/Admin/common/Footer';
+import { Header } from '../common/Header';
+import { Sidebar, useSidebar } from '../common/sidebar';
+import { cn } from "../../../utils/cn";
+import { useTheme } from "../../../hooks/use-theme";  
+import Footer from '../common/Footer';
 
 const Dashboard = ({ collapsed }) => {
   const { theme, setTheme } = useTheme();

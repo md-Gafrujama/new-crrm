@@ -1,14 +1,14 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { UserHeader } from '../Components/User/common/UserHeader';
-import { UserSidebar,useSidebarUser } from '../Components/User/common/UserSidebar';
-import { UserFooter } from '../Components/User/common/UserFooter';
-import { PersonalDetails } from '../Components/User/common/PersonalDetails';
+import { UserHeader } from '../common/UserHeader';
+import { UserSidebar,useSidebarUser } from '../common/UserSidebar';
+import { UserFooter } from '../common/UserFooter';
+import { PersonalDetails } from '../common/PersonalDetails';
 import { Calendar} from 'lucide-react';
 import { toast } from 'react-toastify';
-import { useTheme } from "../hooks/use-theme";  
+import { useTheme } from "../../../hooks/use-theme";  
 import axios from 'axios';
-import { API_BASE_URL } from '../config/api';
+import { API_BASE_URL } from '../../../config/api';
 import { useNavigate } from 'react-router-dom';
 
 const UserDashboard = ({onLogout}) => {
