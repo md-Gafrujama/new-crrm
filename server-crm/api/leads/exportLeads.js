@@ -10,13 +10,13 @@ router.use(corsMiddleware);
 
 router.get("/csv", jwtTokenMiddleware, async (req, res) => {
   try {
-    const { uid: userId, userType } = req.user;
+    const { uid: userId, userType,username } = req.user;
 
     if (!userId || !userType) {
       return res.status(400).json({ error: "Missing user ID or type" });
     }
 
-    const leads = await fetchLeadsByUser(userId, userType);
+    const leads = await fetchLeadsByUser(userId, userType,username);
 
     if (!leads.length) {
       return res.status(404).json({ error: "No leads found" });

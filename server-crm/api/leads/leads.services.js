@@ -4,7 +4,7 @@ export function createLead(data) {
   return prisma.lead.create({ data });
 }
 
-export function fetchLeadsByUser(userId, userType) {
+export function fetchLeadsByUser(userId, userType,username) {
   const query = {
     where: {
       isCurrentVersion: true, 
@@ -13,6 +13,7 @@ export function fetchLeadsByUser(userId, userType) {
     select: {
       id: true,
       uid: true,
+      username:true,
       cid: true,
       title: true,
       customerFirstName: true,
@@ -43,7 +44,7 @@ export async function deleteLeadById(id) {
   });
 }
 
-export async function updateLeadById(id, updateData) {
+export async function updateLeadById(id, username,updateData) {
   const currentLead = await prisma.lead.findUnique({
     where: { id }
   });
@@ -61,7 +62,8 @@ export async function updateLeadById(id, updateData) {
     data: {
       ...currentLead,
       ...updateData,
-      id: undefined, 
+      id: undefined,
+      username, 
       versionNumber: currentLead.versionNumber + 1,
       isCurrentVersion: true,
       rootId: currentLead.rootId || currentLead.id,

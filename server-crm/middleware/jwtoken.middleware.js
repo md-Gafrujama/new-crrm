@@ -21,7 +21,7 @@ const jwtTokenMiddleware = async (req, res, next) => {
 
     const user = await prisma.user.findUnique({
       where: { id: decoded.uid },
-      select: { id: true, email: true },
+      select: { id: true, email: true,username:true },
     });
 
     if (!user) {
@@ -31,12 +31,13 @@ const jwtTokenMiddleware = async (req, res, next) => {
     req.user = {
       uid: user.id,
       email: user.email,
+      username:user.username,
       userType: decoded.role
     };
+   
 
     next();
   } catch (error) {
-    console.error('JWT error:', error);
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({ message: 'Token expired' });
     }

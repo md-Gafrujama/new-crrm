@@ -22,7 +22,6 @@ router.put("/update-lead/:id", async (req, res) => {
     const { id } = req.params;
     try {
         const { id: _id, ...updateData } = req.body;
-        console.log("updateData", updateData); // Add this line
         const lead = await prisma.lead.update({
             where: { id: id },
             data: updateData

@@ -23,7 +23,7 @@ router.use(corsMiddleware); // Use the CORS middleware
 
 router.get("/", jwtTokenMiddleware, async (req, res) => {
   try {
-    const { uid: userId, userType } = req.user;
+    const { uid: userId, userType ,username} = req.user;
 
     if (!userId || !userType) {
       return res.status(400).json({ error: "Missing user ID or type" });
@@ -32,6 +32,7 @@ router.get("/", jwtTokenMiddleware, async (req, res) => {
     const query = {
       select: {
         id: true,
+        username,
         title: true,
         customerFirstName: true,
         customerLastName: true,

@@ -8,7 +8,7 @@ export function convertStringToISODateString(dateString) {
 
 export function convertLeadsToCSV(leads) {
   const fields = [
-    "id", "title", "customerFirstName", "customerLastName", "emailAddress",
+    "id", "title","username", "customerFirstName", "customerLastName", "emailAddress",
     "phoneNumber", "jobTitle", "topicOfWork", "industry", "status",
     "serviceInterestedIn", "closingDate", "notes"
   ];

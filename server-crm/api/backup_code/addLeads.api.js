@@ -2,8 +2,6 @@ import express from "express";
 import prisma from "../../prisma/prismaClient.js";
 import jwtTokenMiddleware from "../../middleware/jwtoken.middleware.js"
 
-
-
 const router = express.Router();
 
 function convertStringToISODateString(dateString) {
@@ -24,7 +22,9 @@ function convertStringToISODateString(dateString) {
 
 router.post('/', jwtTokenMiddleware, async (req, res) => {
   try {
-    const { uid } = req.user;
+    console.log("req.user:", req.user);
+
+    const { uid, username } = req.user;
     const {
       title,
       customerFirstName,
@@ -41,7 +41,6 @@ router.post('/', jwtTokenMiddleware, async (req, res) => {
       notes
     } = req.body;
 
-
     const closingDateISO = convertStringToISODateString(closingDate);
     if (closingDateISO === null) {
       return res.status(400).json({ error: "Invalid closingDate provided." });
@@ -50,6 +49,7 @@ router.post('/', jwtTokenMiddleware, async (req, res) => {
     const newLead = await prisma.lead.create({
       data: {
         uid,
+        username,
         cid: "0",
         title,
         customerFirstName,
@@ -73,7 +73,6 @@ router.post('/', jwtTokenMiddleware, async (req, res) => {
     console.error("Error creating lead:", error);
     res.status(500).json({ error: 'Failed to create lead' });
   }
-  console.log("POSTexecuted");
 });
 
 export default router;

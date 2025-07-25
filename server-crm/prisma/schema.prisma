@@ -80,6 +80,7 @@ model Lead {
   uid                 String
   cid                 String
   title               String
+  username            String?
   customerFirstName   String
   customerLastName    String
   emailAddress        String
