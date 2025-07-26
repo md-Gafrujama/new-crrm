@@ -39,11 +39,6 @@ export const navbarLinks = [
                 label: "Leads Activity",
                 icon: UserCheck,
                 path: "/leadsactivity",
-            },
-            {
-                label: "Add Leads",
-                icon: FilePlus,
-                path: "/add-leads",
             }
         ],
     },

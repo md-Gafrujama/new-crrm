@@ -24,11 +24,6 @@ export const navbarLinks = [
                 label: "All Leads",
                 icon: List,
                 path: "/user-leads",
-            },
-            {
-                label: "Add Leads",
-                icon: FilePlus,
-                path: "/add-leads",
             }
         ],
     },

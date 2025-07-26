@@ -9,6 +9,7 @@ import { cn } from "../../../utils/cn";
 import { useTheme } from "../../../hooks/use-theme";
 import { UserFooter } from "../common/UserFooter";
 import StatusHistoryPopup from "../../CombinedForUser&Admin/StatusHistoryPopup";
+import CombinedLeadForm from "../../CombinedForUser&Admin/CombinedLeadForm";
 
 const download = async () => {
   try {
@@ -76,6 +77,7 @@ const UserLeads = ({ collapsed, onLogout }) => {
   const [selectedLead, setSelectedLead] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [apiError, setApiError] = useState(null);
+  const [showAddLeadForm, setShowAddLeadForm] = useState(false);
 
   // Add these popup components right before your return statement
   const ViewLeadPopup = ({
@@ -958,6 +960,8 @@ const UserLeads = ({ collapsed, onLogout }) => {
                           Total Leads: {allCombinedLeads.length}
                         </p>
                       </div>
+                      <div className="flex flex-row gap-4">
+                      <div>
                       <button
                         onClick={download}
                         className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-100 text-[#ff8633] rounded-md transition-colors shadow-md"
@@ -976,6 +980,26 @@ const UserLeads = ({ collapsed, onLogout }) => {
                           />
                         </svg>
                       </button>
+                      </div>
+
+                       <div>
+                <button onClick={() => setShowAddLeadForm(true)} className="flex items-center gap-2 px-4 py-2 bg-white p-5 justify-center hover:bg-gray-100 text-[#ff8633] rounded-md transition-colors shadow-md">
+                  Add Leads
+                  <svg
+  xmlns="http://www.w3.org/2000/svg"
+  className="h-5 w-5"
+  viewBox="0 0 20 20"
+  fill="currentColor"
+>
+  <path
+    fillRule="evenodd"
+    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+    clipRule="evenodd"
+  />
+</svg>
+                </button>
+              </div>
+                    </div>
                     </div>
                   </div>
 
@@ -1190,7 +1214,14 @@ const UserLeads = ({ collapsed, onLogout }) => {
               onClose={() => setSelectedLead(null)}
             />
           )}
+
+          <CombinedLeadForm 
+  isOpen={showAddLeadForm} 
+  onClose={() => setShowAddLeadForm(false)} 
+  collapsed={collapsed}
+/>
         </div>
+
       </UserSidebar>
       <UserFooter />
     </>
