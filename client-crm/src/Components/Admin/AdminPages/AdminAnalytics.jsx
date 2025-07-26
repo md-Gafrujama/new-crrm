@@ -88,7 +88,7 @@ const AdminAnalytics = ({collapsed}) => {
         <div className="flex space-x-2">
           <button
             onClick={() => setTimeRange('week')}
-            className={`px-4 py-2 rounded-lg ${timeRange === 'week' ? 'bg-[#ff8633] text-white' : 'bg-gray-200 dark:text-gray-400 dark:bg-gray-700'}`}
+            className={`px-4 py-2 rounded-lg ${timeRange === 'week' ? 'bg-[#00BFA6] text-white' : 'bg-gray-200 dark:text-gray-400 dark:bg-gray-700'}`}
           >
             Week
           </button>
