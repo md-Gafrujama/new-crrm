@@ -39,9 +39,30 @@ export function fetchLeadsByUser(userId, userType,username) {
 }
 
 export async function deleteLeadById(id) {
-  return await prisma.lead.delete({
+  const leadToDelete = await prisma.lead.findUnique({
     where: { id }
   });
+
+  if (!leadToDelete) {
+    throw new Error("Lead not found");
+  }
+
+  if (leadToDelete.isCurrentVersion) {
+    await prisma.lead.deleteMany({
+      where: {
+        OR: [
+          { rootId: leadToDelete.rootId || leadToDelete.id },
+          { id: leadToDelete.id }
+        ]
+      }
+    });
+  } else {
+    await prisma.lead.delete({
+      where: { id }
+    });
+  }
+
+  return { message: "Lead deleted successfully" };
 }
 
 export async function updateLeadById(id, username,updateData) {

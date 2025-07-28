@@ -4,6 +4,7 @@ import cors from "cors";
 import jwt from "jsonwebtoken";
 import connectDB from "./prisma/dbConnect.js";
 import compression from "compression";
+import cron from "node-cron";
 
 const app = express();
 app.use(compression());
@@ -62,6 +63,8 @@ connectDB();
 
   import securityLock from "./api/security/security.routes.js";
   app.use("/api/security",securityLock);
+
+  import "./automate/automate.routes.js";
 
 import updatePassword from "./middleware/updatePassword.middleware.js";
 import jwtTokenMiddleware from "./middleware/jwtoken.middleware.js"; 
