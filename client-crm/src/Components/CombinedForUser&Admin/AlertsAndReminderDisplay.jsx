@@ -107,7 +107,7 @@ useEffect(() => {
       const response = await axios.put(
         `${API_BASE_URL}/api/alert/${updatedAlert.id}`,
         updatedAlert,
-        { headers: { 'Authorization': `Bearer ${token}` } }
+        { headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'} }
       );
 
       setAlerts(alerts.map(a => a.id === updatedAlert.id ? response.data : a));

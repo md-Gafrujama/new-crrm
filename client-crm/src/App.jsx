@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Pages/login.jsx';
-import Sign from './Components/Admin/Forms/sign.jsx'
+// import Sign from './Components/Admin/Forms/sign.jsx'
 import Dashboard from './Components/Admin/AdminPages/dashboard.jsx';
 import UserProfile from './Components/User/UserPages/userProfile.jsx';
 import Register from './Components/Admin/Forms/register.jsx';
@@ -107,7 +107,7 @@ function App() {
         )}
 
         <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
-          <Route path="/sign" element={userType === "admin" ? <Sign /> : <Navigate to="/" />} />
+          {/* <Route path="/sign" element={userType === "admin" ? <Sign /> : <Navigate to="/" />} /> */}
           <Route path="/dashboard" element={userType === "admin" ? <Dashboard onLogout={handleLogout} /> : <Navigate to="/" />} />
           <Route path="/userProfile" element={<UserProfile onLogout={handleLogout} />} />
           <Route path="/users" element={<AllUsers />} />
