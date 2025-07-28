@@ -10,6 +10,7 @@ import { useTheme } from "../../../hooks/use-theme";
 import axios from "axios";
 import { API_BASE_URL } from "../../../config/api";
 import { useNavigate } from "react-router-dom";
+import CombinedAlertReminder from "../../CombinedForUser&Admin/CombinedAlertReminder";
 
 const UserDashboard = ({ onLogout }) => {
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarUser();
@@ -19,6 +20,7 @@ const UserDashboard = ({ onLogout }) => {
   const [error, setError] = useState(null);
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
+  const [showAddAlertReminderForm, setShowAddAlertReminderForm] = useState(false);
 
   useEffect(() => {
     const fetchAlerts = async () => {
@@ -194,11 +196,17 @@ const UserDashboard = ({ onLogout }) => {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
                 <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-                  <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+                  <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex flex-row justify-between">
                     <h2 className="text-lg dark:text-gray-400 font-semibold flex items-center">
                       <Calendar className="h-5 w-5 mr-2 text-red-500" />
                       Alerts and Reminders
                     </h2>
+                     <button onClick={() => setShowAddAlertReminderForm(true)} className="flex items-center gap-2 px-4 py-2 bg-[#ff8633] hover:bg-orange-500 text-white rounded-md transition-colors">
+          Add Alerts and Reminder
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+          </svg>
+        </button>
                   </div>
                   <div className="p-6">
                     {alerts.map((alert) => (
@@ -315,6 +323,10 @@ const UserDashboard = ({ onLogout }) => {
             </main>
           </div>
         </div>
+          <CombinedAlertReminder 
+                      isOpen={showAddAlertReminderForm} 
+                      onClose={() => setShowAddAlertReminderForm(false)}
+                    />
       </UserSidebar>
       <UserFooter />
     </>

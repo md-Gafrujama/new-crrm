@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { API_BASE_URL } from '../../../config/api'; 
-import { Header } from '../../Admin/common/Header';
-import { Sidebar,useSidebar } from '../../Admin/common/sidebar';
 import { useTheme } from '../../../hooks/use-theme';
 
 const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
@@ -29,10 +27,6 @@ const AlertsandReminder = () => {
     }));
   }, []);
 
-  const handlegobacktodashboard = () => {
-    navigate('/dashboard');
-  };
-const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
  const handleSubmitAlert = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -123,7 +117,7 @@ const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebar();
                   }>
                     <form
                       onSubmit={handleSubmitAlert}
-                      className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl w-full max-w-2xl border border-gray-100 dark:border-slate-700 transition-all hover:shadow-2xl"
+                      className="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-2xl  transition-all"
                     >
                       <div className="text-center mb-8">
                         <h2 className="text-xl lg:text-3xl font-bold text-gray-800 dark:text-gray-400 mb-2">Alerts And Reminder</h2>

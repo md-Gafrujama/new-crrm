@@ -6,6 +6,7 @@ import { API_BASE_URL } from '../../config/api';
 import { cn } from "../../utils/cn";
 import { useTheme } from "../../hooks/use-theme";
 import { Calendar,Edit, Trash2, Bell, AlertCircle, XCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import CombinedAlertReminder from './CombinedAlertReminder';
 
 const AlertsAndReminderDisplay = ({ collapsed }) => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const AlertsAndReminderDisplay = ({ collapsed }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [currentAlert, setCurrentAlert] = useState(null);
   const [expandedAlertId, setExpandedAlertId] = useState(null);
+  const [showAddAlertReminderForm, setShowAddAlertReminderForm] = useState(false);
 
 useEffect(() => {
     const fetchAlerts = async () => {
@@ -180,7 +182,7 @@ useEffect(() => {
                 </p>
               </div>
               <button
-                onClick={() => navigate('/add-alerts-and-reminder')}
+                onClick={() => setShowAddAlertReminderForm(true)}
                 className="mt-4 md:mt-0 flex items-center gap-2 px-4 py-2 bg-[#ff8633] hover:bg-[#e57328] text-white rounded-lg transition-colors"
               >
                 <Bell className="h-5 w-5" />
@@ -437,6 +439,10 @@ useEffect(() => {
           </div>
         </div>
       )}
+        <CombinedAlertReminder 
+                      isOpen={showAddAlertReminderForm} 
+                      onClose={() => setShowAddAlertReminderForm(false)}
+                    />
     </>
   );
 };

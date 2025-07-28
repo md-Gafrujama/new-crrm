@@ -46,11 +46,6 @@ export const navbarLinks = [
                 path: "/realtime-tracking",
             },
             {
-                label: "Alerts And Remainder",
-                icon: BellPlus,
-                path: "/add-alerts-and-reminder",
-            },
-            {
                 label: "Reports",
                 icon: FileText,
                 path: "/user-report",
