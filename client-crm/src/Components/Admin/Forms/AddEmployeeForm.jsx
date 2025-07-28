@@ -5,15 +5,9 @@ import axios from 'axios';
 import { API_BASE_URL } from '../../../config/api'; 
 import { useTheme } from '../../../hooks/use-theme';
 
-// Lazy load components and icons
-const Eye = lazy(() => import('lucide-react').then(module => ({ default: module.Eye })));
-const EyeOff = lazy(() => import('lucide-react').then(module => ({ default: module.EyeOff })));
-const ReactToastifyCSS = lazy(() => import('react-toastify/dist/ReactToastify.css'));
-
-const Sign = ({isOpen,onClose}) => {
+const AddEmployeeForm = ({isOpen,onClose}) => {
   const navigate = useNavigate();
   const panelRef = useRef(null);
-  const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { theme, setTheme } = useTheme();
   
@@ -22,18 +16,28 @@ const Sign = ({isOpen,onClose}) => {
     lastName: '',
     username: '',
     email: '',
-    password: '',
     phone: '',
-    role: 'user',
+    whatsappphone:'',
+    joiningdate:'',
+    status: 'active',
+    department:'',
+    role:'',
     profilePhoto: null
   });
   const [previewImage, setPreviewImage] = useState(null);
+  const departmentRoles = {
+  'Sales': ['Field Sales', 'Inside Sales', 'B2B', 'B2C'],
+  'Marketing': ['Content', 'Performance', 'SEO','Social Media', 'Branding'],
+  'SaaS': ['Product Manager', 'Customer Success', 'Technical Support','Implementation'],
+  'Technology': ['Frontend', 'Backend', 'Full Stack','DevOps','AI/ML','QA','UI/UX'],
+};
 
   const handleChange = React.useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+      ...(name === 'department' && { role: '' })
     }));
   }, []);
 
@@ -115,7 +119,7 @@ const handleSubmit = async (e) => {
       formDataToSend.append('profilePhoto', formData.profilePhoto);
     }
 
-    const response = await axios.post(`${API_BASE_URL}/api/addUser`, 
+    const response = await axios.post(`${API_BASE_URL}/api/addEmployee`, 
       formDataToSend,
       {
           headers: {
@@ -164,14 +168,14 @@ const handleSubmit = async (e) => {
       />
        <div 
         ref={panelRef}
-        className={`fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-slate-800 shadow-xl z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 right-0 w-full max-w-xl bg-white dark:bg-slate-800 shadow-xl z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
      <div className="h-full flex flex-col">
        <div className={`px-6 py-4 border-b ${theme === 'dark' ? 'border-slate-700' : 'border-gray-200'}`}>
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold dark:text-gray-300">Add New User</h2>
+              <h2 className="text-xl font-semibold dark:text-gray-300">Add New Employee</h2>
               <button
                 onClick={onClose}
                 className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -205,8 +209,8 @@ const handleSubmit = async (e) => {
 
 
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-400 mb-2">Create Account</h2>
-            <p className="text-gray-500 dark:text-gray-400">Add Users</p>
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-400 mb-2">Employee Management</h2>
+            <p className="text-gray-500 dark:text-gray-400">Add Employees</p>
           </div>
 
           {/* Profile Photo Upload */}
@@ -240,7 +244,7 @@ const handleSubmit = async (e) => {
             </label>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             <div>
               <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
                 First Name
@@ -255,6 +259,21 @@ const handleSubmit = async (e) => {
                 className="dark:text-gray-400 w-full text-center px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="John"
                 autoComplete="given-name"
+              />
+            </div>
+             <div>
+              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
+                Middle Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                className="dark:text-gray-400 w-full px-4 text-center py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+                placeholder="Doe"
+                autoComplete="family-name"
               />
             </div>
             <div>
@@ -278,7 +297,7 @@ const handleSubmit = async (e) => {
 
  <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
-              Email
+              Email (Official)
             </label>
             <input
               type="email"
@@ -293,6 +312,7 @@ const handleSubmit = async (e) => {
             />
           </div>
 
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div className="mb-4">
             <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               Phone Number
@@ -308,38 +328,94 @@ const handleSubmit = async (e) => {
               autoComplete="tel"
             />
           </div>
+
+           <div className="mb-4">
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
+              Whatsapp Number
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.whatsappphone}
+              onChange={handleChange}
+              className="dark:text-gray-400 w-full px-4  text-center py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+              placeholder="+1 (123) 456-7890"
+              autoComplete="tel"
+            />
+          </div>
+</div>
+
+<div className="mb-4">
+  <label htmlFor="department" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
+    Department
+  </label>
+  <select
+    id="department"
+    name="department"
+    value={formData.department}
+    onChange={handleChange}
+    required
+    className="dark:text-gray-400 w-full px-4 py-3 cursor-pointer rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+  >
+    <option value="">Select Department</option>
+    {Object.keys(departmentRoles).map(dept => (
+      <option key={dept} value={dept}>{dept}</option>
+    ))}
+  </select>
+</div>
+
+<div className="mb-4">
+  <label htmlFor="role" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
+    Role
+  </label>
+  <select
+    id="role"
+    name="role"
+    value={formData.role}
+    onChange={handleChange}
+    required
+    disabled={!formData.department}
+    className="dark:text-gray-400 w-full px-4 py-3 cursor-pointer rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
+  >
+    <option value="">Select Role</option>
+    {formData.department && departmentRoles[formData.department].map(role => (
+      <option key={role} value={role}>{role}</option>
+    ))}
+  </select>
+</div>
          
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-800 dark:text-gray-400 mb-3 text-center">Account Type</label>
+            <label className="block text-sm font-medium text-gray-800 dark:text-gray-400 mb-3 text-center">Status</label>
             <div className="flex justify-center space-x-6">
               <label className="flex items-center space-x-2 cursor-pointer">
                 <input
                   type="radio"
-                  name="role"
-                  value="user"
-                  checked={formData.role === 'user'}
+                  name="status"
+                  value="active"
+                  checked={formData.status === 'active'}
                   onChange={handleChange}
                   className="hidden"
                 />
-                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition ${formData.role === 'user' ? 'border-[#ff8633]' : 'border-gray-300'}`}>
-                  {formData.role === 'user' && <div className="w-3 h-3 rounded-full bg-[#ff8633]"></div>}
+                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition ${formData.status === 'active' ? 'border-[#ff8633]' : 'border-gray-300'}`}>
+                  {formData.status === 'active' && <div className="w-3 h-3 rounded-full bg-[#ff8633]"></div>}
                 </div>
-                <span className="text-gray-700 dark:text-gray-400">User</span>
+                <span className="text-gray-700 dark:text-gray-400">Active</span>
               </label>
               <label className="flex items-center space-x-2 cursor-pointer">
                 <input
                   type="radio"
-                  name="role"
-                  value="admin"
-                  checked={formData.role === 'admin'}
+                  name="status"
+                  value="inactive"
+                  checked={formData.status === 'inactive'}
                   onChange={handleChange}
                   className="hidden"
                 />
-                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition ${formData.role === 'admin' ? 'border-[#ff8633]' : 'border-gray-300'}`}>
-                  {formData.role === 'admin' && <div className="w-3 h-3 rounded-full bg-[#ff8633]"></div>}
+                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition ${formData.status === 'inactive' ? 'border-[#ff8633]' : 'border-gray-300'}`}>
+                  {formData.status === 'inactive' && <div className="w-3 h-3 rounded-full bg-[#ff8633]"></div>}
                 </div>
-                <span className="text-gray-700 dark:text-gray-400">Admin</span>
+                <span className="text-gray-700 dark:text-gray-400">Inactive</span>
               </label>
             </div>
           </div>
@@ -364,30 +440,19 @@ const handleSubmit = async (e) => {
           </div>
 
           <div className="relative mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
-              Password
+            <label htmlFor="date" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
+              Joining Date
             </label>
             <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
-              placeholder="••••••••"
-              value={formData.password}
+              type="date"
+              id="joiningdate"
+              name="joiningdate"
+              value={formData.joiningdate}
               onChange={handleChange}
               required
               className="dark:text-gray-400 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all pr-12"
               autoComplete="new-password"
             />
-            <Suspense fallback={<div className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 bg-gray-300 rounded-full"></div>}>
-              <button
-                type="button"
-                className="absolute right-3 top-3/4 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700"
-                onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? "Hide password" : "Show password"}
-              >
-                {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-              </button>
-            </Suspense>
           </div>
 </div>
          
@@ -399,7 +464,7 @@ const handleSubmit = async (e) => {
               isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
             }`}
           >
-            {isSubmitting ? 'Creating Account...' : 'Sign Up'}
+            {isSubmitting ? 'Adding Employee...' : 'Add Employee'}
           </button>
           
         </form>
@@ -412,4 +477,4 @@ const handleSubmit = async (e) => {
   );
 };
 
-export default React.memo(Sign);
+export default React.memo(AddEmployeeForm);
