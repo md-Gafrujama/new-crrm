@@ -118,12 +118,10 @@ const alertController = {
     const alertId = req.params.id;
     const updateData = req.body;
 
-    // Log for debugging
     console.log("User from token:", req.user);
     console.log("Updating alert with ID:", alertId);
     console.log("Update data:", updateData);
 
-    // Check if alert exists
     const alert = await prisma.Alertsandremainder.findUnique({
       where: { id: alertId },
     });
@@ -135,7 +133,6 @@ const alertController = {
       });
     }
 
-    // Authorization check
     if (userType !== 'admin' && alert.uid !== uid) {
       return res.status(403).json({
         success: false,
@@ -143,10 +140,8 @@ const alertController = {
       });
     }
 
-    // Ensure 'id' is removed from the update data before passing it to Prisma
     const { id, ...validUpdateData } = updateData;
 
-    // Validate fields (optional)
     const allowedFields = ['topic', 'remainder', 'date', 'time', 'description', 'cid']; // Add all valid fields here
     const validatedUpdateData = Object.keys(validUpdateData).reduce((acc, key) => {
       if (allowedFields.includes(key)) {
@@ -155,13 +150,11 @@ const alertController = {
       return acc;
     }, {});
 
-    // Perform the update
     const updatedAlert = await prisma.Alertsandremainder.update({
       where: { id: alertId },
       data: validatedUpdateData,
     });
 
-    // Return success response
     return res.status(200).json({
       success: true,
       message: "Alert updated successfully",
