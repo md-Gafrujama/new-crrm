@@ -65,6 +65,11 @@ export const navbarLinks = [
                 icon: Radar,
                 path: "/realtime-tracking",
             },
+             {
+                label: "Job Portal",
+                icon: Radar,
+                path: "/job-portal",
+            },
             {
                 label: "Alerts And Remainder",
                 icon: BellPlus,

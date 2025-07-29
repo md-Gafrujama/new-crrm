@@ -32,6 +32,7 @@ import AdminAnalytics from './Components/Admin/AdminPages/AdminAnalytics.jsx';
 import Lockedusers from './Components/Admin/AdminPages/Lockedusers.jsx';
 import CombinedAlertReminderDisplay from './Components/CombinedForUser&Admin/CombinedAlertReminderDisplay.jsx';
 import EmployeePage from './Components/Admin/AdminPages/EmployeePage.jsx';
+import { SearchProvider } from './contexts/SearchContext.jsx';
 
 function App() {
   
@@ -62,6 +63,7 @@ function App() {
   };
 
   return (
+    <SearchProvider>
     <ThemeProvider storageKey="theme">
     <Router>
         <ToastContainer
@@ -132,6 +134,7 @@ function App() {
       </Routes>
     </Router>
     </ThemeProvider>
+    </SearchProvider>
   );
 }
 
