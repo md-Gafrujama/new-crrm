@@ -52,6 +52,23 @@ model OTP {
   user            User?    @relation(fields: [email], references: [email], onDelete: Cascade)
 }
 
+model Employee {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName      String
+  lastName       String
+  username       String   @unique
+  email          String   @unique
+  phoneNumber    String   @unique
+  whatsAppPhone  String?  
+  joiningDate    DateTime
+  status         String   
+  department     String
+  role           String
+  photo          String?  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+}
 
 
 model company {  

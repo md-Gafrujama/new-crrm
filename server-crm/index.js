@@ -51,6 +51,9 @@ connectDB();
   app.use("/api/usersData",userData);
   app.use("/api",editUser);
 
+  import employee from "./api/employee/employee.route.js";
+  app.use("/api/employee",employee);
+
   import compBaz from "./api/external/compBaz.routes.js";
   import qb2b from "./api/external/qb2b.routes.js";
   app.use("/api/external/compBazar",compBaz);
