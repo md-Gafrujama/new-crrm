@@ -14,6 +14,7 @@ const AddEmployeeForm = ({isOpen,onClose}) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
+    middleName:'',
     username: '',
     email: '',
     phone: '',
@@ -262,14 +263,14 @@ const handleSubmit = async (e) => {
               />
             </div>
              <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
+              <label htmlFor="middleName" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
                 Middle Name
               </label>
               <input
                 type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
+                id="middleName"
+                name="middleName"
+                value={formData.middleName}
                 onChange={handleChange}
                 className="dark:text-gray-400 w-full px-4 text-center py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"
                 placeholder="Doe"
@@ -330,13 +331,13 @@ const handleSubmit = async (e) => {
           </div>
 
            <div className="mb-4">
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
+            <label htmlFor="whatsappphone" className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1">
               Whatsapp Number
             </label>
             <input
               type="tel"
-              id="phone"
-              name="phone"
+              id="whatsappphone"
+              name="whatsappphone"
               value={formData.whatsappphone}
               onChange={handleChange}
               className="dark:text-gray-400 w-full px-4  text-center py-3 rounded-lg border border-gray-300 dark:border-slate-700 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[#ff8633] focus:border-transparent transition-all"

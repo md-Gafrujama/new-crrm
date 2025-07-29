@@ -84,7 +84,7 @@ export const Sidebar = ({ isOpen, onClose, children }) => {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed z-50 flex sm:h-screen lg:h-[calc(100vh-4rem)] w-70 flex-col border-r bg-white shadow-lg transition-all duration-300 ease-in-out dark:border-slate-700 dark:bg-slate-900",
+          "fixed z-50 flex sm:h-screen lg:h-[calc(100vh-4rem)] w-64 flex-col border-r bg-white shadow-lg transition-all duration-300 ease-in-out dark:border-slate-700 dark:bg-slate-900",
           "md:top-16", 
           "top-0", 
           theme === "dark" ? "border-slate-900" : "border-slate-200",
