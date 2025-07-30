@@ -96,6 +96,45 @@ const employee = {
         }
     },
 
+    async getSale(req, res) {
+        try {
+            const employeeSale = await prisma.employee.findMany({where :{department :"Sale"}});
+            return res.status(200).json({ employeeSale });
+        } catch (error) {
+            console.error("Get employee error:", error);
+            return res.status(500).json({ message: "Internal server error" });
+        }
+    },
+
+    async getMarketing(req, res) {
+        try {
+            const employeeMarketing = await prisma.employee.findMany({ where:{department:"Marketing"}});
+            return res.status(200).json({ employeeMarketing });
+        } catch (error) {
+            return res.status(500).json({ message: "Internal server error" });
+        }
+    },
+
+    async getSaas(req, res) {
+        try {
+            const employeeSaas = await prisma.employee.findMany({where:{department:"SaaS"}});
+            return res.status(200).json({ employeeSaas });
+        } catch (error) {
+            console.error("Get employee error:", error);
+            return res.status(500).json({ message: "Internal server error" });
+        }
+    },
+
+    async getTechnologies(req, res) {
+        try {
+            const employeeTech = await prisma.employee.findMany({where:{department:"Technology"}});
+            return res.status(200).json({ employeeTech });
+        } catch (error) {
+            console.error("Get employee error:", error);
+            return res.status(500).json({ message: "Internal server error" });
+        }
+    },
+
     async delEmployee(req, res) {
         try {
             const user = req.user;
