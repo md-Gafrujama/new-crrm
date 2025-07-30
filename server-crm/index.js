@@ -52,7 +52,9 @@ connectDB();
   app.use("/api",editUser);
 
   import employee from "./api/employee/employee.route.js";
+  import spEmployee from "./api/employee/employeeProfile.routes.js";
   app.use("/api/employee",employee);
+  app.use("/api/spEmployee",spEmployee);
 
   import compBaz from "./api/external/compBaz.routes.js";
   import qb2b from "./api/external/qb2b.routes.js";
