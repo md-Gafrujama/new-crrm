@@ -140,7 +140,6 @@ const EmployeePage = ({collapsed}) => {
         key={employee.id}
         className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
       >
-        {/* Profile Header with Image */}
         <div className="relative h-48 bg-gradient-to-r from-blue-500 to-indigo-600">
           <img
             src={employee.photo || 'https://randomuser.me/api/portraits/men/1.jpg'}
@@ -246,10 +245,11 @@ const EmployeePage = ({collapsed}) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
             <EditEmployee 
-              userId={selectedUserId} 
-              onUpdate={handleUserUpdated}
-              onDelete={handleUserDeleted}
-              onClose={handleCloseModal}
+               isOpen={isEditModalOpen}
+  userId={selectedUserId}
+  onClose={handleCloseModal}
+  onUpdate={handleUserUpdated}
+  onDelete={handleUserDeleted}
             />
           </div>
         </div>
