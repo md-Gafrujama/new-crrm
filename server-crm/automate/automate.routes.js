@@ -1,7 +1,7 @@
 import cron from "node-cron";
 import { deleteOldAlerts } from "./automate.controller.js";
 
-cron.schedule("2 11 * * *", async () => {
+cron.schedule("30 17 * * *", async () => {
   try {
     console.log("Running daily alert cleanup...");
     await deleteOldAlerts();
