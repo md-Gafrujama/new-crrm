@@ -31,6 +31,8 @@ import UserReport from './Components/User/UserPages/UserReport.jsx';
 import AdminAnalytics from './Components/Admin/AdminPages/AdminAnalytics.jsx';
 import Lockedusers from './Components/Admin/AdminPages/Lockedusers.jsx';
 import CombinedAlertReminderDisplay from './Components/CombinedForUser&Admin/CombinedAlertReminderDisplay.jsx';
+import EmployeePage from './Components/Admin/AdminPages/EmployeePage.jsx';
+import { SearchProvider } from './contexts/SearchContext.jsx';
 
 function App() {
   
@@ -61,6 +63,7 @@ function App() {
   };
 
   return (
+    <SearchProvider>
     <ThemeProvider storageKey="theme">
     <Router>
         <ToastContainer
@@ -123,6 +126,7 @@ function App() {
           <Route path="/analytics" element={<AdminAnalytics/>} />
           <Route path="/locked-users" element={<Lockedusers/>} />
           <Route path="/all-alerts-reminders" element={<CombinedAlertReminderDisplay/>} />
+          <Route path="/employee-page" element={<EmployeePage/>} />
         </Route>
 
         {/* Fallback */}
@@ -130,6 +134,7 @@ function App() {
       </Routes>
     </Router>
     </ThemeProvider>
+    </SearchProvider>
   );
 }
 

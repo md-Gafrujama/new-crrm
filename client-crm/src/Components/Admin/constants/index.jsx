@@ -26,6 +26,11 @@ export const navbarLinks = [
                 path: "/users",
             },
              {
+                label: "Employee Management",
+                icon: UserPlus,
+                path: "/employee-page",
+            },
+             {
                 label: "Locked users",
                 icon: UserPlus,
                 path: "/locked-users",
@@ -59,6 +64,11 @@ export const navbarLinks = [
                 label: "Real Time Tracking",
                 icon: Radar,
                 path: "/realtime-tracking",
+            },
+             {
+                label: "Job Portal",
+                icon: Radar,
+                path: "/job-portal",
             },
             {
                 label: "Alerts And Remainder",
