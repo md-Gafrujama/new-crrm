@@ -1,6 +1,7 @@
 import cron from "node-cron";
 import { deleteOldAlerts, alertsOfTheDay } from "./automate.controller.js";
 import { config as configDotenv } from "dotenv";
+import axios from "axios";
 
 cron.schedule("50 11 * * *", async () => {
   try {
@@ -12,37 +13,53 @@ cron.schedule("50 11 * * *", async () => {
 });
 
 
-cron.schedule("*/5 * * * *", async () => {
-  const start = Date.now();
+async function sendWhatsAppMessage(topic, time, description) {
   try {
-    const alerts = await alertsOfTheDay();
-    const msg = typeof alerts === 'string' ? alerts : 
-                       alerts instanceof Object ? JSON.stringify(alerts) : 
-                       String(alerts);
-    const end = Date.now();
-    const duration = end - start;
-
-    const done = await fetch(process.env.LINK,{
-      method: "POST",
+    await axios({
+      url: process.env.WA_LINK,
+      method: "post",
       headers: {
         "Authorization": `Bearer ${process.env.WA_TOKEN}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       data: {
         messaging_product: "whatsapp",
         to: process.env.PHONE,
-        type: "alert",
+        type: "text",
         text: {
-          body: msg
+          body: `You have saved a reminder for ${topic} at ${time} and it is all about ${description}. Hope you don't miss out.`
         }
       }
     });
+  } catch (error) {
+    console.error("Error sending message:", error.response?.data || error.message);
+  }
+}
 
-    if(done){
-      console.log("done");
+cron.schedule("*/1 * * * *", async () => {
+  const start = Date.now();
+
+  try {
+    const alerts = await alertsOfTheDay();
+
+
+    if (alerts && alerts.length > 0) {
+      for (const alert of alerts) {
+        
+        const topic = alert.topic || "No topic available";
+        const time = alert.time || "No time available";
+        const description = alert.description || "No description available";
+
+        await sendWhatsAppMessage(topic, time, description);
+      }
+    } else {
+      console.log("No alerts to send at this time.");
     }
 
-    console.log("Alerts of the day:", alerts);
+    const end = Date.now();
+    const duration = end - start;
+    console.log(`Cron job finished in ${duration}ms`);
+
   } catch (error) {
     console.error("Error while fetching alerts of the day:", error);
   }

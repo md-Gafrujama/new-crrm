@@ -118,10 +118,6 @@ const alertController = {
     const alertId = req.params.id;
     const updateData = req.body;
 
-    console.log("User from token:", req.user);
-    console.log("Updating alert with ID:", alertId);
-    console.log("Update data:", updateData);
-
     const alert = await prisma.Alertsandremainder.findUnique({
       where: { id: alertId },
     });
